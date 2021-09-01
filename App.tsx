@@ -13,10 +13,12 @@ import {
   StatusBar,
   Text,
   View,
+  SafeAreaView,
+  StyleSheet,
 } from 'react-native';
 import { Provider as StoreProvider } from 'react-redux';
 import store from './src/redux/store';
-import Test from './src/screens/Test'
+import Test from './src/screens/Test';
 
 const App = (): React.ReactElement => {
   return (
@@ -24,16 +26,26 @@ const App = (): React.ReactElement => {
       <StoreProvider
         store={store}
       >
-        <StatusBar />
-        <View>
-          <Text>
-            app.js
-          </Text>
-          <Test></Test>
-        </View>
+        <SafeAreaView
+          style={styles.safeAreaView}
+        >
+          <StatusBar />
+          <View>
+            <Text>
+              app.js
+            </Text>
+            <Test />
+          </View>
+        </SafeAreaView>
       </StoreProvider>
     </>
   );
 };
+
+const styles = StyleSheet.create({
+  safeAreaView: {
+    flex: 1,
+  },
+});
 
 export default App;

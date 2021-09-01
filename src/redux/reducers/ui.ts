@@ -4,7 +4,7 @@ const defaultState = {
   isLoading: null,
 };
 
-export const uiReducer = (state = defaultState, action) => {
+export const uiReducer = (state = defaultState, action: any) => {
   switch (action.type) {
     case types.SET_LOADING:
       return {

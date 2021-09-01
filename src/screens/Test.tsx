@@ -31,6 +31,13 @@ const App = (): React.ReactElement => {
           app.js
         </Text>
         <Button
+          title="log store"
+          onPress={() => {
+            console.log(store);
+            console.log(ui);
+          }}
+        />
+        <Button
           title="true"
           onPress={() => {
             functions.ui.setLoading(true);
@@ -43,9 +50,9 @@ const App = (): React.ReactElement => {
           }}
         />
         {ui.isLoading ? (
-            <Text>true</Text>
+          <Text>true</Text>
         ) : (
-            <Text>false</Text>
+          <Text>false</Text>
         )}
       </View>
     </>
