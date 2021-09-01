@@ -14,16 +14,24 @@ import {
   Text,
   View,
 } from 'react-native';
+import { Provider as StoreProvider } from 'react-redux';
+import store from './src/redux/store';
+import Test from './src/screens/Test'
 
 const App = (): React.ReactElement => {
   return (
     <>
-      <StatusBar />
-      <View>
-        <Text>
-          app.js
-        </Text>
-      </View>
+      <StoreProvider
+        store={store}
+      >
+        <StatusBar />
+        <View>
+          <Text>
+            app.js
+          </Text>
+          <Test></Test>
+        </View>
+      </StoreProvider>
     </>
   );
 };
