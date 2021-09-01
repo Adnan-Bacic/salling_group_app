@@ -1,11 +1,87 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1630502800586" clover="3.2.0">
-  <project timestamp="1630502800586" name="All files">
-    <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1" elements="3" coveredelements="3" complexity="0" loc="2" ncloc="2" packages="1" files="1" classes="1"/>
-    <file name="App.tsx" path="D:\dev\salling_group_app\App.tsx">
-      <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-      <line num="18" count="1" type="stmt"/>
-      <line num="19" count="1" type="stmt"/>
-    </file>
+<coverage generated="1630529783678" clover="3.2.0">
+  <project timestamp="1630529783679" name="All files">
+    <metrics statements="30" coveredstatements="22" conditionals="7" coveredconditionals="4" methods="10" coveredmethods="5" elements="47" coveredelements="31" complexity="0" loc="30" ncloc="30" packages="6" files="11" classes="11"/>
+    <package name="salling_group_app">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="App.tsx" path="/Users/adb/dev/salling_group_app/App.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="salling_group_app.src.redux">
+      <metrics statements="8" coveredstatements="7" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+      <file name="rootReducer.ts" path="/Users/adb/dev/salling_group_app/src/redux/rootReducer.ts">
+        <metrics statements="5" coveredstatements="4" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+      </file>
+      <file name="store.ts" path="/Users/adb/dev/salling_group_app/src/redux/store.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+      <file name="types.ts" path="/Users/adb/dev/salling_group_app/src/redux/types.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="salling_group_app.src.redux.actions">
+      <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="index.ts" path="/Users/adb/dev/salling_group_app/src/redux/actions/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ui.ts" path="/Users/adb/dev/salling_group_app/src/redux/actions/ui.ts">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="salling_group_app.src.redux.functions">
+      <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+      <file name="index.ts" path="/Users/adb/dev/salling_group_app/src/redux/functions/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ui.ts" path="/Users/adb/dev/salling_group_app/src/redux/functions/ui.ts">
+        <metrics statements="2" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="salling_group_app.src.redux.reducers">
+      <metrics statements="5" coveredstatements="4" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
+      <file name="index.ts" path="/Users/adb/dev/salling_group_app/src/redux/reducers/index.ts">
+        <metrics statements="0" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      </file>
+      <file name="ui.ts" path="/Users/adb/dev/salling_group_app/src/redux/reducers/ui.ts">
+        <metrics statements="5" coveredstatements="4" conditionals="3" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="7" count="1" type="cond" truecount="1" falsecount="0"/>
+        <line num="8" count="3" type="cond" truecount="1" falsecount="1"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="16" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="salling_group_app.src.screens">
+      <metrics statements="10" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="2"/>
+      <file name="Test.tsx" path="/Users/adb/dev/salling_group_app/src/screens/Test.tsx">
+        <metrics statements="10" coveredstatements="6" conditionals="2" coveredconditionals="1" methods="5" coveredmethods="2"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="24" count="2" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+      </file>
+    </package>
   </project>
 </coverage>
