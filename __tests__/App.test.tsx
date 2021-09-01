@@ -7,8 +7,15 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import App from '../App';
 
-// Note: test renderer must be required after react-native.
+let wrapper: any;
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+beforeEach(() => {
+  wrapper = renderer.create(
+    <App />,
+  );
+})
+
+test('renders correctly', () => {
+  const tree = wrapper.toJSON();
+  expect(tree).toMatchSnapshot();
 });
