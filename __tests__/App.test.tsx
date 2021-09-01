@@ -13,7 +13,7 @@ beforeEach(() => {
   wrapper = renderer.create(
     <App />,
   );
-})
+});
 
 test('renders correctly', () => {
   const tree = wrapper.toJSON();
