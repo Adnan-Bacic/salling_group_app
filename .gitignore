@@ -66,3 +66,6 @@ buck-out/
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
+
+# jest test coverage/ folder
+coverage/

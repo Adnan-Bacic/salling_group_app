@@ -7,15 +7,14 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start --reset-cache",
-    "test": "jest",
+    "test": "jest -u --coverage",
     "lint": "eslint src __tests__ index.js App.tsx babel.config.js metro.config.js react-native.config.js .eslintrc.js --ext .js,.jsx,.ts,.tsx --fix"
   },
   "dependencies": {
     "react": "17.0.2",
     "react-native": "0.65.1",
     "react-redux": "^7.2.4",
-    "redux": "^4.1.1",
-    "redux-thunk": "^2.3.0"
+    "redux": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
