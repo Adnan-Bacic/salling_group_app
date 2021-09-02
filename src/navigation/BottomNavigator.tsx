@@ -3,6 +3,7 @@ import { Text } from 'react-native'
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import * as Screens from '../screens'
+import StackNavigator from './StackNavigator';
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -23,14 +24,16 @@ const BottomNavigator = () => {
           }
 
           // You can return any component that you like here!
-          return <Ionicons name={iconName} size={size} color={color} />;
-          //return <Text>{iconName}</Text>;
+          //return <Ionicons name={iconName} size={size} color={color} />;
+          return <Text>{iconName}</Text>;
         },
         tabBarActiveTintColor: 'tomato',
         tabBarInactiveTintColor: 'gray',
-      })}>
-      <Tab.Screen name="Test" component={Screens.Test} />
-      <Tab.Screen name="Test2" component={Screens.Test2} />
+      })}
+      >
+    <Tab.Screen name="Tab1" component={Screens.Tab1}></Tab.Screen>
+    <Tab.Screen name="Tab2" component={Screens.Tab2}></Tab.Screen>
+    <Tab.Screen name="Stack" component={StackNavigator}></Tab.Screen>
     </Tab.Navigator>
   );
 }
