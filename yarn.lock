@@ -1584,6 +1584,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-navigation/elements@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@react-navigation/elements@npm:1.1.0"
+  peerDependencies:
+    "@react-navigation/native": ^6.0.0
+    react: "*"
+    react-native: "*"
+    react-native-safe-area-context: ">= 3.0.0"
+  checksum: 6212650fea787c6ed90ac2fffb998c01d3e081a87133af148b1f61f98cfec2594a1e16308323be5a91f61eec394a68187925d7c32ad85bd485adaf4874902a6b
+  languageName: node
+  linkType: hard
+
+"@react-navigation/native-stack@npm:^6.1.0":
+  version: 6.1.0
+  resolution: "@react-navigation/native-stack@npm:6.1.0"
+  dependencies:
+    "@react-navigation/elements": ^1.1.0
+    warn-once: ^0.1.0
+  peerDependencies:
+    "@react-navigation/native": ^6.0.0
+    react: "*"
+    react-native: "*"
+    react-native-safe-area-context: ">= 3.0.0"
+    react-native-screens: ">= 3.0.0"
+  checksum: 150c37e4d87b8428209febf2f3aeae37e4c459787209f786f240b2bf59bbfdc61d628a42fbb38ab9cbb22949f4ece218de942df4662ec3b6e6109c3541dfe4d0
+  languageName: node
+  linkType: hard
+
 "@react-navigation/native@npm:^6.0.2":
   version: 6.0.2
   resolution: "@react-navigation/native@npm:6.0.2"
@@ -8553,6 +8581,7 @@ resolve@^2.0.0-next.3:
     "@babel/runtime": ^7.12.5
     "@react-native-community/eslint-config": ^2.0.0
     "@react-navigation/native": ^6.0.2
+    "@react-navigation/native-stack": ^6.1.0
     "@types/jest": ^26.0.23
     "@types/react-native": ^0.64.5
     "@types/react-test-renderer": ^16.9.2

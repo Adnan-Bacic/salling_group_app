@@ -17,7 +17,7 @@ import {
 import { useSelector, useDispatch, useStore } from 'react-redux';
 import * as functions from '../redux/functions';
 
-const App = (): React.ReactElement => {
+const App = ({ navigation }): React.ReactElement => {
   const store = useStore();
   console.log('store', store);
 
@@ -29,13 +29,14 @@ const App = (): React.ReactElement => {
     <>
       <View>
         <Text>
-          app.js
+          1
         </Text>
         <Button
           title="log store"
           onPress={() => {
             console.log(store);
             console.log(ui);
+            navigation.navigate('Test2')
           }}
         />
         <Button
