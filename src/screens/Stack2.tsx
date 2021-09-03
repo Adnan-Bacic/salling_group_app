@@ -12,7 +12,9 @@ const Stack2 = ({ navigation }): React.ReactElement => {
       <View>
       <Text>stack 2</Text>
       <Button title="nav" onPress={() => {
-        navigation.navigate('Tab1')
+        navigation.navigate('StackNavigator2', {
+          screen: 'Tab1'
+        })
       }}></Button>
       </View>
     </>

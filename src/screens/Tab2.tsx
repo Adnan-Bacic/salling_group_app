@@ -12,7 +12,7 @@ const Tab2 = ({ navigation }): React.ReactElement => {
       <View>
       <Text>tab 2</Text>
       <Button title="nav" onPress={() => {
-        navigation.navigate('Stack')
+        navigation.navigate('Stack1')
       }}></Button>
       </View>
     </>
