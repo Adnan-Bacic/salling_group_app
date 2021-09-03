@@ -12,6 +12,7 @@ const BottomNavigator = () => {
     <Tab.Navigator screenOptions={{
       tabBarIcon: () => {
         const iconName = 'heart'
+        //return <Text>123</Text>
         return <Ionicons name={iconName} size={20} color="red" />;
       }
     }}
