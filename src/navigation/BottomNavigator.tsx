@@ -9,7 +9,13 @@ const Tab = createMaterialBottomTabNavigator();
 
 const BottomNavigator = () => {
   return (
-    <Tab.Navigator>
+    <Tab.Navigator screenOptions={{
+      tabBarIcon: () => {
+        const iconName = 'heart'
+        return <Ionicons name={iconName} size={20} color="red" />;
+      }
+    }}
+    >
     <Tab.Screen name="StackNavigator1" component={StackNavigator.StackNavigator1}></Tab.Screen>
     <Tab.Screen name="StackNavigator2" component={StackNavigator.StackNavigator2}></Tab.Screen>
     </Tab.Navigator>
