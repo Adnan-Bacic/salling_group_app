@@ -6,8 +6,8 @@ platform :ios, '11.0'
 target 'salling_group_app' do
   config = use_native_modules!
 
-  # MANUAL - for react-native-vector-icons
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+  #MANUAL - for react-native-vector-icons
+  #pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   use_react_native!(
     :path => config[:reactNativePath],
