@@ -9,7 +9,8 @@
     "start": "react-native start --reset-cache",
     "test": "jest -u --coverage",
     "lint": "eslint src __tests__ index.js App.tsx babel.config.js metro.config.js react-native.config.js .eslintrc.js --ext .js,.jsx,.ts,.tsx --fix",
-    "clean": "react-native clean-project-auto"
+    "clean": "react-native clean-project-auto",
+    "clearCache": "cd android && ./gradlew clean && cd .. && del -rf node_modules && del -rf /tmp/metro-* && yarn cache clean && yarn install"
   },
   "dependencies": {
     "@react-navigation/material-bottom-tabs": "^6.0.5",
