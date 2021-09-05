@@ -1,5 +1,5 @@
-import * as RootNavigation from './RootNavigation'
+import * as RootNavigation from './RootNavigation';
 
 export {
-    RootNavigation,
-}
+  RootNavigation,
+};

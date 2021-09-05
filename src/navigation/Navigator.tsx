@@ -1,17 +1,16 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import StackNavigator from './StackNavigator';
 import BottomNavigator from './BottomNavigator';
-import { RootNavigation } from '../services'
-import * as Screens from '../screens'
+import { RootNavigation } from '../services';
 
-
-const Navigator = () => {
+const Navigator: React.FunctionComponent = (): React.ReactElement => {
   return (
-    <NavigationContainer ref={RootNavigation.navigationRef}>
-      <BottomNavigator></BottomNavigator>
+    <NavigationContainer
+      ref={RootNavigation.navigationRef}
+    >
+      <BottomNavigator />
     </NavigationContainer>
   );
-}
+};
 
 export default Navigator;

@@ -6,14 +6,16 @@ import {
 } from 'react-native';
 
 const Tab2 = ({ navigation }): React.ReactElement => {
-
   return (
     <>
       <View>
-      <Text>tab 2</Text>
-      <Button title="nav" onPress={() => {
-        navigation.navigate('Stack1')
-      }}></Button>
+        <Text>tab 2</Text>
+        <Button
+          title="nav"
+          onPress={() => {
+            navigation.navigate('Stack1');
+          }}
+        />
       </View>
     </>
   );

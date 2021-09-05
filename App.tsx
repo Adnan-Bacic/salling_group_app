@@ -11,14 +11,12 @@
 import React from 'react';
 import {
   StatusBar,
-  Text,
-  View,
   SafeAreaView,
   StyleSheet,
 } from 'react-native';
 import { Provider as StoreProvider } from 'react-redux';
 import store from './src/redux/store';
-import Navigator from './src/navigation/Navigator'
+import Navigator from './src/navigation/Navigator';
 
 const App = (): React.ReactElement => {
   return (
@@ -30,7 +28,7 @@ const App = (): React.ReactElement => {
           style={styles.safeAreaView}
         >
           <StatusBar />
-          <Navigator></Navigator>
+          <Navigator />
         </SafeAreaView>
       </StoreProvider>
     </>
