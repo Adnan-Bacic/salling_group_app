@@ -4,11 +4,15 @@ import {
   View,
   Button,
 } from 'react-native';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import * as functions from '../redux/functions';
+import { useAppDispatch, useAppSelector } from '../redux/hooks'
 
 const Stack1 = ({ navigation }): React.ReactElement => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const ui = useAppSelector(state => state.ui)
+  console.log('ui', ui)
+
   return (
     <>
       <View>
