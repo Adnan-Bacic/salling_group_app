@@ -10,7 +10,10 @@
     "test": "jest -u --coverage",
     "lint": "eslint src __tests__ index.js App.tsx babel.config.js metro.config.js react-native.config.js .eslintrc.js --ext .js,.jsx,.ts,.tsx --fix",
     "clean": "react-native clean-project-auto",
-    "clearCache": "cd android && ./gradlew clean && cd .. && del -rf node_modules && yarn cache clean && yarn install"
+    "clearCache": "cd android && ./gradlew clean && cd .. && del -rf node_modules && yarn cache clean && yarn install",
+    "generateDebugAPK": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd android && ./gradlew assembleDebug && cd ..",
+    "generateReleaseAPK": "cd android && ./gradlew assembleRelease && cd ..",
+    "generateReleaseAAB": "cd android && ./gradlew bundleRelease && cd .."
   },
   "dependencies": {
     "@react-navigation/material-bottom-tabs": "^6.0.5",
