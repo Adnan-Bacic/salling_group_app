@@ -1,6 +1,6 @@
 import * as actions from '../actions';
-import store from '../store';
 
-export const setLoading = (isLoading: boolean) => {
-  store.dispatch(actions.ui.setLoading(isLoading));
+export const setLoading = (isLoading: boolean) => (dispatch, getState) => {
+  console.log(getState())
+  dispatch(actions.ui.setLoading(isLoading));
 };
