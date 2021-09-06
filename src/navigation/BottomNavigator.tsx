@@ -5,7 +5,7 @@ import * as StackNavigator from './StackNavigator';
 
 const Tab = createMaterialBottomTabNavigator();
 
-const BottomNavigator = () => {
+const BottomNavigator = (): React.ReactElement => {
   return (
     <Tab.Navigator
       screenOptions={{
