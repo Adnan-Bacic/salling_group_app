@@ -1,6 +1,7 @@
 import React from 'react';
 import { Text } from 'react-native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import * as StackNavigator from './StackNavigator';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -11,8 +12,9 @@ const BottomNavigator = (): React.ReactElement => {
       screenOptions={{
         tabBarIcon: () => {
           const renderTabBarIcon = () => {
-            return <Text>123</Text>;
-          // return <Ionicons name={iconName} size={20} color="red" />;
+            //return <Text>123</Text>;
+            const iconName = 'heart'
+          return <Ionicons name={iconName} size={20} color="red" />;
           };
 
           return renderTabBarIcon();
