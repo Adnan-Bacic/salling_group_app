@@ -7,7 +7,7 @@
     "android": "react-native run-android",
     "ios": "react-native run-ios",
     "start": "react-native start --reset-cache",
-    "test": "jest -u --coverage",
+    "test": "jest --coverage",
     "lint": "eslint src __tests__ index.js App.tsx babel.config.js metro.config.js react-native.config.js .eslintrc.js --ext .js,.jsx,.ts,.tsx --fix",
     "clean": "react-native clean-project-auto",
     "clearCache": "cd android && ./gradlew clean && cd .. && del -rf node_modules && yarn cache clean && yarn install",
