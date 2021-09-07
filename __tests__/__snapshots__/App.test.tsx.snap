@@ -343,8 +343,25 @@ exports[`renders correctly 1`] = `
                       }
                     }
                   >
-                    <Text>
-                      123
+                    <Text
+                      allowFontScaling={false}
+                      style={
+                        Array [
+                          Object {
+                            "color": "red",
+                            "fontSize": 20,
+                          },
+                          undefined,
+                          Object {
+                            "fontFamily": "Ionicons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
+                        ]
+                      }
+                    >
+                      
                     </Text>
                   </View>
                   <View
@@ -362,8 +379,25 @@ exports[`renders correctly 1`] = `
                       }
                     }
                   >
-                    <Text>
-                      123
+                    <Text
+                      allowFontScaling={false}
+                      style={
+                        Array [
+                          Object {
+                            "color": "red",
+                            "fontSize": 20,
+                          },
+                          undefined,
+                          Object {
+                            "fontFamily": "Ionicons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
+                        ]
+                      }
+                    >
+                      
                     </Text>
                   </View>
                   <View
@@ -566,8 +600,25 @@ exports[`renders correctly 1`] = `
                       }
                     }
                   >
-                    <Text>
-                      123
+                    <Text
+                      allowFontScaling={false}
+                      style={
+                        Array [
+                          Object {
+                            "color": "red",
+                            "fontSize": 20,
+                          },
+                          undefined,
+                          Object {
+                            "fontFamily": "Ionicons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
+                        ]
+                      }
+                    >
+                      
                     </Text>
                   </View>
                   <View
@@ -585,8 +636,25 @@ exports[`renders correctly 1`] = `
                       }
                     }
                   >
-                    <Text>
-                      123
+                    <Text
+                      allowFontScaling={false}
+                      style={
+                        Array [
+                          Object {
+                            "color": "red",
+                            "fontSize": 20,
+                          },
+                          undefined,
+                          Object {
+                            "fontFamily": "Ionicons",
+                            "fontStyle": "normal",
+                            "fontWeight": "normal",
+                          },
+                          Object {},
+                        ]
+                      }
+                    >
+                      
                     </Text>
                   </View>
                   <View
