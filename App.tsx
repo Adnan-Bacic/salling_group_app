@@ -15,6 +15,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { Provider as StoreProvider } from 'react-redux';
+import { Provider as PaperProvider } from 'react-native-paper';
 import store from './src/redux/store';
 import Navigator from './src/navigation/Navigator';
 
@@ -28,7 +29,9 @@ const App = (): React.ReactElement => {
           style={styles.safeAreaView}
         >
           <StatusBar />
-          <Navigator />
+          <PaperProvider>
+            <Navigator />
+          </PaperProvider>
         </SafeAreaView>
       </StoreProvider>
     </>
