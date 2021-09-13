@@ -1855,6 +1855,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-native-dotenv@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@types/react-native-dotenv@npm:0.2.0"
+  checksum: 23d59b8ebd35e8fe693531f9c630f7518cb149c06694c8c35fc3b628ac8e8e26cc602cec9372447873fbbb13bf0c40bbd951ba5306c1b83b169cc3a927cb935f
+  languageName: node
+  linkType: hard
+
 "@types/react-native@npm:^0.64.5":
   version: 0.64.13
   resolution: "@types/react-native@npm:0.64.13"
@@ -3704,6 +3711,13 @@ __metadata:
   dependencies:
     webidl-conversions: ^5.0.0
   checksum: d638e9cb05c52999f1b2eb87c374b03311ea5b1d69c2f875bc92da73e17db60c12142b45c950228642ff7f845c536b65305483350d080df59003a653da80b691
+  languageName: node
+  linkType: hard
+
+"dotenv@npm:^10.0.0":
+  version: 10.0.0
+  resolution: "dotenv@npm:10.0.0"
+  checksum: f412c5fe8c24fbe313d302d2500e247ba8a1946492db405a4de4d30dd0eb186a88a43f13c958c5a7de303938949c4231c56994f97d05c4bc1f22478d631b4005
   languageName: node
   linkType: hard
 
@@ -8160,6 +8174,27 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
+"react-native-config@npm:^1.4.4":
+  version: 1.4.4
+  resolution: "react-native-config@npm:1.4.4"
+  peerDependencies:
+    react-native-windows: ">=0.61"
+  peerDependenciesMeta:
+    react-native-windows:
+      optional: true
+  checksum: aa00a3fea8a74307176e2ddef9d822bbae49ea38f3a1c736607ff732606d95be2fef440d922f5c1fcb9ff2f0b17bcbb7143d9b256e8a981454038e4bfbfcbe81
+  languageName: node
+  linkType: hard
+
+"react-native-dotenv@npm:^3.2.0":
+  version: 3.2.0
+  resolution: "react-native-dotenv@npm:3.2.0"
+  dependencies:
+    dotenv: ^10.0.0
+  checksum: 31012bd58d014fb9bbe0253441581bb9fd955f0ebe5996aca9a6e342b6142ccdf6de58533887610017c7f3bd5d17d90ff6159be1862665a986f8ce3e85db9b5c
+  languageName: node
+  linkType: hard
+
 "react-native-iphone-x-helper@npm:^1.3.1":
   version: 1.3.1
   resolution: "react-native-iphone-x-helper@npm:1.3.1"
@@ -8771,6 +8806,7 @@ resolve@^2.0.0-next.3:
     "@react-navigation/native-stack": ^6.1.0
     "@types/jest": ^26.0.23
     "@types/react-native": ^0.64.5
+    "@types/react-native-dotenv": ^0.2.0
     "@types/react-test-renderer": ^16.9.2
     "@typescript-eslint/eslint-plugin": ^4.30.0
     "@typescript-eslint/parser": ^4.30.0
@@ -8789,6 +8825,8 @@ resolve@^2.0.0-next.3:
     react-native: 0.65.1
     react-native-clean-project: ^3.6.7
     react-native-codegen: ^0.0.7
+    react-native-config: ^1.4.4
+    react-native-dotenv: ^3.2.0
     react-native-paper: ^4.9.2
     react-native-safe-area-context: ^3.3.2
     react-native-screens: ^3.6.0
