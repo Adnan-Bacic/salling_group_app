@@ -6,6 +6,7 @@ import { Alert } from 'react-native';
 
 // eslint-disable-next-line max-len
 export const getStores = (storeData: any) => async (dispatch: (p: DispatchProps<any>) => void, getState: () => void): void => {
+  dispatch(actions.ui.setLoading(true))
   try {
     const url = `${API_URL}/v2/stores`
     const res = await fetch(url, {
@@ -28,4 +29,5 @@ export const getStores = (storeData: any) => async (dispatch: (p: DispatchProps<
   } catch (err) {
     Alert.alert(err.name, err.message)
   }
+  dispatch(actions.ui.setLoading(false))
 };

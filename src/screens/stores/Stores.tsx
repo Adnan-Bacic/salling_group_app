@@ -6,6 +6,7 @@ import {
 } from 'react-native';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import * as functions from '../../redux/functions';
+import { Spinner } from '../../components';
 
 const Stores = ({ navigation }): React.ReactElement => {
   const dispatch = useAppDispatch();
@@ -18,8 +19,13 @@ const Stores = ({ navigation }): React.ReactElement => {
   }, [dispatch]);
 
   const stores = useAppSelector((state) => { return state.stores; });
+  const ui = useAppSelector((state) => { return state.ui; });
   //console.log('stores', stores);
 
+  if(ui.isLoading){
+    return <Spinner></Spinner>
+  }
+  
   return (
     <>
       <View>
