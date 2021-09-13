@@ -42,5 +42,6 @@ module.exports = {
     'react/jsx-max-props-per-line': [2, { maximum: 1, when: 'always' }],
     'arrow-body-style': [2, 'always'],
     'import/prefer-default-export': 'off',
+    'object-shorthand': ['warn', 'never'],
   },
 };

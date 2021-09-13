@@ -35,3 +35,16 @@ export const StackNavigator2 = (): React.ReactElement => {
     </Stack2.Navigator>
   );
 };
+
+const StoresStack = createNativeStackNavigator();
+
+export const StoresNavigator = (): React.ReactElement => {
+  return (
+    <StoresStack.Navigator>
+      <StoresStack.Screen
+        name="Stores"
+        component={Screens.Stores}
+      />
+    </StoresStack.Navigator>
+  );
+};
