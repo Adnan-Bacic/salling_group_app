@@ -6,7 +6,6 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { API_URL, API_TOKEN } from 'react-native-dotenv';
-import Config from 'react-native-config';
 
 import * as functions from '../redux/functions';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
@@ -23,10 +22,6 @@ const Stack1 = ({ navigation }): React.ReactElement => {
         <Text>{API_URL}</Text>
         <Text>{API_TOKEN}</Text>
         <Text>rn config</Text>
-        <Text>{Config.API_URL}</Text>
-        <Text>{Config.API_TOKEN}</Text>
-        <Text>dotenv</Text>
-        <Text>{process.env.API_URL}</Text>
         <Text>stack 1</Text>
         <Button
           title="nav"

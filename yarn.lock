@@ -8174,18 +8174,6 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-native-config@npm:^1.4.4":
-  version: 1.4.4
-  resolution: "react-native-config@npm:1.4.4"
-  peerDependencies:
-    react-native-windows: ">=0.61"
-  peerDependenciesMeta:
-    react-native-windows:
-      optional: true
-  checksum: aa00a3fea8a74307176e2ddef9d822bbae49ea38f3a1c736607ff732606d95be2fef440d922f5c1fcb9ff2f0b17bcbb7143d9b256e8a981454038e4bfbfcbe81
-  languageName: node
-  linkType: hard
-
 "react-native-dotenv@npm:^3.2.0":
   version: 3.2.0
   resolution: "react-native-dotenv@npm:3.2.0"
@@ -8825,7 +8813,6 @@ resolve@^2.0.0-next.3:
     react-native: 0.65.1
     react-native-clean-project: ^3.6.7
     react-native-codegen: ^0.0.7
-    react-native-config: ^1.4.4
     react-native-dotenv: ^3.2.0
     react-native-paper: ^4.9.2
     react-native-safe-area-context: ^3.3.2
