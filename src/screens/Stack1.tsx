@@ -13,7 +13,6 @@ import { useAppDispatch, useAppSelector } from '../redux/hooks';
 const Stack1 = ({ navigation }): React.ReactElement => {
   const dispatch = useAppDispatch();
   const ui = useAppSelector((state) => { return state.ui; });
-  console.log('ui', ui);
 
   return (
     <>
