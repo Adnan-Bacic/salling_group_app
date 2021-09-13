@@ -21,5 +21,5 @@ beforeEach(() => {
 
 test('renders correctly', () => {
   const tree = wrapper.toJSON();
-  expect(true).toBeTruthy();
+  expect(tree).toMatchSnapshot();
 });
