@@ -145,6 +145,18 @@ exports[`renders correctly 1`] = `
                     >
                       <View>
                         <Text>
+                          rn env
+                        </Text>
+                        <Text>
+                          https://api231.example.org
+                        </Text>
+                        <Text>
+                          abc123abv
+                        </Text>
+                        <Text>
+                          rn config
+                        </Text>
+                        <Text>
                           stack 1
                         </Text>
                         <View

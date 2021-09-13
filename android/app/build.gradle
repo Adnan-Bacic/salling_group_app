@@ -77,9 +77,9 @@ import com.android.build.OutputFile
  * ]
  */
 
-// MANUAL - vector-icons doesnt support autolinking
+// MANUAL
+// vector-icons doesnt support autolinking
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
-
 
 project.ext.react = [
     enableHermes: false,  // clean and rebuild if changing

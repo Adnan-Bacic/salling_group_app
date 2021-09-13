@@ -12,9 +12,15 @@ const BottomNavigator = (): React.ReactElement => {
       screenOptions={{
         tabBarIcon: () => {
           const renderTabBarIcon = () => {
-            //return <Text>123</Text>;
-            const iconName = 'heart'
-          return <Ionicons name={iconName} size={20} color="red" />;
+            // return <Text>123</Text>;
+            const iconName = 'heart';
+            return (
+              <Ionicons
+                name={iconName}
+                size={20}
+                color="red"
+              />
+            );
           };
 
           return renderTabBarIcon();

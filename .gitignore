@@ -69,3 +69,6 @@ buck-out/
 
 # jest test coverage/ folder
 coverage/
+
+# enviroment variables
+.env
