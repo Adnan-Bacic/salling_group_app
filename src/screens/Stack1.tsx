@@ -46,19 +46,27 @@ const Stack1 = ({ navigation }): React.ReactElement => {
         ) : (
           <Text>false</Text>
         )}
-        <Paper.Button onPress={() => {
-          console.log('paper')
-        }}>
+        <Paper.Button
+          onPress={() => {
+            console.log('paper');
+          }}
+        >
           material button
         </Paper.Button>
-        <Paper.Button mode="outlined" onPress={() => {
-          console.log('paper')
-        }}>
+        <Paper.Button
+          mode="outlined"
+          onPress={() => {
+            console.log('paper');
+          }}
+        >
           material button
         </Paper.Button>
-        <Paper.Button mode="contained" onPress={() => {
-          console.log('paper')
-        }}>
+        <Paper.Button
+          mode="contained"
+          onPress={() => {
+            console.log('paper');
+          }}
+        >
           material button
         </Paper.Button>
       </View>
