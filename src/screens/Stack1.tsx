@@ -7,7 +7,6 @@ import {
 import * as Paper from 'react-native-paper';
 import { API_URL, API_TOKEN } from 'react-native-dotenv';
 import Config from 'react-native-config';
-const dotenv = require('dotenv')
 
 import * as functions from '../redux/functions';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
