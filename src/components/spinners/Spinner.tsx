@@ -1,12 +1,17 @@
 import React from 'react';
 import {
-  ActivityIndicator, StyleSheet, View,
+  StyleSheet, View,
 } from 'react-native';
+import * as Paper from 'react-native-paper';
 
 const Spinner = () => {
   return (
-    <View style={styles.container}>
-      <ActivityIndicator size="large" />
+    <View
+      style={styles.container}
+    >
+      <Paper.ActivityIndicator
+        size="large"
+      />
     </View>
   );
 };
@@ -14,7 +19,7 @@ const Spinner = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center"
+    justifyContent: 'center',
   },
 });
 

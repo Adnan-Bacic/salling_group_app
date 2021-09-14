@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { API_URL, API_TOKEN } from 'react-native-dotenv';
-import { Spinner } from '../components'
+import { Spinner } from '../components';
 import * as functions from '../redux/functions';
 import { useAppDispatch, useAppSelector } from '../redux/hooks';
 

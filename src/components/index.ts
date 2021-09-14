@@ -1,5 +1,5 @@
-import Spinner from './spinners/Spinner'
+import Spinner from './spinners/Spinner';
 
 export {
-    Spinner
-}
+  Spinner,
+};
