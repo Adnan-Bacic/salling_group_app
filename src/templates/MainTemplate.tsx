@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
-const MainTemplate = ({ children }) => {
+interface MainTemplateInterface {
+  children: React.ReactElement;
+}
+const MainTemplate = ({ children }: MainTemplateInterface): React.ReactElement => {
   return (
     <View
       style={styles.container}

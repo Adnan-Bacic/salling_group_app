@@ -2,9 +2,17 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import * as Paper from 'react-native-paper';
 
+interface StoreItemInterface {
+  name: string;
+  street: string;
+  city: string;
+  zip: string;
+  attributes: Record<string, unknown>
+  onPress: () => void;
+}
 const StoreItem = ({
   name, street, city, zip, attributes, onPress,
-}) => {
+}: StoreItemInterface): React.ReactElement => {
   return (
     <View
       style={styles.container}
