@@ -26,7 +26,11 @@ const StoreItem = ({
           <Paper.Paragraph>Paper.Card content</Paper.Paragraph>
           {/* attributes here */}
           {attributes.carlsJunior ? (
+            <>
+            <Paper.Chip icon="information">chip</Paper.Chip>
+
             <Text>carlsJunior</Text>
+            </>
           ) : (
             <Text>no carlsJunior</Text>
           )}
