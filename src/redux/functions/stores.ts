@@ -5,10 +5,12 @@ import * as actions from '../actions';
 import { DispatchProps } from '../types';
 
 // eslint-disable-next-line max-len
-export const getStores = (storeData: any) => async (dispatch: (p: DispatchProps<any>) => void, getState: () => void): void => {
-  dispatch(actions.ui.setLoading(true));
+export const getStores = (babyChanging: any, bakery: any, carlsJunior: any) => async (dispatch: (p: DispatchProps<any>) => void, getState: () => void): Promise<void> => {
+  if (getState().ui.isLoading === null) {
+    dispatch(actions.ui.setLoading(true));
+  }
   try {
-    const url = `${API_URL}/v2/stores`;
+    const url = `${API_URL}/v2/stores?babyChanging=${babyChanging}&bakery=${bakery}&carlsJunior=${carlsJunior}`;
     const res = await fetch(url, {
       method: 'GET',
       headers: {

@@ -27,9 +27,13 @@ const StoreItem = ({
           {/* attributes here */}
           {attributes.carlsJunior ? (
             <>
-            <Paper.Chip icon="information">chip</Paper.Chip>
+              <Paper.Chip
+                icon="information"
+              >
+                chip
+              </Paper.Chip>
 
-            <Text>carlsJunior</Text>
+              <Text>carlsJunior</Text>
             </>
           ) : (
             <Text>no carlsJunior</Text>
