@@ -34,12 +34,13 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   }, [babyChanging, bakery, carlsJunior, dispatch]);
 
   const stores = useAppSelector((state) => { return state.stores; });
+  console.log(stores.storesData.length)
   const ui = useAppSelector((state) => { return state.ui; });
   // console.log('stores', stores);
 
   // not needed?
   if (ui.isLoading) {
-    return <Spinner />;
+    //return <Spinner />;
   }
 
   return (
@@ -101,28 +102,38 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
           <View
             style={styles.spacer}
           />
+          {ui.isLoading && (
+            <Spinner></Spinner>
+          )}
+          {!ui.isLoading && (
           <ScrollView>
-            {stores.storesData && (
-            <>
-              {stores.storesData.map((item: any) => {
-                // console.log('i', item.hours)
-                return (
-                  <StoreItem
-                    key={item.id}
-                    name={item.name}
-                    street={item.address.street}
-                    city={item.address.city}
-                    zip={item.address.zip}
-                    attributes={item.attributes}
-                    onPress={() => {
-                      console.log(item.id);
-                    }}
-                  />
-                );
-              })}
-            </>
-            )}
-          </ScrollView>
+          {stores.storesData && (
+          <>
+            {stores.storesData.map((item: any) => {
+              // console.log('i', item.hours)
+              return (
+                <StoreItem
+                  key={item.id}
+                  name={item.name}
+                  street={item.address.street}
+                  city={item.address.city}
+                  zip={item.address.zip}
+                  attributes={item.attributes}
+                  onPress={() => {
+                    console.log(item.id);
+                  }}
+                />
+              );
+            })}
+          </>
+          )}
+        </ScrollView>
+          )}
+          {(stores?.storeData?.length === 0) ? (
+            <Paper.Text>no results found</Paper.Text>
+          ) : (
+            <Paper.Text>results found</Paper.Text>
+          )}
         </>
       </MainTemplate>
     </>

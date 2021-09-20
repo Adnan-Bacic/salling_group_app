@@ -6,11 +6,24 @@ import { DispatchProps } from '../types';
 
 // eslint-disable-next-line max-len
 export const getStores = (babyChanging: any, bakery: any, carlsJunior: any) => async (dispatch: (p: DispatchProps<any>) => void, getState: () => void): Promise<void> => {
-  if (getState().ui.isLoading === null) {
     dispatch(actions.ui.setLoading(true));
-  }
+  
   try {
-    const url = `${API_URL}/v2/stores?babyChanging=${babyChanging}&bakery=${bakery}&carlsJunior=${carlsJunior}`;
+    let paramString = ''
+    if(babyChanging === true){
+      paramString += 'babyChanging=true';
+    }
+    if(bakery === true){
+      paramString += 'bakery=true';
+    }
+    if(carlsJunior === true){
+      paramString += 'carlsJunior=true';
+    }
+    console.log('ps', paramString)
+
+    console.log('params', babyChanging, bakery, carlsJunior)
+    const url = `${API_URL}/v2/stores?${paramString}`;
+    console.log('url', url)
     const res = await fetch(url, {
       method: 'GET',
       headers: {
@@ -28,5 +41,7 @@ export const getStores = (babyChanging: any, bakery: any, carlsJunior: any) => a
   } catch (err) {
     Alert.alert(err.name, err.message);
   }
+setTimeout(() => {
   dispatch(actions.ui.setLoading(false));
-};
+
+}, 1000);};
