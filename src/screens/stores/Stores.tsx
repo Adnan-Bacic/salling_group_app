@@ -34,7 +34,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   }, [babyChanging, bakery, carlsJunior, dispatch]);
 
   const stores = useAppSelector((state) => { return state.stores; });
-  console.log(stores.storesData.length)
+  console.log('storedata', stores?.storesData)
   const ui = useAppSelector((state) => { return state.ui; });
   // console.log('stores', stores);
 
@@ -107,7 +107,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
           )}
           {!ui.isLoading && (
           <ScrollView>
-          {stores.storesData && (
+          {stores.storesData.length === 0 ? (
           <>
             {stores.storesData.map((item: any) => {
               // console.log('i', item.hours)
@@ -126,13 +126,15 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
               );
             })}
           </>
+          ) : (
+            <Paper.Text>no results found1</Paper.Text>
+          )}
+                    {(stores.storeData?.length === 0) ? (
+            <Paper.Text>no results found2</Paper.Text>
+          ) : (
+            <Paper.Text>results found2</Paper.Text>
           )}
         </ScrollView>
-          )}
-          {(stores?.storeData?.length === 0) ? (
-            <Paper.Text>no results found</Paper.Text>
-          ) : (
-            <Paper.Text>results found</Paper.Text>
           )}
         </>
       </MainTemplate>

@@ -14,10 +14,10 @@ export const getStores = (babyChanging: any, bakery: any, carlsJunior: any) => a
       paramString += 'babyChanging=true';
     }
     if(bakery === true){
-      paramString += 'bakery=true';
+      paramString += '&bakery=true';
     }
     if(carlsJunior === true){
-      paramString += 'carlsJunior=true';
+      paramString += '&carlsJunior=true';
     }
     console.log('ps', paramString)
 
@@ -33,11 +33,14 @@ export const getStores = (babyChanging: any, bakery: any, carlsJunior: any) => a
 
     const data = await res.json();
 
+
     if (!res.ok) {
       throw new Error('Could not get stores');
     }
 
     dispatch(actions.stores.getStores(data));
+    console.log('data', data)
+    console.log('getstate', getState().stores.storesData)
   } catch (err) {
     Alert.alert(err.name, err.message);
   }
