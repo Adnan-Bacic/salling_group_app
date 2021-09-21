@@ -16,8 +16,7 @@ const FilterItem = ({ title, status, onPress }: FilterItemInterface): React.Reac
       <View
         style={styles.titleContainer}
       >
-        <Paper.Text
-        >
+        <Paper.Text>
           {title}
         </Paper.Text>
 

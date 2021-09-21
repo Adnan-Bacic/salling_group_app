@@ -17,6 +17,7 @@ interface StoresInterface {
 }
 const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   const [filtersShown, setFiltersShown] = useState(true);
+  const [zip, setZip] = useState('');
 
   // filters
   const [babyChanging, setBabyChanging] = useState<string | boolean>('');
@@ -27,26 +28,35 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
   useEffect(() => {
     const getStores = () => {
-      dispatch(functions.stores.getStores(babyChanging, bakery, carlsJunior));
+      dispatch(functions.stores.getStores(zip, babyChanging, bakery, carlsJunior));
     };
 
     getStores();
-  }, [babyChanging, bakery, carlsJunior, dispatch]);
+  }, [babyChanging, bakery, carlsJunior, dispatch, zip]);
 
   const stores = useAppSelector((state) => { return state.stores; });
-  console.log('storedata', stores?.storesData)
+  console.log('storedata length', stores?.storesData?.length);
   const ui = useAppSelector((state) => { return state.ui; });
   // console.log('stores', stores);
 
   // not needed?
   if (ui.isLoading) {
-    //return <Spinner />;
+    // return <Spinner />;
   }
 
   return (
     <>
       <MainTemplate>
         <>
+          <Paper.TextInput
+            keyboardType="numeric"
+            label="zip"
+            value={zip}
+            mode="outlined"
+            onChangeText={(text) => {
+              setZip(text);
+            }}
+          />
           <Paper.Button
             onPress={() => {
               setFiltersShown((prevState) => { return !prevState; });
@@ -84,7 +94,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                                <FilterItem
+                <FilterItem
                   title="carlsJunior"
                   status={carlsJunior ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -103,38 +113,38 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
             style={styles.spacer}
           />
           {ui.isLoading && (
-            <Spinner></Spinner>
+            <Spinner />
           )}
           {!ui.isLoading && (
           <ScrollView>
-          {stores.storesData.length === 0 ? (
-          <>
-            {stores.storesData.map((item: any) => {
+            {(stores.storeData?.length === 0) ? (
+              <Paper.Text>no results found</Paper.Text>
+            ) : (
+              <Paper.Text>results found</Paper.Text>
+            )}
+
+            {stores.storesData && (
+            <>
+              {stores.storesData.map((item: any) => {
               // console.log('i', item.hours)
-              return (
-                <StoreItem
-                  key={item.id}
-                  name={item.name}
-                  street={item.address.street}
-                  city={item.address.city}
-                  zip={item.address.zip}
-                  attributes={item.attributes}
-                  onPress={() => {
-                    console.log(item.id);
-                  }}
-                />
-              );
-            })}
-          </>
-          ) : (
-            <Paper.Text>no results found1</Paper.Text>
-          )}
-                    {(stores.storeData?.length === 0) ? (
-            <Paper.Text>no results found2</Paper.Text>
-          ) : (
-            <Paper.Text>results found2</Paper.Text>
-          )}
-        </ScrollView>
+                return (
+                  <StoreItem
+                    key={item.id}
+                    name={item.name}
+                    street={item.address.street}
+                    city={item.address.city}
+                    zip={item.address.zip}
+                    attributes={item.attributes}
+                    onPress={() => {
+                      console.log(item.id);
+                    }}
+                  />
+                );
+              })}
+            </>
+            )}
+
+          </ScrollView>
           )}
         </>
       </MainTemplate>
