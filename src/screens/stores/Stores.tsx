@@ -136,7 +136,9 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     zip={item.address.zip}
                     attributes={item.attributes}
                     onPress={() => {
-                      console.log(item.id);
+                      navigation.navigate('Store', {
+                        name: item.name,
+                      });
                     }}
                   />
                 );
