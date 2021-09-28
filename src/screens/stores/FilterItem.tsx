@@ -13,6 +13,7 @@ interface FilterItemInterface {
 const FilterItem = ({ title, status, onPress }: FilterItemInterface): React.ReactElement => {
   return (
     <>
+    <View style={styles.container}>
       <View
         style={styles.titleContainer}
       >
@@ -29,15 +30,22 @@ const FilterItem = ({ title, status, onPress }: FilterItemInterface): React.Reac
           onPress={onPress}
         />
       </View>
+      </View>
     </>
   );
 };
 
 const styles = StyleSheet.create({
+  container:{
+    flexDirection: 'row',
+    width: '45%',
+    //backgroundColor: 'red',
+  },
   checkboxContainer: {
-    flex: 1,
+    //flex: 3,
   },
   titleContainer: {
+    alignSelf: 'center',
     flex: 1,
   },
 });

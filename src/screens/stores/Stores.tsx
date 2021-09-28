@@ -15,24 +15,70 @@ import FilterItem from './FilterItem';
 interface StoresInterface {
   navigation: any
 }
+enum FilterButtonTextProps {
+  'ShowFilters' = 'Show filters',
+  'HideFilters' = 'Hide filters',
+}
 const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
-  const [filtersShown, setFiltersShown] = useState(true);
-  const [zip, setZip] = useState('');
+  const [filtersShown, setFiltersShown] = useState(false);
+  const [filterButtonText, setFilterButtonText] = useState<FilterButtonTextProps>(FilterButtonTextProps.ShowFilters);
+
+  // OPTIONS FOR SEARCH
 
   // filters
-  const [babyChanging, setBabyChanging] = useState<string | boolean>('');
-  const [bakery, setBakery] = useState<string | boolean>('');
-  const [carlsJunior, setCarlsJunior] = useState<string | boolean>('');
+  const [zip, setZip] = useState('');
+
+  // attributes
+  const [babyChanging, setBabyChanging] = useState<null | boolean>(null);
+  const [bakery, setBakery] = useState<null | boolean>(null);
+  const [carlsJunior, setCarlsJunior] = useState<null | boolean>(null);
+  const [enablingFacilities, setEnablingFacilities] = useState<null | boolean>(null);
+  const [flowers, setFlowers] = useState<null | boolean>(null);
+  const [garden, setGarden] = useState<null | boolean>(null);
+  const [holidayOpen, setHolidayOpen] = useState<null | boolean>(null);
+  const [nonFood, setNonFood] = useState<null | boolean>(null);
+  const [open247, setOpen247] = useState<null | boolean>(null);
+  const [parking, setParking] = useState<null | boolean>(null);
+  const [noParkingRestrictions, setNoParkingRestrictions] = useState<null | boolean>(null); // reverse 
+  const [petFood, setPetFood] = useState<null | boolean>(null);
+  const [pharmacy, setPharmacy] = useState<null | boolean>(null);
+  const [scanAndGo, setScanAndGo] = useState<null | boolean>(null);
+  //const [smileyscheme, setSmileyscheme] = useState<null | boolean>(null);
+  const [starbucks, setStarbucks] = useState<null | boolean>(null);
+  const [swipBox, setSwipBox] = useState<null | boolean>(null);
+  const [wc, setWc] = useState<null | boolean>(null);
+  const [wifi, setWifi] = useState<null | boolean>(null);
 
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     const getStores = () => {
-      dispatch(functions.stores.getStores(zip, babyChanging, bakery, carlsJunior));
+      const options = {
+        //zip: zip,
+        babyChanging: babyChanging,
+        bakery: bakery,
+        carlsJunior: carlsJunior,
+        enablingFacilities: enablingFacilities,
+        flowers: flowers,
+        garden: garden,
+        holidayOpen: holidayOpen,
+        nonFood: nonFood,
+        open247: open247,
+        parking: parking,
+        noParkingRestrictions: noParkingRestrictions,
+        petFood: petFood,
+        pharmacy: pharmacy,
+        scanAndGo: scanAndGo,
+        starbucks: starbucks,
+        swipBox: swipBox,
+        wc: wc,
+        wifi: wifi,
+      }
+      dispatch(functions.stores.getStores(options));
     };
 
     getStores();
-  }, [babyChanging, bakery, carlsJunior, dispatch, zip]);
+  }, [dispatch, zip, babyChanging, bakery, carlsJunior, enablingFacilities, flowers, garden, holidayOpen, nonFood, open247, parking, noParkingRestrictions, petFood, pharmacy, scanAndGo, starbucks, swipBox, wc, wifi]);
 
   const stores = useAppSelector((state) => { return state.stores; });
   console.log('storedata length', stores?.storesData?.length);
@@ -60,9 +106,14 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
           <Paper.Button
             onPress={() => {
               setFiltersShown((prevState) => { return !prevState; });
+              if(filterButtonText === FilterButtonTextProps.ShowFilters){
+                setFilterButtonText(FilterButtonTextProps.ShowFilters)
+              } else {
+                setFilterButtonText(FilterButtonTextProps.HideFilters)
+              }
             }}
           >
-            show filters
+            {filterButtonText}
           </Paper.Button>
           {filtersShown && (
             <>
@@ -72,12 +123,16 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
               <View
                 style={styles.filterContainer}
               >
+
+                <Paper.Text style={{ width: '100%' }}>test</Paper.Text>
+
+                {/* filters */}
                 <FilterItem
                   title="baby changing"
                   status={babyChanging ? 'checked' : 'unchecked'}
                   onPress={() => {
                     if (babyChanging === true) {
-                      setBabyChanging('');
+                      setBabyChanging(null);
                     } else {
                       setBabyChanging(true);
                     }
@@ -88,7 +143,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                   status={bakery ? 'checked' : 'unchecked'}
                   onPress={() => {
                     if (bakery === true) {
-                      setBakery('');
+                      setBakery(null);
                     } else {
                       setBakery(true);
                     }
@@ -99,12 +154,178 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                   status={carlsJunior ? 'checked' : 'unchecked'}
                   onPress={() => {
                     if (carlsJunior === true) {
-                      setCarlsJunior('');
+                      setCarlsJunior(null);
                     } else {
                       setCarlsJunior(true);
                     }
                   }}
                 />
+                <FilterItem
+                  title="enablingFacilities"
+                  status={enablingFacilities ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (enablingFacilities === true) {
+                      setEnablingFacilities(null);
+                    } else {
+                      setEnablingFacilities(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="flowers"
+                  status={flowers ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (flowers === true) {
+                      setFlowers(null);
+                    } else {
+                      setFiltersShown(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="garden"
+                  status={garden ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (garden === true) {
+                      setGarden(null);
+                    } else {
+                      setGarden(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="holidayOpen"
+                  status={holidayOpen ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (holidayOpen === true) {
+                      setHolidayOpen(null);
+                    } else {
+                      setHolidayOpen(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="nonFood"
+                  status={nonFood ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (nonFood === true) {
+                      setNonFood(null);
+                    } else {
+                      setNonFood(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="open247"
+                  status={open247 ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (open247 === true) {
+                      setOpen247(null);
+                    } else {
+                      setOpen247(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="parking"
+                  status={parking ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (parking === true) {
+                      setParking(null);
+                    } else {
+                      setParking(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="parkingRestrictions"
+                  status={noParkingRestrictions ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (noParkingRestrictions === true) {
+                      setNoParkingRestrictions(null);
+                    } else {
+                      setNoParkingRestrictions(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="petFood"
+                  status={petFood ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (petFood === true) {
+                      setPetFood(null);
+                    } else {
+                      setPetFood(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="pharmacy"
+                  status={pharmacy ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (pharmacy === true) {
+                      setPharmacy(null);
+                    } else {
+                      setPharmacy(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="scanAndGo"
+                  status={scanAndGo ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (scanAndGo === true) {
+                      setScanAndGo(null);
+                    } else {
+                      setScanAndGo(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="starbucks"
+                  status={starbucks ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (starbucks === true) {
+                      setStarbucks(null);
+                    } else {
+                      setStarbucks(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="swipBox"
+                  status={swipBox ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (swipBox === true) {
+                      setSwipBox(null);
+                    } else {
+                      setSwipBox(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="wc"
+                  status={wc ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (wc === true) {
+                      setWc(null);
+                    } else {
+                      setWc(true);
+                    }
+                  }}
+                />
+                <FilterItem
+                  title="wifi"
+                  status={wifi ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    if (wifi === true) {
+                      setWifi(null);
+                    } else {
+                      setWifi(true);
+                    }
+                  }}
+                />
+                {/* filters */}
 
               </View>
             </>
@@ -154,8 +375,9 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
 const styles = StyleSheet.create({
   filterContainer: {
-    alignItems: 'center',
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
   },
   spacer: {
     marginTop: 20,
