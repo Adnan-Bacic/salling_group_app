@@ -1,17 +1,17 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, ScrollView } from 'react-native';
 
 interface MainTemplateInterface {
   children: React.ReactElement;
 }
 const MainTemplate = ({ children }: MainTemplateInterface): React.ReactElement => {
   return (
-    <View
+    <ScrollView
       style={styles.container}
     >
       {children}
 
-    </View>
+    </ScrollView>
   );
 };
 

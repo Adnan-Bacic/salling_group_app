@@ -3,14 +3,16 @@ import {
   View,
   StyleSheet,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import * as functions from '../../redux/functions';
 import { MainTemplate } from '../../templates';
-import { Spinner } from '../../components';
+import { Spinner, NoResults } from '../../components';
 import StoreItem from './StoreItem';
-import FilterItem from './FilterItem';
+import FilterCheckBoxItem from './FilterCheckBoxItem';
+import FilterRadioButtonItem from './FilterRadioButtonItem';
 
 interface StoresInterface {
   navigation: any
@@ -26,7 +28,25 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   // OPTIONS FOR SEARCH
 
   // filters
-  const [zip, setZip] = useState('');
+  enum Countries {
+    dk = 'dk',
+    se = 'se',
+    de = 'de',
+    pl = 'pl',
+  }
+  enum Brands {
+    netto = 'netto',
+    bilka = 'bilka',
+    foetex = 'foetex',
+    salling = 'salling',
+    carlsjr = 'carlsjr',
+    br = 'br',
+  }
+  const [zip, setZip] = useState<string>('');
+  const [city, setCity] = useState<string>('');
+  const [country, setCountry] = useState<Countries | string>('');
+  const [street, setStreet] = useState<string>('');
+  const [brand, setBrand] = useState<Brands | string>('');
 
   // attributes
   const [babyChanging, setBabyChanging] = useState<null | boolean>(null);
@@ -39,11 +59,11 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   const [nonFood, setNonFood] = useState<null | boolean>(null);
   const [open247, setOpen247] = useState<null | boolean>(null);
   const [parking, setParking] = useState<null | boolean>(null);
-  const [noParkingRestrictions, setNoParkingRestrictions] = useState<null | boolean>(null); // reverse 
+  const [noParkingRestrictions, setNoParkingRestrictions] = useState<null | boolean>(null); // reverse
   const [petFood, setPetFood] = useState<null | boolean>(null);
   const [pharmacy, setPharmacy] = useState<null | boolean>(null);
   const [scanAndGo, setScanAndGo] = useState<null | boolean>(null);
-  //const [smileyscheme, setSmileyscheme] = useState<null | boolean>(null);
+  // const [smileyscheme, setSmileyscheme] = useState<null | boolean>(null);
   const [starbucks, setStarbucks] = useState<null | boolean>(null);
   const [swipBox, setSwipBox] = useState<null | boolean>(null);
   const [wc, setWc] = useState<null | boolean>(null);
@@ -54,7 +74,12 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   useEffect(() => {
     const getStores = () => {
       const options = {
-        //zip: zip,
+        //filters
+        zip: zip,
+        country: country,
+        brand: brand,
+
+        //attributes
         babyChanging: babyChanging,
         bakery: bakery,
         carlsJunior: carlsJunior,
@@ -73,61 +98,195 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
         swipBox: swipBox,
         wc: wc,
         wifi: wifi,
-      }
+      };
       dispatch(functions.stores.getStores(options));
     };
 
     getStores();
-  }, [dispatch, zip, babyChanging, bakery, carlsJunior, enablingFacilities, flowers, garden, holidayOpen, nonFood, open247, parking, noParkingRestrictions, petFood, pharmacy, scanAndGo, starbucks, swipBox, wc, wifi]);
+  }, [babyChanging, bakery, brand, carlsJunior, country, dispatch, enablingFacilities, flowers, garden, holidayOpen, noParkingRestrictions, nonFood, open247, parking, petFood, pharmacy, scanAndGo, starbucks, swipBox, wc, wifi, zip]);
 
   const stores = useAppSelector((state) => { return state.stores; });
-  console.log('storedata length', stores?.storesData?.length);
   const ui = useAppSelector((state) => { return state.ui; });
-  // console.log('stores', stores);
 
   // not needed?
   if (ui.isLoading) {
     // return <Spinner />;
   }
 
+  interface FlatListItemProps {
+    item: any;
+  }
+  const renderItem = ({ item }: FlatListItemProps) => {
+    return (
+      <StoreItem
+        key={item.id}
+        name={item.name}
+        street={item.address.street}
+        city={item.address.city}
+        zip={item.address.zip}
+        attributes={item.attributes}
+        onPress={() => {
+          console.log(item.id);
+        }}
+      />
+    );
+  };
+
   return (
     <>
       <MainTemplate>
         <>
-          <Paper.TextInput
-            keyboardType="numeric"
-            label="zip"
-            value={zip}
-            mode="outlined"
-            onChangeText={(text) => {
-              setZip(text);
-            }}
-          />
           <Paper.Button
             onPress={() => {
               setFiltersShown((prevState) => { return !prevState; });
-              if(filterButtonText === FilterButtonTextProps.ShowFilters){
-                setFilterButtonText(FilterButtonTextProps.ShowFilters)
+              if (filterButtonText === FilterButtonTextProps.ShowFilters) {
+                setFilterButtonText(FilterButtonTextProps.HideFilters);
               } else {
-                setFilterButtonText(FilterButtonTextProps.HideFilters)
+                setFilterButtonText(FilterButtonTextProps.ShowFilters);
               }
             }}
           >
             {filterButtonText}
           </Paper.Button>
           {filtersShown && (
-            <>
+            <View>
               <Paper.Text>
                 add filters. this shows stores where your filters apply. if unchecked, stores may or may not have the specified filter
               </Paper.Text>
+              {/* filters */}
+              <Paper.TextInput
+                keyboardType="numeric"
+                label="zip"
+                value={zip}
+                mode="outlined"
+                onChangeText={(text) => {
+                  setZip(text);
+                }}
+              />
+              <Paper.TextInput
+                label="city"
+                value={city}
+                mode="outlined"
+                onChangeText={(text) => {
+                  setCity(text);
+                }}
+              />
+              <Paper.TextInput
+                label="street (exact match only)"
+                value={city}
+                mode="outlined"
+                onChangeText={(text) => {
+                  setStreet(text);
+                }}
+              />
+
+<Paper.Text>country</Paper.Text>
+
+                
+ 
+              <FilterRadioButtonItem
+              title="title"
+              value={Countries.dk}
+              status={country === Countries.dk ? 'checked' : 'unchecked'}
+              onPress={() =>{
+                setCountry(Countries.dk)
+              }}
+              ></FilterRadioButtonItem>
+
+<FilterRadioButtonItem
+              title="title"
+              value={Countries.se}
+              status={country === Countries.se ? 'checked' : 'unchecked'}
+              onPress={() =>{
+                setCountry(Countries.se)
+              }}
+              ></FilterRadioButtonItem>
+
+<FilterRadioButtonItem
+              title="title"
+              value={Countries.de}
+              status={country === Countries.de ? 'checked' : 'unchecked'}
+              onPress={() =>{
+                setCountry(Countries.de)
+              }}
+              ></FilterRadioButtonItem>
+
+<FilterRadioButtonItem
+              title="title"
+              value={Countries.pl}
+              status={country === Countries.pl ? 'checked' : 'unchecked'}
+              onPress={() =>{
+                setCountry(Countries.pl)
+              }}
+              ></FilterRadioButtonItem>
+              
+
+              <Paper.Text>
+                brand
+              </Paper.Text>
+
+              <FilterRadioButtonItem
+              title="title"
+              value={Brands.netto}
+              status={brand === Brands.netto ? 'checked' : 'unchecked'}
+              onPress={() =>{
+                setBrand(Brands.netto)
+              }}
+               />
+
+<FilterRadioButtonItem
+              title="title"
+              value={Brands.bilka}
+              status={brand === Brands.bilka ? 'checked' : 'unchecked'}
+              onPress={() =>{
+                setBrand(Brands.bilka)
+              }}
+               />
+
+<FilterRadioButtonItem
+              title="title"
+              value={Brands.foetex}
+              status={brand === Brands.foetex ? 'checked' : 'unchecked'}
+              onPress={() =>{
+                setBrand(Brands.foetex)
+              }}
+               />
+
+<FilterRadioButtonItem
+              title="title"
+              value={Brands.salling}
+              status={brand === Brands.salling ? 'checked' : 'unchecked'}
+              onPress={() =>{
+                setBrand(Brands.salling)
+              }}
+               />
+
+<FilterRadioButtonItem
+              title="title"
+              value={Brands.carlsjr}
+              status={brand === Brands.carlsjr ? 'checked' : 'unchecked'}
+              onPress={() =>{
+                setBrand(Brands.carlsjr)
+              }}
+               />
+
+<FilterRadioButtonItem
+              title="title"
+              value={Brands.br}
+              status={brand === Brands.br ? 'checked' : 'unchecked'}
+              onPress={() =>{
+                setBrand(Brands.br)
+              }}
+               />
+
+
               <View
-                style={styles.filterContainer}
+                style={styles.filterAttributesContainer}
               >
 
-                <Paper.Text style={{ width: '100%' }}>test</Paper.Text>
+                {/* attributes */}
 
-                {/* filters */}
-                <FilterItem
+                <FilterCheckBoxItem
                   title="baby changing"
                   status={babyChanging ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -138,7 +297,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="bakery"
                   status={bakery ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -149,7 +308,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="carlsJunior"
                   status={carlsJunior ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -160,7 +319,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="enablingFacilities"
                   status={enablingFacilities ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -171,7 +330,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="flowers"
                   status={flowers ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -182,7 +341,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="garden"
                   status={garden ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -193,7 +352,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="holidayOpen"
                   status={holidayOpen ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -204,7 +363,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="nonFood"
                   status={nonFood ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -215,7 +374,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="open247"
                   status={open247 ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -226,7 +385,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="parking"
                   status={parking ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -237,7 +396,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="parkingRestrictions"
                   status={noParkingRestrictions ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -248,7 +407,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="petFood"
                   status={petFood ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -259,7 +418,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="pharmacy"
                   status={pharmacy ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -270,7 +429,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="scanAndGo"
                   status={scanAndGo ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -281,7 +440,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="starbucks"
                   status={starbucks ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -292,7 +451,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="swipBox"
                   status={swipBox ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -303,7 +462,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="wc"
                   status={wc ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -314,7 +473,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
-                <FilterItem
+                <FilterCheckBoxItem
                   title="wifi"
                   status={wifi ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -328,7 +487,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 {/* filters */}
 
               </View>
-            </>
+            </View>
           )}
           <View
             style={styles.spacer}
@@ -336,36 +495,38 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
           {ui.isLoading && (
             <Spinner />
           )}
+
+          <FlatList
+            //data={stores.storesData}
+            renderItem={renderItem}
+            ListEmptyComponent={<NoResults />}
+          />
+
           {!ui.isLoading && (
-          <ScrollView>
-            {(stores.storeData?.length === 0) ? (
-              <Paper.Text>no results found</Paper.Text>
-            ) : (
-              <Paper.Text>results found</Paper.Text>
-            )}
+          <View>
 
             {stores.storesData && (
             <>
-              {stores.storesData.map((item: any) => {
-              // console.log('i', item.hours)
-                return (
-                  <StoreItem
-                    key={item.id}
-                    name={item.name}
-                    street={item.address.street}
-                    city={item.address.city}
-                    zip={item.address.zip}
-                    attributes={item.attributes}
-                    onPress={() => {
-                      console.log(item.id);
-                    }}
-                  />
-                );
-              })}
+              <ScrollView>
+                {stores.storesData.map((item: any) => {
+                  return (
+                    <StoreItem
+                      key={item.id}
+                      name={item.name}
+                      street={item.address.street}
+                      city={item.address.city}
+                      zip={item.address.zip}
+                      attributes={item.attributes}
+                      onPress={() => {
+                        console.log(item.id);
+                      }}
+                    />
+                  );
+                })}
+              </ScrollView>
             </>
             )}
-
-          </ScrollView>
+          </View>
           )}
         </>
       </MainTemplate>
@@ -374,10 +535,15 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 };
 
 const styles = StyleSheet.create({
-  filterContainer: {
+  filterAttributesContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  filterRadioButtonsContainer:{
+    //backgroundColor: 'red',
+    //flex: 1,
+    //width: '40%'
   },
   spacer: {
     marginTop: 20,
