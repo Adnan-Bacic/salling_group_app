@@ -45,6 +45,10 @@ export const StoresNavigator = (): React.ReactElement => {
         name="Stores"
         component={Screens.Stores}
       />
+      <StoresStack.Screen
+        name="Store"
+        component={Screens.Store}
+      />
     </StoresStack.Navigator>
   );
 };

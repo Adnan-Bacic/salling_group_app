@@ -507,23 +507,24 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
             {stores.storesData && (
             <>
-              <ScrollView>
-                {stores.storesData.map((item: any) => {
-                  return (
-                    <StoreItem
-                      key={item.id}
-                      name={item.name}
-                      street={item.address.street}
-                      city={item.address.city}
-                      zip={item.address.zip}
-                      attributes={item.attributes}
-                      onPress={() => {
-                        console.log(item.id);
-                      }}
-                    />
-                  );
-                })}
-              </ScrollView>
+              {stores.storesData.map((item: any) => {
+              // console.log('i', item.hours)
+                return (
+                  <StoreItem
+                    key={item.id}
+                    name={item.name}
+                    street={item.address.street}
+                    city={item.address.city}
+                    zip={item.address.zip}
+                    attributes={item.attributes}
+                    onPress={() => {
+                      navigation.navigate('Store', {
+                        name: item.name,
+                      });
+                    }}
+                  />
+                );
+              })}
             </>
             )}
           </View>
