@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 
 interface MainTemplateInterface {
   children: React.ReactElement;
@@ -10,7 +10,6 @@ const MainTemplate = ({ children }: MainTemplateInterface): React.ReactElement =
       style={styles.container}
     >
       {children}
-
     </View>
   );
 };

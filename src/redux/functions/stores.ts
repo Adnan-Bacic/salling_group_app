@@ -104,9 +104,8 @@ export const getStores = (options: Options) => {
         query += 'wifi=true&';
       }
 
-      //remove last char(&)
-      query = query.slice(0, -1); 
-
+      // remove last char(&)
+      query = query.slice(0, -1);
 
       console.log('query', query);
 

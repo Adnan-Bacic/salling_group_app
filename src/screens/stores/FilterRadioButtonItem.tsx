@@ -5,12 +5,16 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 
+type StatusType = 'checked' | 'unchecked';
 interface FilterRadioButtonItemInterface {
   title: string;
-  status: string;
+  status: StatusType;
+  value: string;
   onPress: () => void;
 }
-const FilterRadioButtonItem = ({ title, status, onPress }: FilterRadioButtonItemInterface): React.ReactElement => {
+const FilterRadioButtonItem = ({
+  title, status, value, onPress,
+}: FilterRadioButtonItemInterface): React.ReactElement => {
   return (
     <>
       <View
@@ -24,11 +28,10 @@ const FilterRadioButtonItem = ({ title, status, onPress }: FilterRadioButtonItem
           </Paper.Text>
 
         </View>
-        <View
-          style={styles.radioButtonContainer}
-        >
+        <View>
           <Paper.RadioButton
             status={status}
+            value={value}
             onPress={onPress}
           />
         </View>
@@ -38,18 +41,14 @@ const FilterRadioButtonItem = ({ title, status, onPress }: FilterRadioButtonItem
 };
 
 const styles = StyleSheet.create({
-    radioButtonContainer: {
-        //flex: 3,
-      },
-      container: {
-        flexDirection: 'row',
-        width: '45%',
-        // backgroundColor: 'red',
-      },
-      titleContainer: {
-        alignSelf: 'center',
-        flex: 1,
-      },
+  container: {
+    flexDirection: 'row',
+    width: '45%',
+  },
+  titleContainer: {
+    alignSelf: 'center',
+    flex: 1,
+  },
 });
 
 export default FilterRadioButtonItem;

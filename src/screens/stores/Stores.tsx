@@ -74,12 +74,12 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   useEffect(() => {
     const getStores = () => {
       const options = {
-        //filters
+        // filters
         zip: zip,
         country: country,
         brand: brand,
 
-        //attributes
+        // attributes
         babyChanging: babyChanging,
         bakery: bakery,
         carlsJunior: carlsJunior,
@@ -151,7 +151,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
           {filtersShown && (
             <ScrollView>
               <Paper.Text>
-                add filters. this shows stores where your filters apply. if unchecked, stores may or may not have the specified filter
+                add filters
               </Paper.Text>
               {/* filters */}
               <Paper.TextInput
@@ -180,116 +180,128 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 }}
               />
 
-<Paper.Text>country</Paper.Text>
+              <Paper.Text>country</Paper.Text>
 
-                
- 
-              <FilterRadioButtonItem
-              title={Countries.dk}
-              value={Countries.dk}
-              status={country === Countries.dk ? 'checked' : 'unchecked'}
-              onPress={() =>{
-                setCountry(Countries.dk)
-              }}
-              ></FilterRadioButtonItem>
+              <View
+                style={styles.filterRowContainer}
+              >
+                <FilterRadioButtonItem
+                  title={Countries.dk}
+                  value={Countries.dk}
+                  status={country === Countries.dk ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setCountry(Countries.dk);
+                  }}
+                />
 
-<FilterRadioButtonItem
-              title={Countries.se}
-              value={Countries.se}
-              status={country === Countries.se ? 'checked' : 'unchecked'}
-              onPress={() =>{
-                setCountry(Countries.se)
-              }}
-              ></FilterRadioButtonItem>
+                <FilterRadioButtonItem
+                  title={Countries.se}
+                  value={Countries.se}
+                  status={country === Countries.se ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setCountry(Countries.se);
+                  }}
+                />
 
-<FilterRadioButtonItem
-              title={Countries.de}
-              value={Countries.de}
-              status={country === Countries.de ? 'checked' : 'unchecked'}
-              onPress={() =>{
-                setCountry(Countries.de)
-              }}
-              ></FilterRadioButtonItem>
+                <FilterRadioButtonItem
+                  title={Countries.de}
+                  value={Countries.de}
+                  status={country === Countries.de ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setCountry(Countries.de);
+                  }}
+                />
 
-<FilterRadioButtonItem
-              title={Countries.pl}
-              value={Countries.pl}
-              status={country === Countries.pl ? 'checked' : 'unchecked'}
-              onPress={() =>{
-                setCountry(Countries.pl)
-              }}
-              ></FilterRadioButtonItem>
+                <FilterRadioButtonItem
+                  title={Countries.pl}
+                  value={Countries.pl}
+                  status={country === Countries.pl ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setCountry(Countries.pl);
+                  }}
+                />
+              </View>
 
-              <Paper.Button onPress={() => {
-                setCountry('')
-              }}>reset country</Paper.Button>
-              
+              <Paper.Button
+                onPress={() => {
+                  setCountry('');
+                }}
+              >
+                reset country
+              </Paper.Button>
 
               <Paper.Text>
                 brand
               </Paper.Text>
 
-              <FilterRadioButtonItem
-              title={Brands.netto}
-              value={Brands.netto}
-              status={brand === Brands.netto ? 'checked' : 'unchecked'}
-              onPress={() =>{
-                setBrand(Brands.netto)
-              }}
-               />
+              <View
+                style={styles.filterRowContainer}
+              >
+                <FilterRadioButtonItem
+                  title={Brands.netto}
+                  value={Brands.netto}
+                  status={brand === Brands.netto ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setBrand(Brands.netto);
+                  }}
+                />
 
-<FilterRadioButtonItem
-              title={Brands.bilka}
-              value={Brands.bilka}
-              status={brand === Brands.bilka ? 'checked' : 'unchecked'}
-              onPress={() =>{
-                setBrand(Brands.bilka)
-              }}
-               />
+                <FilterRadioButtonItem
+                  title={Brands.bilka}
+                  value={Brands.bilka}
+                  status={brand === Brands.bilka ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setBrand(Brands.bilka);
+                  }}
+                />
 
-<FilterRadioButtonItem
-              title={Brands.foetex}
-              value={Brands.foetex}
-              status={brand === Brands.foetex ? 'checked' : 'unchecked'}
-              onPress={() =>{
-                setBrand(Brands.foetex)
-              }}
-               />
+                <FilterRadioButtonItem
+                  title={Brands.foetex}
+                  value={Brands.foetex}
+                  status={brand === Brands.foetex ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setBrand(Brands.foetex);
+                  }}
+                />
 
-<FilterRadioButtonItem
-              title={Brands.salling}
-              value={Brands.salling}
-              status={brand === Brands.salling ? 'checked' : 'unchecked'}
-              onPress={() =>{
-                setBrand(Brands.salling)
-              }}
-               />
+                <FilterRadioButtonItem
+                  title={Brands.salling}
+                  value={Brands.salling}
+                  status={brand === Brands.salling ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setBrand(Brands.salling);
+                  }}
+                />
 
-<FilterRadioButtonItem
-              title={Brands.carlsjr}
-              value={Brands.carlsjr}
-              status={brand === Brands.carlsjr ? 'checked' : 'unchecked'}
-              onPress={() =>{
-                setBrand(Brands.carlsjr)
-              }}
-               />
+                <FilterRadioButtonItem
+                  title={Brands.carlsjr}
+                  value={Brands.carlsjr}
+                  status={brand === Brands.carlsjr ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setBrand(Brands.carlsjr);
+                  }}
+                />
 
-<FilterRadioButtonItem
-              title={Brands.br}
-              value={Brands.br}
-              status={brand === Brands.br ? 'checked' : 'unchecked'}
-              onPress={() =>{
-                setBrand(Brands.br)
-              }}
-               />
+                <FilterRadioButtonItem
+                  title={Brands.br}
+                  value={Brands.br}
+                  status={brand === Brands.br ? 'checked' : 'unchecked'}
+                  onPress={() => {
+                    setBrand(Brands.br);
+                  }}
+                />
+              </View>
 
-<Paper.Button onPress={() => {
-                setBrand('')
-              }}>reset brand</Paper.Button>
-
+              <Paper.Button
+                onPress={() => {
+                  setBrand('');
+                }}
+              >
+                reset brand
+              </Paper.Button>
 
               <View
-                style={styles.filterAttributesContainer}
+                style={styles.filterRowContainer}
               >
 
                 {/* attributes */}
@@ -505,13 +517,12 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
           )}
 
           {!ui.isLoading && !filtersShown && (
- <FlatList
- data={stores.storesData}
- renderItem={renderStoreItem}
- ListEmptyComponent={NoResults}
-/>
+          <FlatList
+            data={stores.storesData}
+            renderItem={renderStoreItem}
+            ListEmptyComponent={NoResults}
+          />
           )}
-         
 
           {!ui.isLoading && (
           <View>
@@ -547,15 +558,10 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 };
 
 const styles = StyleSheet.create({
-  filterAttributesContainer: {
+  filterRowContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-  },
-  filterRadioButtonsContainer:{
-    //backgroundColor: 'red',
-    //flex: 1,
-    //width: '40%'
   },
   spacer: {
     marginTop: 20,

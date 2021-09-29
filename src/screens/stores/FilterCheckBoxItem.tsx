@@ -5,13 +5,15 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 
+type StatusType = 'checked' | 'unchecked' | 'indeterminate';
 interface FilterCheckBoxItemInterface {
   title: string;
-  value: string;
-  status: string;
+  status: StatusType;
   onPress: () => void;
 }
-const FilterCheckBoxItem = ({ title, value, status, onPress }: FilterCheckBoxItemInterface): React.ReactElement => {
+const FilterCheckBoxItem = ({
+  title, status, onPress,
+}: FilterCheckBoxItemInterface): React.ReactElement => {
   return (
     <>
       <View
@@ -25,11 +27,8 @@ const FilterCheckBoxItem = ({ title, value, status, onPress }: FilterCheckBoxIte
           </Paper.Text>
 
         </View>
-        <View
-          style={styles.checkboxContainer}
-        >
+        <View>
           <Paper.Checkbox
-            value={value}
             status={status}
             onPress={onPress}
           />
@@ -40,13 +39,9 @@ const FilterCheckBoxItem = ({ title, value, status, onPress }: FilterCheckBoxIte
 };
 
 const styles = StyleSheet.create({
-  checkboxContainer: {
-    //flex: 3,
-  },
   container: {
     flexDirection: 'row',
     width: '45%',
-    // backgroundColor: 'red',
   },
   titleContainer: {
     alignSelf: 'center',
