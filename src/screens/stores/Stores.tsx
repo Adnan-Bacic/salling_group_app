@@ -116,7 +116,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   interface FlatListItemProps {
     item: any;
   }
-  const renderItem = ({ item }: FlatListItemProps) => {
+  const renderStoreItem = ({ item }: FlatListItemProps) => {
     return (
       <StoreItem
         key={item.id}
@@ -149,7 +149,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
             {filterButtonText}
           </Paper.Button>
           {filtersShown && (
-            <View>
+            <ScrollView>
               <Paper.Text>
                 add filters. this shows stores where your filters apply. if unchecked, stores may or may not have the specified filter
               </Paper.Text>
@@ -185,7 +185,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 
  
               <FilterRadioButtonItem
-              title="title"
+              title={Countries.dk}
               value={Countries.dk}
               status={country === Countries.dk ? 'checked' : 'unchecked'}
               onPress={() =>{
@@ -194,7 +194,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
               ></FilterRadioButtonItem>
 
 <FilterRadioButtonItem
-              title="title"
+              title={Countries.se}
               value={Countries.se}
               status={country === Countries.se ? 'checked' : 'unchecked'}
               onPress={() =>{
@@ -203,7 +203,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
               ></FilterRadioButtonItem>
 
 <FilterRadioButtonItem
-              title="title"
+              title={Countries.de}
               value={Countries.de}
               status={country === Countries.de ? 'checked' : 'unchecked'}
               onPress={() =>{
@@ -212,13 +212,17 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
               ></FilterRadioButtonItem>
 
 <FilterRadioButtonItem
-              title="title"
+              title={Countries.pl}
               value={Countries.pl}
               status={country === Countries.pl ? 'checked' : 'unchecked'}
               onPress={() =>{
                 setCountry(Countries.pl)
               }}
               ></FilterRadioButtonItem>
+
+              <Paper.Button onPress={() => {
+                setCountry('')
+              }}>reset country</Paper.Button>
               
 
               <Paper.Text>
@@ -226,7 +230,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
               </Paper.Text>
 
               <FilterRadioButtonItem
-              title="title"
+              title={Brands.netto}
               value={Brands.netto}
               status={brand === Brands.netto ? 'checked' : 'unchecked'}
               onPress={() =>{
@@ -235,7 +239,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                />
 
 <FilterRadioButtonItem
-              title="title"
+              title={Brands.bilka}
               value={Brands.bilka}
               status={brand === Brands.bilka ? 'checked' : 'unchecked'}
               onPress={() =>{
@@ -244,7 +248,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                />
 
 <FilterRadioButtonItem
-              title="title"
+              title={Brands.foetex}
               value={Brands.foetex}
               status={brand === Brands.foetex ? 'checked' : 'unchecked'}
               onPress={() =>{
@@ -253,7 +257,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                />
 
 <FilterRadioButtonItem
-              title="title"
+              title={Brands.salling}
               value={Brands.salling}
               status={brand === Brands.salling ? 'checked' : 'unchecked'}
               onPress={() =>{
@@ -262,7 +266,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                />
 
 <FilterRadioButtonItem
-              title="title"
+              title={Brands.carlsjr}
               value={Brands.carlsjr}
               status={brand === Brands.carlsjr ? 'checked' : 'unchecked'}
               onPress={() =>{
@@ -271,13 +275,17 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                />
 
 <FilterRadioButtonItem
-              title="title"
+              title={Brands.br}
               value={Brands.br}
               status={brand === Brands.br ? 'checked' : 'unchecked'}
               onPress={() =>{
                 setBrand(Brands.br)
               }}
                />
+
+<Paper.Button onPress={() => {
+                setBrand('')
+              }}>reset brand</Paper.Button>
 
 
               <View
@@ -337,7 +345,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     if (flowers === true) {
                       setFlowers(null);
                     } else {
-                      setFiltersShown(true);
+                      setFlowers(true);
                     }
                   }}
                 />
@@ -487,7 +495,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 {/* filters */}
 
               </View>
-            </View>
+            </ScrollView>
           )}
           <View
             style={styles.spacer}
@@ -496,16 +504,19 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
             <Spinner />
           )}
 
-          <FlatList
-            //data={stores.storesData}
-            renderItem={renderItem}
-            ListEmptyComponent={<NoResults />}
-          />
+          {!ui.isLoading && !filtersShown && (
+ <FlatList
+ data={stores.storesData}
+ renderItem={renderStoreItem}
+ ListEmptyComponent={NoResults}
+/>
+          )}
+         
 
           {!ui.isLoading && (
           <View>
 
-            {stores.storesData && (
+            {stores.storesData === 1 && (
             <>
               {stores.storesData.map((item: any) => {
               // console.log('i', item.hours)

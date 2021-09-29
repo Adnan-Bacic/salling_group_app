@@ -6,12 +6,12 @@ interface MainTemplateInterface {
 }
 const MainTemplate = ({ children }: MainTemplateInterface): React.ReactElement => {
   return (
-    <ScrollView
+    <View
       style={styles.container}
     >
       {children}
 
-    </ScrollView>
+    </View>
   );
 };
 

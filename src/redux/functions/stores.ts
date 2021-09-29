@@ -31,7 +31,6 @@ interface Options {
 }
 export const getStores = (options: Options) => {
   return async (dispatch: (p: DispatchProps<any>) => void): Promise<void> => {
-    console.log('options', options);
     dispatch(actions.ui.setLoading(true));
 
     try {
@@ -105,11 +104,14 @@ export const getStores = (options: Options) => {
         query += 'wifi=true&';
       }
 
+      //remove last char(&)
+      query = query.slice(0, -1); 
+
+
       console.log('query', query);
 
       const url = `${API_URL}/v2/stores?${query}`;
       // const url = `${API_URL}/v2/stores?zip=${zip}&babyChanging=${babyChanging}&bakery=${bakery}&carlsJunior=${carlsJunior}`;
-      console.log('url', url);
       const res = await fetch(url, {
         method: 'GET',
         headers: {
