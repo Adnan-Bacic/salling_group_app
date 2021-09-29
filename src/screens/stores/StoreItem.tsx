@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import * as Paper from 'react-native-paper';
 
 interface StoreItemInterface {
@@ -33,10 +33,10 @@ const StoreItem = ({
                 chip
               </Paper.Chip>
 
-              <Text>carlsJunior</Text>
+              <Paper.Text>carlsJunior</Paper.Text>
             </>
           ) : (
-            <Text>no carlsJunior</Text>
+            <Paper.Text>no carlsJunior</Paper.Text>
           )}
         </Paper.Card.Content>
         <Paper.Card.Actions

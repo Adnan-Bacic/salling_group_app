@@ -300,12 +300,12 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 reset brand
               </Paper.Button>
 
+              <Paper.Text>filters</Paper.Text>
               <View
                 style={styles.filterRowContainer}
               >
 
                 {/* attributes */}
-
                 <FilterCheckBoxItem
                   title="baby changing"
                   status={babyChanging ? 'checked' : 'unchecked'}
@@ -504,6 +504,10 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     }
                   }}
                 />
+
+                <Paper.Button onPress={() => {
+                  console.log('todo?')
+                }}>reset filters</Paper.Button>
                 {/* filters */}
 
               </View>
