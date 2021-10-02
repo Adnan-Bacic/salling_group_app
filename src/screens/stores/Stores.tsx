@@ -76,7 +76,9 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
       const options = {
         // filters
         zip: zip,
+        city: city,
         country: country,
+        street: street,
         brand: brand,
 
         // attributes
@@ -103,7 +105,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
     };
 
     getStores();
-  }, [babyChanging, bakery, brand, carlsJunior, country, dispatch, enablingFacilities, flowers, garden, holidayOpen, noParkingRestrictions, nonFood, open247, parking, petFood, pharmacy, scanAndGo, starbucks, swipBox, wc, wifi, zip]);
+  }, [babyChanging, bakery, brand, carlsJunior, city, country, dispatch, enablingFacilities, flowers, garden, holidayOpen, noParkingRestrictions, nonFood, open247, parking, petFood, pharmacy, scanAndGo, starbucks, street, swipBox, wc, wifi, zip]);
 
   const stores = useAppSelector((state) => { return state.stores; });
   const ui = useAppSelector((state) => { return state.ui; });
@@ -124,9 +126,12 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
         street={item.address.street}
         city={item.address.city}
         zip={item.address.zip}
+        country={item.address.country}
         attributes={item.attributes}
         onPress={() => {
-          console.log(item.id);
+          navigation.navigate('Store', {
+            name: item.name,
+          });
         }}
       />
     );
@@ -173,7 +178,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
               />
               <Paper.TextInput
                 label="street (exact match only)"
-                value={city}
+                value={street}
                 mode="outlined"
                 onChangeText={(text) => {
                   setStreet(text);

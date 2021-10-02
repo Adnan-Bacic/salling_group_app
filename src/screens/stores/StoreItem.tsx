@@ -7,11 +7,12 @@ interface StoreItemInterface {
   street: string;
   city: string;
   zip: string;
+  country: string;
   attributes: Record<string, unknown>
   onPress: () => void;
 }
 const StoreItem = ({
-  name, street, city, zip, attributes, onPress,
+  name, street, city, zip, country, attributes, onPress,
 }: StoreItemInterface): React.ReactElement => {
   return (
     <View
@@ -20,24 +21,25 @@ const StoreItem = ({
       <Paper.Card>
         <Paper.Card.Title
           title={name}
-          subtitle={`${street}, ${city} - ${zip}`}
+          subtitle={`${street}, ${city} - ${zip} - ${country}`}
         />
         <Paper.Card.Content>
           <Paper.Paragraph>Paper.Card content</Paper.Paragraph>
-          {/* attributes here */}
-          {attributes.carlsJunior ? (
-            <>
-              <Paper.Chip
-                icon="information"
-              >
-                chip
-              </Paper.Chip>
-
-              <Paper.Text>carlsJunior</Paper.Text>
-            </>
-          ) : (
-            <Paper.Text>no carlsJunior</Paper.Text>
-          )}
+          <View
+            style={styles.chipContainer}
+          >
+            {Object.keys(attributes).map((item) => {
+              return (
+                <Paper.Chip
+                  key={item}
+                  icon="information"
+                  style={styles.chip}
+                >
+                  {item}
+                </Paper.Chip>
+              );
+            })}
+          </View>
         </Paper.Card.Content>
         <Paper.Card.Actions
           style={styles.actionContainer}
@@ -56,6 +58,15 @@ const StoreItem = ({
 const styles = StyleSheet.create({
   actionContainer: {
     alignSelf: 'flex-end',
+  },
+  chip: {
+    marginBottom: 5,
+    marginRight: 5,
+  },
+  chipContainer: {
+    // backgroundColor: 'red',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   container: {
     marginBottom: 20,

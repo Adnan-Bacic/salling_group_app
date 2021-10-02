@@ -6,7 +6,9 @@ import { DispatchProps } from '../types';
 interface Options {
   // filters
   zip?: string;
+  city?: string;
   country?: string;
+  street?: string;
   brand?: string;
 
   // attributes
@@ -40,8 +42,14 @@ export const getStores = (options: Options) => {
       if (options.zip !== '') {
         query += `zip=${options.zip}&`;
       }
+      if (options.city !== '') {
+        query += `city=${options.city}&`;
+      }
       if (options.country !== '') {
         query += `country=${options.country}&`;
+      }
+      if (options.street  !== '') {
+        query += `street =${options.street }&`;
       }
       if (options.brand !== '') {
         query += `brand=${options.brand}&`;
