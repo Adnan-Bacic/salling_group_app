@@ -48,8 +48,8 @@ export const getStores = (options: Options) => {
       if (options.country !== '') {
         query += `country=${options.country}&`;
       }
-      if (options.street  !== '') {
-        query += `street =${options.street }&`;
+      if (options.street !== '') {
+        query += `street =${options.street}&`;
       }
       if (options.brand !== '') {
         query += `brand=${options.brand}&`;

@@ -440,7 +440,24 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
                 <Paper.Button
                   onPress={() => {
-                    console.log('todo?');
+                    setBabyChanging(false);
+                    setBakery(false);
+                    setCarlsJunior(false);
+                    setEnablingFacilities(false);
+                    setFlowers(false);
+                    setGarden(false);
+                    setHolidayOpen(false);
+                    setNonFood(false);
+                    setOpen247(false);
+                    setParking(false);
+                    setNoParkingRestrictions(false);
+                    setPetFood(false);
+                    setPharmacy(false);
+                    setScanAndGo(false);
+                    setStarbucks(false);
+                    setSwipBox(false);
+                    setWc(false);
+                    setWifi(false);
                   }}
                 >
                   reset filters
