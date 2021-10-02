@@ -49,25 +49,25 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   const [brand, setBrand] = useState<Brands | string>('');
 
   // attributes
-  const [babyChanging, setBabyChanging] = useState<null | boolean>(null);
-  const [bakery, setBakery] = useState<null | boolean>(null);
-  const [carlsJunior, setCarlsJunior] = useState<null | boolean>(null);
-  const [enablingFacilities, setEnablingFacilities] = useState<null | boolean>(null);
-  const [flowers, setFlowers] = useState<null | boolean>(null);
-  const [garden, setGarden] = useState<null | boolean>(null);
-  const [holidayOpen, setHolidayOpen] = useState<null | boolean>(null);
-  const [nonFood, setNonFood] = useState<null | boolean>(null);
-  const [open247, setOpen247] = useState<null | boolean>(null);
-  const [parking, setParking] = useState<null | boolean>(null);
-  const [noParkingRestrictions, setNoParkingRestrictions] = useState<null | boolean>(null); // reverse
-  const [petFood, setPetFood] = useState<null | boolean>(null);
-  const [pharmacy, setPharmacy] = useState<null | boolean>(null);
-  const [scanAndGo, setScanAndGo] = useState<null | boolean>(null);
-  // const [smileyscheme, setSmileyscheme] = useState<null | boolean>(null);
-  const [starbucks, setStarbucks] = useState<null | boolean>(null);
-  const [swipBox, setSwipBox] = useState<null | boolean>(null);
-  const [wc, setWc] = useState<null | boolean>(null);
-  const [wifi, setWifi] = useState<null | boolean>(null);
+  const [babyChanging, setBabyChanging] = useState<boolean>(false);
+  const [bakery, setBakery] = useState<boolean>(false);
+  const [carlsJunior, setCarlsJunior] = useState<boolean>(false);
+  const [enablingFacilities, setEnablingFacilities] = useState<boolean>(false);
+  const [flowers, setFlowers] = useState<boolean>(false);
+  const [garden, setGarden] = useState<boolean>(false);
+  const [holidayOpen, setHolidayOpen] = useState<boolean>(false);
+  const [nonFood, setNonFood] = useState<boolean>(false);
+  const [open247, setOpen247] = useState<boolean>(false);
+  const [parking, setParking] = useState<boolean>(false);
+  const [noParkingRestrictions, setNoParkingRestrictions] = useState<boolean>(false); // reverse
+  const [petFood, setPetFood] = useState<boolean>(false);
+  const [pharmacy, setPharmacy] = useState<boolean>(false);
+  const [scanAndGo, setScanAndGo] = useState<boolean>(false);
+  // const [smileyscheme, setSmileyscheme] = useState<boolean>(false);
+  const [starbucks, setStarbucks] = useState<boolean>(false);
+  const [swipBox, setSwipBox] = useState<boolean>(false);
+  const [wc, setWc] = useState<boolean>(false);
+  const [wifi, setWifi] = useState<boolean>(false);
 
   const dispatch = useAppDispatch();
 
@@ -310,204 +310,136 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                   title="baby changing"
                   status={babyChanging ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (babyChanging === true) {
-                      setBabyChanging(null);
-                    } else {
-                      setBabyChanging(true);
-                    }
+                    setBabyChanging((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="bakery"
                   status={bakery ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (bakery === true) {
-                      setBakery(null);
-                    } else {
-                      setBakery(true);
-                    }
+                    setBakery((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="carlsJunior"
                   status={carlsJunior ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (carlsJunior === true) {
-                      setCarlsJunior(null);
-                    } else {
-                      setCarlsJunior(true);
-                    }
+                    setCarlsJunior((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="enablingFacilities"
                   status={enablingFacilities ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (enablingFacilities === true) {
-                      setEnablingFacilities(null);
-                    } else {
-                      setEnablingFacilities(true);
-                    }
+                    setEnablingFacilities((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="flowers"
                   status={flowers ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (flowers === true) {
-                      setFlowers(null);
-                    } else {
-                      setFlowers(true);
-                    }
+                    setFlowers((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="garden"
                   status={garden ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (garden === true) {
-                      setGarden(null);
-                    } else {
-                      setGarden(true);
-                    }
+                    setGarden((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="holidayOpen"
                   status={holidayOpen ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (holidayOpen === true) {
-                      setHolidayOpen(null);
-                    } else {
-                      setHolidayOpen(true);
-                    }
+                    setHolidayOpen((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="nonFood"
                   status={nonFood ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (nonFood === true) {
-                      setNonFood(null);
-                    } else {
-                      setNonFood(true);
-                    }
+                    setNonFood((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="open247"
                   status={open247 ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (open247 === true) {
-                      setOpen247(null);
-                    } else {
-                      setOpen247(true);
-                    }
+                    setOpen247((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="parking"
                   status={parking ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (parking === true) {
-                      setParking(null);
-                    } else {
-                      setParking(true);
-                    }
+                    setParking((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="parkingRestrictions"
                   status={noParkingRestrictions ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (noParkingRestrictions === true) {
-                      setNoParkingRestrictions(null);
-                    } else {
-                      setNoParkingRestrictions(true);
-                    }
+                    setNoParkingRestrictions((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="petFood"
                   status={petFood ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (petFood === true) {
-                      setPetFood(null);
-                    } else {
-                      setPetFood(true);
-                    }
+                    setPetFood((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="pharmacy"
                   status={pharmacy ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (pharmacy === true) {
-                      setPharmacy(null);
-                    } else {
-                      setPharmacy(true);
-                    }
+                    setPharmacy((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="scanAndGo"
                   status={scanAndGo ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (scanAndGo === true) {
-                      setScanAndGo(null);
-                    } else {
-                      setScanAndGo(true);
-                    }
+                    setScanAndGo((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="starbucks"
                   status={starbucks ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (starbucks === true) {
-                      setStarbucks(null);
-                    } else {
-                      setStarbucks(true);
-                    }
+                    setStarbucks((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="swipBox"
                   status={swipBox ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (swipBox === true) {
-                      setSwipBox(null);
-                    } else {
-                      setSwipBox(true);
-                    }
+                    setSwipBox((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="wc"
                   status={wc ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (wc === true) {
-                      setWc(null);
-                    } else {
-                      setWc(true);
-                    }
+                    setWc((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
                   title="wifi"
                   status={wifi ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    if (wifi === true) {
-                      setWifi(null);
-                    } else {
-                      setWifi(true);
-                    }
+                    setWifi((prevState) => { return !prevState; });
                   }}
                 />
 
-                <Paper.Button onPress={() => {
-                  console.log('todo?')
-                }}>reset filters</Paper.Button>
+                <Paper.Button
+                  onPress={() => {
+                    console.log('todo?');
+                  }}
+                >
+                  reset filters
+                </Paper.Button>
                 {/* filters */}
 
               </View>

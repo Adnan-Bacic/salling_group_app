@@ -110,6 +110,7 @@ export const getStores = (options: Options) => {
       console.log('query', query);
 
       const url = `${API_URL}/v2/stores?${query}`;
+      console.log(url);
       // const url = `${API_URL}/v2/stores?zip=${zip}&babyChanging=${babyChanging}&bakery=${bakery}&carlsJunior=${carlsJunior}`;
       const res = await fetch(url, {
         method: 'GET',
