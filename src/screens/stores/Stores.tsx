@@ -59,7 +59,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   const [nonFood, setNonFood] = useState<boolean>(false);
   const [open247, setOpen247] = useState<boolean>(false);
   const [parking, setParking] = useState<boolean>(false);
-  const [noParkingRestrictions, setNoParkingRestrictions] = useState<boolean>(false); // reverse
+  const [parkingRestrictions, setParkingRestrictions] = useState<boolean>(false);
   const [petFood, setPetFood] = useState<boolean>(false);
   const [pharmacy, setPharmacy] = useState<boolean>(false);
   const [scanAndGo, setScanAndGo] = useState<boolean>(false);
@@ -92,7 +92,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
         nonFood: nonFood,
         open247: open247,
         parking: parking,
-        noParkingRestrictions: noParkingRestrictions,
+        parkingRestrictions: parkingRestrictions,
         petFood: petFood,
         pharmacy: pharmacy,
         scanAndGo: scanAndGo,
@@ -105,7 +105,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
     };
 
     getStores();
-  }, [babyChanging, bakery, brand, carlsJunior, city, country, dispatch, enablingFacilities, flowers, garden, holidayOpen, noParkingRestrictions, nonFood, open247, parking, petFood, pharmacy, scanAndGo, starbucks, street, swipBox, wc, wifi, zip]);
+  }, [babyChanging, bakery, brand, carlsJunior, city, country, dispatch, enablingFacilities, flowers, garden, holidayOpen, parkingRestrictions, nonFood, open247, parking, petFood, pharmacy, scanAndGo, starbucks, street, swipBox, wc, wifi, zip]);
 
   const stores = useAppSelector((state) => { return state.stores; });
   const ui = useAppSelector((state) => { return state.ui; });
@@ -383,9 +383,9 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 />
                 <FilterCheckBoxItem
                   title="parkingRestrictions"
-                  status={noParkingRestrictions ? 'checked' : 'unchecked'}
+                  status={parkingRestrictions ? 'checked' : 'unchecked'}
                   onPress={() => {
-                    setNoParkingRestrictions((prevState) => { return !prevState; });
+                    setParkingRestrictions((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
@@ -450,7 +450,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                     setNonFood(false);
                     setOpen247(false);
                     setParking(false);
-                    setNoParkingRestrictions(false);
+                    setParkingRestrictions(false);
                     setPetFood(false);
                     setPharmacy(false);
                     setScanAndGo(false);

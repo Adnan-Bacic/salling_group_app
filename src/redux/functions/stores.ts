@@ -22,7 +22,7 @@ interface Options {
   nonFood?: null | boolean;
   open247?: null | boolean;
   parking?: null | boolean;
-  noParkingRestrictions?: null | boolean;
+  parkingRestrictions?: null | boolean;
   petFood?: null | boolean;
   pharmacy?: null | boolean;
   scanAndGo?: null | boolean;
@@ -87,7 +87,7 @@ export const getStores = (options: Options) => {
         query += 'parking=true&';
       }
       // reverse
-      if (options.noParkingRestrictions === true) {
+      if (options.parkingRestrictions === true) {
         query += 'parkingRestrictions=false&';
       }
       if (options.petFood === true) {
