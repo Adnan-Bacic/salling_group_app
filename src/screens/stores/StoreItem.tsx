@@ -40,6 +40,11 @@ const StoreItem = ({
               );
             })}
           </View>
+          <View>
+            <Paper.Text>
+              open smiley?
+            </Paper.Text>
+          </View>
         </Paper.Card.Content>
         <Paper.Card.Actions
           style={styles.actionContainer}
