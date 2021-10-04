@@ -35,7 +35,7 @@ const StoreItem = ({
           >
             {Object.keys(attributes).map((item) => {
               const attribute = enums.StoreAttributesToNormal(item);
-              //console.log(item, attribute);
+              // console.log(item, attribute);
               return (
                 <Paper.Chip
                   key={item}
@@ -54,12 +54,12 @@ const StoreItem = ({
                   const url = `https://www.findsmiley.dk/${attributes.smileyscheme}`;
                   console.log('url', url);
                   try {
-                    const res = await Linking.canOpenURL(url)
-                    console.log('res', res)
-                    if(res){
-                      console.log(1)
+                    const res = await Linking.canOpenURL(url);
+                    console.log('res', res);
+                    if (res) {
+                      console.log(1);
                     } else {
-                      console.log(2)
+                      console.log(2);
                     }
 
                     if (!await Linking.canOpenURL(url)) {

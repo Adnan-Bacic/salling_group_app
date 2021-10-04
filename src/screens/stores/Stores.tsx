@@ -210,7 +210,9 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 }}
               />
 
-              <Paper.Subheading>Country</Paper.Subheading>
+              <Paper.Subheading>
+                Country
+              </Paper.Subheading>
 
               <View
                 style={styles.filterRowContainer}
@@ -331,7 +333,9 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 reset brand
               </Paper.Button>
 
-              <Paper.Subheading>Attributes</Paper.Subheading>
+              <Paper.Subheading>
+                Attributes
+              </Paper.Subheading>
               <View
                 style={styles.filterRowContainer}
               >
