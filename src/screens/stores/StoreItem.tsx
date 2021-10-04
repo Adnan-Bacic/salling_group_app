@@ -1,6 +1,9 @@
 import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import {
+  View, StyleSheet, Linking, Alert,
+} from 'react-native';
 import * as Paper from 'react-native-paper';
+import { enums } from '../../helpers';
 
 interface StoreItemInterface {
   name: string;
@@ -24,27 +27,55 @@ const StoreItem = ({
           subtitle={`${street}, ${city} - ${zip} - ${country}`}
         />
         <Paper.Card.Content>
-          <Paper.Paragraph>Paper.Card content</Paper.Paragraph>
+          <Paper.Paragraph>
+            Paper.Card content
+          </Paper.Paragraph>
           <View
             style={styles.chipContainer}
           >
             {Object.keys(attributes).map((item) => {
+              const attribute = enums.StoreAttributesToNormal(item);
+              //console.log(item, attribute);
               return (
                 <Paper.Chip
                   key={item}
                   icon="information"
                   style={styles.chip}
                 >
-                  {item}
+                  {attribute}
                 </Paper.Chip>
               );
             })}
           </View>
-          <View>
-            <Paper.Text>
-              open smiley?
-            </Paper.Text>
-          </View>
+          {attributes.smileyscheme && (
+            <View>
+              <Paper.Text
+                onPress={async () => {
+                  const url = `https://www.findsmiley.dk/${attributes.smileyscheme}`;
+                  console.log('url', url);
+                  try {
+                    const res = await Linking.canOpenURL(url)
+                    console.log('res', res)
+                    if(res){
+                      console.log(1)
+                    } else {
+                      console.log(2)
+                    }
+
+                    if (!await Linking.canOpenURL(url)) {
+                      throw new Error(`Cannot open URL. If you wish to manually look up the smiley scheme: ${url}`);
+                    }
+                    await Linking.openURL(url);
+                  } catch (err: any) {
+                    console.log('err', err);
+                    Alert.alert(err.name, err.message);
+                  }
+                }}
+              >
+                Open smiley scheme
+              </Paper.Text>
+            </View>
+          )}
         </Paper.Card.Content>
         <Paper.Card.Actions
           style={styles.actionContainer}

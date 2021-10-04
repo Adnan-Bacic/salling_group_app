@@ -18,11 +18,21 @@ const Stack1 = ({ navigation }): React.ReactElement => {
   return (
     <>
       <View>
-        <Text>rn env</Text>
-        <Text>{API_URL}</Text>
-        <Text>{API_TOKEN}</Text>
-        <Text>rn config</Text>
-        <Text>stack 1</Text>
+        <Text>
+          rn env
+        </Text>
+        <Text>
+          {API_URL}
+        </Text>
+        <Text>
+          {API_TOKEN}
+        </Text>
+        <Text>
+          rn config
+        </Text>
+        <Text>
+          stack 1
+        </Text>
         <Button
           title="nav"
           onPress={() => {
@@ -42,9 +52,13 @@ const Stack1 = ({ navigation }): React.ReactElement => {
           }}
         />
         {ui.isLoading ? (
-          <Text>true</Text>
+          <Text>
+            true
+          </Text>
         ) : (
-          <Text>false</Text>
+          <Text>
+            false
+          </Text>
         )}
         <Paper.Button
           onPress={() => {

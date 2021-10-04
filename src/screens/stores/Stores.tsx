@@ -10,6 +10,7 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import * as functions from '../../redux/functions';
 import { MainTemplate } from '../../templates';
 import { Spinner, NoResults } from '../../components';
+import { enums } from '../../helpers';
 import StoreItem from './StoreItem';
 import FilterCheckBoxItem from './FilterCheckBoxItem';
 import FilterRadioButtonItem from './FilterRadioButtonItem';
@@ -17,24 +18,25 @@ import FilterRadioButtonItem from './FilterRadioButtonItem';
 interface StoresInterface {
   navigation: any
 }
-enum FilterButtonTextProps {
-  'ShowFilters' = 'Show filters',
-  'HideFilters' = 'Hide filters',
-}
+
 const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
-  const [filtersShown, setFiltersShown] = useState(false);
-  const [filterButtonText, setFilterButtonText] = useState<FilterButtonTextProps>(FilterButtonTextProps.ShowFilters);
+  enum ViewModes {
+    filterView = 'filterView',
+    storesView = 'storesView',
+  }
+  const [viewMode, setViewMode] = useState<ViewModes>(ViewModes.storesView);
 
   // OPTIONS FOR SEARCH
-
   // filters
   enum Countries {
+    empty = '',
     dk = 'dk',
     se = 'se',
     de = 'de',
     pl = 'pl',
   }
   enum Brands {
+    empty = '',
     netto = 'netto',
     bilka = 'bilka',
     foetex = 'foetex',
@@ -44,9 +46,9 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   }
   const [zip, setZip] = useState<string>('');
   const [city, setCity] = useState<string>('');
-  const [country, setCountry] = useState<Countries | string>('');
+  const [country, setCountry] = useState<Countries>(Countries.empty);
   const [street, setStreet] = useState<string>('');
-  const [brand, setBrand] = useState<Brands | string>('');
+  const [brand, setBrand] = useState<Brands>(Brands.empty);
 
   // attributes
   const [babyChanging, setBabyChanging] = useState<boolean>(false);
@@ -110,15 +112,11 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   const stores = useAppSelector((state) => { return state.stores; });
   const ui = useAppSelector((state) => { return state.ui; });
 
-  // not needed?
-  if (ui.isLoading) {
-    // return <Spinner />;
-  }
-
   interface FlatListItemProps {
     item: any;
   }
   const renderStoreItem = ({ item }: FlatListItemProps) => {
+    // TODO: handle br - not a food chain
     return (
       <StoreItem
         key={item.id}
@@ -137,31 +135,58 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
     );
   };
 
+  const setAllAttributsFalse = () => {
+    setBabyChanging(false);
+    setBakery(false);
+    setCarlsJunior(false);
+    setEnablingFacilities(false);
+    setFlowers(false);
+    setGarden(false);
+    setHolidayOpen(false);
+    setNonFood(false);
+    setOpen247(false);
+    setParking(false);
+    setParkingRestrictions(false);
+    setPetFood(false);
+    setPharmacy(false);
+    setScanAndGo(false);
+    setStarbucks(false);
+    setSwipBox(false);
+    setWc(false);
+    setWifi(false);
+  };
+
   return (
     <>
       <MainTemplate>
         <>
           <Paper.Button
             onPress={() => {
-              setFiltersShown((prevState) => { return !prevState; });
-              if (filterButtonText === FilterButtonTextProps.ShowFilters) {
-                setFilterButtonText(FilterButtonTextProps.HideFilters);
+              if (viewMode === ViewModes.storesView) {
+                setViewMode(ViewModes.filterView);
               } else {
-                setFilterButtonText(FilterButtonTextProps.ShowFilters);
+                setViewMode(ViewModes.storesView);
               }
             }}
           >
-            {filterButtonText}
+            {viewMode === ViewModes.storesView ? (
+              'Show filters'
+            ) : (
+              'Hide filters'
+            )}
           </Paper.Button>
-          {filtersShown && (
+          {viewMode === ViewModes.filterView && (
             <ScrollView>
-              <Paper.Text>
-                add filters
-              </Paper.Text>
+              <Paper.Title>
+                Add filters for more precise content
+              </Paper.Title>
+              <Paper.Subheading>
+                Location
+              </Paper.Subheading>
               {/* filters */}
               <Paper.TextInput
                 keyboardType="numeric"
-                label="zip"
+                label="Zip code"
                 value={zip}
                 mode="outlined"
                 onChangeText={(text) => {
@@ -169,7 +194,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 }}
               />
               <Paper.TextInput
-                label="city"
+                label="City"
                 value={city}
                 mode="outlined"
                 onChangeText={(text) => {
@@ -177,7 +202,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 }}
               />
               <Paper.TextInput
-                label="street (exact match only)"
+                label="Street (exact match only)"
                 value={street}
                 mode="outlined"
                 onChangeText={(text) => {
@@ -185,13 +210,13 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 }}
               />
 
-              <Paper.Text>country</Paper.Text>
+              <Paper.Subheading>Country</Paper.Subheading>
 
               <View
                 style={styles.filterRowContainer}
               >
                 <FilterRadioButtonItem
-                  title={Countries.dk}
+                  title="Denmark"
                   value={Countries.dk}
                   status={country === Countries.dk ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -200,7 +225,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 />
 
                 <FilterRadioButtonItem
-                  title={Countries.se}
+                  title="Sweden"
                   value={Countries.se}
                   status={country === Countries.se ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -209,7 +234,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 />
 
                 <FilterRadioButtonItem
-                  title={Countries.de}
+                  title="Germany"
                   value={Countries.de}
                   status={country === Countries.de ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -218,7 +243,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 />
 
                 <FilterRadioButtonItem
-                  title={Countries.pl}
+                  title="Poland"
                   value={Countries.pl}
                   status={country === Countries.pl ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -229,21 +254,22 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
               <Paper.Button
                 onPress={() => {
-                  setCountry('');
+                  setCountry(Countries.empty);
                 }}
+                // mode="contained"
               >
                 reset country
               </Paper.Button>
 
-              <Paper.Text>
-                brand
-              </Paper.Text>
+              <Paper.Subheading>
+                Brand
+              </Paper.Subheading>
 
               <View
                 style={styles.filterRowContainer}
               >
                 <FilterRadioButtonItem
-                  title={Brands.netto}
+                  title="Netto"
                   value={Brands.netto}
                   status={brand === Brands.netto ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -252,7 +278,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 />
 
                 <FilterRadioButtonItem
-                  title={Brands.bilka}
+                  title="Bilka"
                   value={Brands.bilka}
                   status={brand === Brands.bilka ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -261,7 +287,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 />
 
                 <FilterRadioButtonItem
-                  title={Brands.foetex}
+                  title="Foetex"
                   value={Brands.foetex}
                   status={brand === Brands.foetex ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -270,7 +296,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 />
 
                 <FilterRadioButtonItem
-                  title={Brands.salling}
+                  title="Salling"
                   value={Brands.salling}
                   status={brand === Brands.salling ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -279,7 +305,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 />
 
                 <FilterRadioButtonItem
-                  title={Brands.carlsjr}
+                  title="Carl's Jr"
                   value={Brands.carlsjr}
                   status={brand === Brands.carlsjr ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -288,7 +314,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                 />
 
                 <FilterRadioButtonItem
-                  title={Brands.br}
+                  title="BR"
                   value={Brands.br}
                   status={brand === Brands.br ? 'checked' : 'unchecked'}
                   onPress={() => {
@@ -299,215 +325,167 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
               <Paper.Button
                 onPress={() => {
-                  setBrand('');
+                  setBrand(Brands.empty);
                 }}
               >
                 reset brand
               </Paper.Button>
 
-              <Paper.Text>filters</Paper.Text>
+              <Paper.Subheading>Attributes</Paper.Subheading>
               <View
                 style={styles.filterRowContainer}
               >
 
                 {/* attributes */}
                 <FilterCheckBoxItem
-                  title="baby changing"
+                  title={enums.StoreAttributesNormal.babyChanging}
                   status={babyChanging ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setBabyChanging((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="bakery"
+                  title={enums.StoreAttributesNormal.bakery}
                   status={bakery ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setBakery((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="carlsJunior"
+                  title={enums.StoreAttributesNormal.carlsJunior}
                   status={carlsJunior ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setCarlsJunior((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="enablingFacilities"
+                  title={enums.StoreAttributesNormal.enablingFacilities}
                   status={enablingFacilities ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setEnablingFacilities((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="flowers"
+                  title={enums.StoreAttributesNormal.flowers}
                   status={flowers ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setFlowers((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="garden"
+                  title={enums.StoreAttributesNormal.garden}
                   status={garden ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setGarden((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="holidayOpen"
+                  title={enums.StoreAttributesNormal.holidayOpen}
                   status={holidayOpen ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setHolidayOpen((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="nonFood"
+                  title={enums.StoreAttributesNormal.nonFood}
                   status={nonFood ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setNonFood((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="open247"
+                  title={enums.StoreAttributesNormal.open247}
                   status={open247 ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setOpen247((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="parking"
+                  title={enums.StoreAttributesNormal.parking}
                   status={parking ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setParking((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="parkingRestrictions"
+                  title={enums.StoreAttributesNormal.parkingRestrictions}
                   status={parkingRestrictions ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setParkingRestrictions((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="petFood"
+                  title={enums.StoreAttributesNormal.petFood}
                   status={petFood ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setPetFood((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="pharmacy"
+                  title={enums.StoreAttributesNormal.pharmacy}
                   status={pharmacy ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setPharmacy((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="scanAndGo"
+                  title={enums.StoreAttributesNormal.scanAndGo}
                   status={scanAndGo ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setScanAndGo((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="starbucks"
+                  title={enums.StoreAttributesNormal.starbucks}
                   status={starbucks ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setStarbucks((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="swipBox"
+                  title={enums.StoreAttributesNormal.swipBox}
                   status={swipBox ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setSwipBox((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="wc"
+                  title={enums.StoreAttributesNormal.wc}
                   status={wc ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setWc((prevState) => { return !prevState; });
                   }}
                 />
                 <FilterCheckBoxItem
-                  title="wifi"
+                  title={enums.StoreAttributesNormal.wifi}
                   status={wifi ? 'checked' : 'unchecked'}
                   onPress={() => {
                     setWifi((prevState) => { return !prevState; });
                   }}
                 />
-
-                <Paper.Button
-                  onPress={() => {
-                    setBabyChanging(false);
-                    setBakery(false);
-                    setCarlsJunior(false);
-                    setEnablingFacilities(false);
-                    setFlowers(false);
-                    setGarden(false);
-                    setHolidayOpen(false);
-                    setNonFood(false);
-                    setOpen247(false);
-                    setParking(false);
-                    setParkingRestrictions(false);
-                    setPetFood(false);
-                    setPharmacy(false);
-                    setScanAndGo(false);
-                    setStarbucks(false);
-                    setSwipBox(false);
-                    setWc(false);
-                    setWifi(false);
-                  }}
-                >
-                  reset filters
-                </Paper.Button>
-                {/* filters */}
-
               </View>
+              <Paper.Button
+                onPress={setAllAttributsFalse}
+              >
+                reset filters
+              </Paper.Button>
+              {/* filters */}
             </ScrollView>
           )}
           <View
             style={styles.spacer}
           />
+
+          {!ui.isLoading && viewMode === ViewModes.storesView && (
+            <FlatList
+              data={stores.storesData}
+              renderItem={renderStoreItem}
+              ListEmptyComponent={NoResults}
+            />
+          )}
+          {/* show regardless of viewMode. then we show the spinner even in filterView so users see new data is fetching */}
           {ui.isLoading && (
             <Spinner />
-          )}
-
-          {!ui.isLoading && !filtersShown && (
-          <FlatList
-            data={stores.storesData}
-            renderItem={renderStoreItem}
-            ListEmptyComponent={NoResults}
-          />
-          )}
-
-          {!ui.isLoading && (
-          <View>
-
-            {stores.storesData === 1 && (
-            <>
-              {stores.storesData.map((item: any) => {
-              // console.log('i', item.hours)
-                return (
-                  <StoreItem
-                    key={item.id}
-                    name={item.name}
-                    street={item.address.street}
-                    city={item.address.city}
-                    zip={item.address.zip}
-                    attributes={item.attributes}
-                    onPress={() => {
-                      navigation.navigate('Store', {
-                        name: item.name,
-                      });
-                    }}
-                  />
-                );
-              })}
-            </>
-            )}
-          </View>
           )}
         </>
       </MainTemplate>

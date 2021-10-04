@@ -9,7 +9,9 @@ const Tab1 = ({ navigation }): React.ReactElement => {
   return (
     <>
       <View>
-        <Text>tab 1</Text>
+        <Text>
+          tab 1
+        </Text>
         <Button
           title="nav"
           onPress={() => {
