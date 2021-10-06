@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 
-const NoResults = () => {
+const NoResults = (): React.ReactElement => {
   return (
     <View
       style={styles.container}

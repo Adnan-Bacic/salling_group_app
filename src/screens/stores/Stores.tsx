@@ -107,7 +107,12 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
     };
 
     getStores();
-  }, [babyChanging, bakery, brand, carlsJunior, city, country, dispatch, enablingFacilities, flowers, garden, holidayOpen, parkingRestrictions, nonFood, open247, parking, petFood, pharmacy, scanAndGo, starbucks, street, swipBox, wc, wifi, zip]);
+  }, [
+    babyChanging, bakery, brand, carlsJunior, city, country, dispatch,
+    enablingFacilities, flowers, garden, holidayOpen, parkingRestrictions,
+    nonFood, open247, parking, petFood, pharmacy, scanAndGo, starbucks,
+    street, swipBox, wc, wifi, zip,
+  ]);
 
   const stores = useAppSelector((state) => { return state.stores; });
   const ui = useAppSelector((state) => { return state.ui; });
@@ -487,7 +492,10 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
               ListEmptyComponent={NoResults}
             />
           )}
-          {/* show regardless of viewMode. then we show the spinner even in filterView so users see new data is fetching */}
+          {/*
+          show regardless of viewMode.
+          then we show the spinner even in filterView so users see new data is fetching
+          */}
           {ui.isLoading && (
             <Spinner />
           )}

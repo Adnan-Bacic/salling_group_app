@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 
-const Spinner = () => {
+const Spinner = (): React.ReactElement => {
   return (
     <View
       style={styles.container}
