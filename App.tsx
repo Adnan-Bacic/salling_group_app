@@ -11,37 +11,27 @@
 import React from 'react';
 import {
   StatusBar,
-  SafeAreaView,
-  StyleSheet,
 } from 'react-native';
 import { Provider as StoreProvider } from 'react-redux';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 import store from './src/redux/store';
 import Navigator from './src/navigation/Navigator';
 
 const App = (): React.ReactElement => {
   return (
-    <>
-      <StoreProvider
-        store={store}
-      >
-        <SafeAreaView
-          style={styles.safeAreaView}
-        >
+    <StoreProvider
+      store={store}
+    >
+      <PaperProvider>
+        <SafeAreaProvider>
           <StatusBar />
-          <PaperProvider>
-            <Navigator />
-          </PaperProvider>
-        </SafeAreaView>
-      </StoreProvider>
-    </>
+
+          <Navigator />
+        </SafeAreaProvider>
+      </PaperProvider>
+    </StoreProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  safeAreaView: {
-    flex: 1,
-  },
-});
 
 export default App;
