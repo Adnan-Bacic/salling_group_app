@@ -40,7 +40,9 @@ module.exports = {
     // syntax
     'react/jsx-first-prop-new-line': [2, 'always'],
     'react/jsx-max-props-per-line': [2, { maximum: 1, when: 'always' }],
+    'react/jsx-one-expression-per-line': [2, { allow: 'none' }],
     'arrow-body-style': [2, 'always'],
     'import/prefer-default-export': 'off',
+    'object-shorthand': ['warn', 'never'],
   },
 };

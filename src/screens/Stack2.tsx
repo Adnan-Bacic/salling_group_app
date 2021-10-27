@@ -9,7 +9,9 @@ const Stack2 = ({ navigation }): React.ReactElement => {
   return (
     <>
       <View>
-        <Text>stack 2</Text>
+        <Text>
+          stack 2
+        </Text>
         <Button
           title="nav"
           onPress={() => {

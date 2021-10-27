@@ -28,6 +28,10 @@ const BottomNavigator = (): React.ReactElement => {
       }}
     >
       <Tab.Screen
+        name="StoresNavigator"
+        component={StackNavigator.StoresNavigator}
+      />
+      <Tab.Screen
         name="StackNavigator1"
         component={StackNavigator.StackNavigator1}
       />
