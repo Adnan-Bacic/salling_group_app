@@ -17,6 +17,10 @@ interface StoreItemInterface {
 const StoreItem = ({
   name, street, city, zip, country, attributes, onPress,
 }: StoreItemInterface): React.ReactElement => {
+  console.log(attributes)
+  //console.log('keys', Object.keys(attributes))
+  //console.log('entires', Object.entries(attributes))
+  //console.log('values', Object.values(attributes))
   return (
     <View
       style={styles.container}
@@ -33,19 +37,27 @@ const StoreItem = ({
           <View
             style={styles.chipContainer}
           >
-            {Object.keys(attributes).map((item) => {
-              const attribute = enums.StoreAttributesToNormal(item);
-              // console.log(item, attribute);
-              return (
+            {Object.entries(attributes).map((item) => {
+              //console.log(item, item[0])
+              const attribute = enums.StoreAttributesToNormal(item[0]);
+              const hasAttribute = item[1] === true
+              //console.log(hasAttribute)
+              return(
+                <>
+                {/* smiley scheme is a string, so only show boolean */}
+                {typeof item[1] === 'boolean' && (
                 <Paper.Chip
-                  key={item}
-                  icon="information"
-                  style={styles.chip}
-                >
-                  {attribute}
-                </Paper.Chip>
-              );
+                key={item}
+                icon={hasAttribute ? 'check' : 'block-helper'}
+                style={styles.chip}
+              >
+                {attribute}
+              </Paper.Chip>
+                )}
+                </>
+              )
             })}
+          
           </View>
           {attributes.smileyscheme && (
             <View>

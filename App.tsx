@@ -26,7 +26,6 @@ const App = (): React.ReactElement => {
       <PaperProvider>
         <SafeAreaProvider>
           <StatusBar />
-
           <Navigator />
         </SafeAreaProvider>
       </PaperProvider>
