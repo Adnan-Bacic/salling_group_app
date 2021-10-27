@@ -4,14 +4,14 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 
-const Spinner = (): React.ReactElement => {
+const NoResults = (): React.ReactElement => {
   return (
     <View
       style={styles.container}
     >
-      <Paper.ActivityIndicator
-        size="large"
-      />
+      <Paper.Title>
+        No results found
+      </Paper.Title>
     </View>
   );
 };
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Spinner;
+export default NoResults;

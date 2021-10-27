@@ -1574,10 +1574,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-native/polyfills@npm:1.0.0":
-  version: 1.0.0
-  resolution: "@react-native/polyfills@npm:1.0.0"
-  checksum: b68f722b2325315d41cd3edfbc6f4eb7c6ec355e52aa8d781a3da6289e302f47f3b9e11deb69f689395e70923eb5b8202203e9e25a714c30c30ba2392c850db3
+"@react-native/polyfills@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@react-native/polyfills@npm:2.0.0"
+  checksum: 6f2a0d1c8c4df4f20e8adac92fcfaec0fb536d097f96fbfd56bdb21b0a3afc4157f82d084b6851093255f58d350818f7ad28098818d584f654533eeb9cba2656
   languageName: node
   linkType: hard
 
@@ -5001,10 +5001,10 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"hermes-engine@npm:~0.8.1":
-  version: 0.8.1
-  resolution: "hermes-engine@npm:0.8.1"
-  checksum: cae8b684582db45d69d4be208af678f2b1c0472ea57947be88d6021eef9cfd11f7309f352a705f8894b91a97de38375744fc26efeb1ec19e0b10f10abbf310fb
+"hermes-engine@npm:~0.9.0":
+  version: 0.9.0
+  resolution: "hermes-engine@npm:0.9.0"
+  checksum: 384549c544de9efb07e9d84202f45bde00e62539a5b56fed2fd2763dbd02560eb37786e61349119966e3086e95a6b8e008822730180a679e229b43a611718f4c
   languageName: node
   linkType: hard
 
@@ -6817,7 +6817,7 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"metro-react-native-babel-preset@npm:0.66.2, metro-react-native-babel-preset@npm:^0.66.0":
+"metro-react-native-babel-preset@npm:0.66.2, metro-react-native-babel-preset@npm:^0.66.2":
   version: 0.66.2
   resolution: "metro-react-native-babel-preset@npm:0.66.2"
   dependencies:
@@ -8130,13 +8130,13 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-devtools-core@npm:^4.6.0":
-  version: 4.18.0
-  resolution: "react-devtools-core@npm:4.18.0"
+"react-devtools-core@npm:^4.13.0":
+  version: 4.20.2
+  resolution: "react-devtools-core@npm:4.20.2"
   dependencies:
     shell-quote: ^1.6.1
     ws: ^7
-  checksum: f84b733225d3a4961fdd2731d2447fdde5943141b1cdf1b17c2c36017f1242674b3fff803e4b5f7d0165ec0ad03c84bb1118514f0e02502f015b37ce571473b9
+  checksum: 14c9e06a62ea276be35b9e4632c032593daff7587c50713d4308644047c1623da6b2c29b0dc625f9c6e45bec14aba9b88cd1284abd0cd02d484c96b86f395374
   languageName: node
   linkType: hard
 
@@ -8154,12 +8154,12 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-native-clean-project@npm:^3.6.7":
-  version: 3.6.7
-  resolution: "react-native-clean-project@npm:3.6.7"
+"react-native-clean-project@npm:4.0.0-alpha1.0":
+  version: 4.0.0-alpha1.0
+  resolution: "react-native-clean-project@npm:4.0.0-alpha1.0"
   bin:
     react-native-clean-project: source/index.js
-  checksum: 5e2c90a5b34f57b1845330b8979e47071c364bfe113a4c6d9c3d5b0098910086129addcd127033396d9a59b412a88b8f458018fb0a1bab6399dbcdbaa359478e
+  checksum: 9d04f768e075155ac185a2a9211d57687bb24759287f557e9db32e94d262d956aa3c35338f4d70c4a977db824df6012949265b1be2c98e1f4077a748abf78072
   languageName: node
   linkType: hard
 
@@ -8248,9 +8248,9 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-native@npm:0.65.1":
-  version: 0.65.1
-  resolution: "react-native@npm:0.65.1"
+"react-native@npm:^0.66.1":
+  version: 0.66.1
+  resolution: "react-native@npm:0.66.1"
   dependencies:
     "@jest/create-cache-key-function": ^27.0.1
     "@react-native-community/cli": ^6.0.0
@@ -8258,12 +8258,12 @@ fsevents@^2.1.2:
     "@react-native-community/cli-platform-ios": ^6.0.0
     "@react-native/assets": 1.0.0
     "@react-native/normalize-color": 1.0.0
-    "@react-native/polyfills": 1.0.0
+    "@react-native/polyfills": 2.0.0
     abort-controller: ^3.0.0
     anser: ^1.4.9
     base64-js: ^1.1.2
     event-target-shim: ^5.0.1
-    hermes-engine: ~0.8.1
+    hermes-engine: ~0.9.0
     invariant: ^2.2.4
     jsc-android: ^250230.2.1
     metro-babel-register: 0.66.2
@@ -8274,7 +8274,8 @@ fsevents@^2.1.2:
     pretty-format: ^26.5.2
     promise: ^8.0.3
     prop-types: ^15.7.2
-    react-devtools-core: ^4.6.0
+    react-devtools-core: ^4.13.0
+    react-native-codegen: ^0.0.7
     react-refresh: ^0.4.0
     regenerator-runtime: ^0.13.2
     scheduler: ^0.20.2
@@ -8286,7 +8287,7 @@ fsevents@^2.1.2:
     react: 17.0.2
   bin:
     react-native: cli.js
-  checksum: 4462aa29ad940dc797b150cb6af9b481e6a013d5201818299e203e36f23bce389d705af25d75eea9e9fb31c0bcafdc349fd23fb6628db0a4cdadde6e1fbd3902
+  checksum: fe1701bb398d8f533c51aaf05dabb1c5d11caf80cb39c79fd38f4dbf13a27e8497080216ffdb19aa72f222d5bc75b32b8673bef504fab711f65a8d84dbdb5ddf
   languageName: node
   linkType: hard
 
@@ -8808,11 +8809,10 @@ resolve@^2.0.0-next.3:
     eslint-plugin-react-hooks: ^4.2.0
     eslint-plugin-react-redux: ^3.3.2
     jest: ^26.6.3
-    metro-react-native-babel-preset: ^0.66.0
+    metro-react-native-babel-preset: ^0.66.2
     react: 17.0.2
-    react-native: 0.65.1
-    react-native-clean-project: ^3.6.7
-    react-native-codegen: ^0.0.7
+    react-native: ^0.66.1
+    react-native-clean-project: 4.0.0-alpha1.0
     react-native-dotenv: ^3.2.0
     react-native-paper: ^4.9.2
     react-native-safe-area-context: ^3.3.2
