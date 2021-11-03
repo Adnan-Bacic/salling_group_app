@@ -115,7 +115,6 @@ export const getStores = (options: Options) => {
       // remove last char(&)
       query = query.slice(0, -1);
 
-
       const url = `${API_URL}/v2/stores?${query}`;
 
       const res = await fetch(url, {

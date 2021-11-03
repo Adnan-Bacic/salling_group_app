@@ -24,7 +24,7 @@ export enum StoreAttributesNormalParking {
   parkingRestrictions = 'Parking restrictions',
 }
 
-export enum StoreAttributes {
+enum StoreAttributes {
   babyChanging = 'babyChanging',
   bakery = 'bakery',
   carlsJunior = 'carlsJunior',

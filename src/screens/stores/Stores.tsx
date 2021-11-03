@@ -5,14 +5,14 @@ import {
   ScrollView,
   FlatList,
   Linking,
-  Alert
+  Alert,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 import * as functions from '../../redux/functions';
 import { MainTemplate } from '../../templates';
 import { Spinner, NoResults } from '../../components';
-import { enums } from '../../helpers';
+import * as enums from './enums';
 import StoreItem from './StoreItem';
 import FilterCheckBoxItem from './FilterCheckBoxItem';
 import FilterRadioButtonItem from './FilterRadioButtonItem';
@@ -124,7 +124,6 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   }
   const renderStoreItem = ({ item }: FlatListItemProps) => {
     // TODO: handle br - not a food chain
-    console.log('1', item.attributes.smileyscheme)
     return (
       <StoreItem
         key={item.id}
@@ -141,14 +140,14 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
         }}
         onPressSmileyScheme={async () => {
           const url = `https://www.findsmiley.dk/${item.attributes.smileyscheme}`;
-          console.log('url', url);
+
           try {
             const res = await Linking.canOpenURL(url);
 
             if (!res) {
               throw new Error(`Cannot open URL. If you wish to manually look up the smiley scheme: ${url}`);
             }
-            
+
             await Linking.openURL(url);
           } catch (err: any) {
             Alert.alert(err.name, err.message);
