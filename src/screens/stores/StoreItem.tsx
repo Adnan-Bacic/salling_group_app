@@ -15,9 +15,9 @@ interface StoreItemInterface {
   onPress: () => void;
 }
 const StoreItem = ({
-  name, street, city, zip, country, attributes, onPress,
+  name, street, city, zip, country, attributes, onPress, onPressSmileyScheme,
 }: StoreItemInterface): React.ReactElement => {
-  console.log(attributes)
+  //console.log(attributes)
   //console.log('keys', Object.keys(attributes))
   //console.log('entires', Object.entries(attributes))
   //console.log('values', Object.values(attributes))
@@ -38,17 +38,26 @@ const StoreItem = ({
             style={styles.chipContainer}
           >
             {Object.entries(attributes).map((item) => {
-              //console.log(item, item[0])
-              const attribute = enums.StoreAttributesToNormal(item[0]);
-              const hasAttribute = item[1] === true
-              //console.log(hasAttribute)
+              console.log(item, item[0])
+              const isParkingRestrictionsAttribute = item[0] === 'parkingRestrictions'
+              console.log('t', isParkingRestrictionsAttribute)
+
+              let attribute
+              if(isParkingRestrictionsAttribute){
+                attribute = enums.StoreAttributesNormalParking.parkingRestrictions;
+              } else {
+                attribute = enums.StoreAttributesToNormal(item[0]);
+              }
+              const attributeIsTrue = item[1] === true
+              //console.log(attributeIsTrue)
+
               return(
                 <>
                 {/* smiley scheme is a string, so only show boolean */}
                 {typeof item[1] === 'boolean' && (
                 <Paper.Chip
                 key={item}
-                icon={hasAttribute ? 'check' : 'block-helper'}
+                icon={attributeIsTrue ? 'check' : 'block-helper'}
                 style={styles.chip}
               >
                 {attribute}
@@ -62,27 +71,7 @@ const StoreItem = ({
           {attributes.smileyscheme && (
             <View>
               <Paper.Text
-                onPress={async () => {
-                  const url = `https://www.findsmiley.dk/${attributes.smileyscheme}`;
-                  console.log('url', url);
-                  try {
-                    const res = await Linking.canOpenURL(url);
-                    console.log('res', res);
-                    if (res) {
-                      console.log(1);
-                    } else {
-                      console.log(2);
-                    }
-
-                    if (!await Linking.canOpenURL(url)) {
-                      throw new Error(`Cannot open URL. If you wish to manually look up the smiley scheme: ${url}`);
-                    }
-                    await Linking.openURL(url);
-                  } catch (err: any) {
-                    console.log('err', err);
-                    Alert.alert(err.name, err.message);
-                  }
-                }}
+                onPress={onPressSmileyScheme}
               >
                 Open smiley scheme
               </Paper.Text>

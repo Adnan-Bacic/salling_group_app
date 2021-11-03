@@ -4,6 +4,8 @@ import {
   StyleSheet,
   ScrollView,
   FlatList,
+  Linking,
+  Alert
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from '../../redux/hooks';
@@ -122,6 +124,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
   }
   const renderStoreItem = ({ item }: FlatListItemProps) => {
     // TODO: handle br - not a food chain
+    console.log('1', item.attributes.smileyscheme)
     return (
       <StoreItem
         key={item.id}
@@ -135,6 +138,21 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
           navigation.navigate('Store', {
             name: item.name,
           });
+        }}
+        onPressSmileyScheme={async () => {
+          const url = `https://www.findsmiley.dk/${item.attributes.smileyscheme}`;
+          console.log('url', url);
+          try {
+            const res = await Linking.canOpenURL(url);
+
+            if (!res) {
+              throw new Error(`Cannot open URL. If you wish to manually look up the smiley scheme: ${url}`);
+            }
+            
+            await Linking.openURL(url);
+          } catch (err: any) {
+            Alert.alert(err.name, err.message);
+          }
         }}
       />
     );
