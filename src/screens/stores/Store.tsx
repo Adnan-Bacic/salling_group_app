@@ -11,7 +11,8 @@ interface StoreInterface {
   }
 }
 const Store = ({ route }: StoreInterface): React.ReactElement => {
-  const { name } = route.params;
+  const { name, id } = route.params;
+  console.log(id);
   return (
     <MainTemplate>
       <View

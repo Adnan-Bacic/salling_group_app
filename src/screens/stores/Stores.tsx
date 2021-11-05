@@ -532,6 +532,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                   onPress={() => {
                     navigation.navigate('Store', {
                       name: item.name,
+                      id: item.id,
                     });
                   }}
                   onPressSmileyScheme={async () => {

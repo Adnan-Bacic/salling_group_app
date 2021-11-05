@@ -7,7 +7,11 @@ import Stack2 from './Stack2';
 import Stores from './stores/Stores';
 import Store from './stores/Store';
 
+// food waste
+import FoodWaste from './foodwaste/FoodWaste';
+
 export {
   Tab1, Tab2, Stack1, Stack2,
   Stores, Store,
+  FoodWaste,
 };

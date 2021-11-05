@@ -32,8 +32,8 @@ const BottomNavigator = (): React.ReactElement => {
         component={StackNavigator.StoresNavigator}
       />
       <Tab.Screen
-        name="StackNavigator1"
-        component={StackNavigator.StackNavigator1}
+        name="FoodWasteNavigator"
+        component={StackNavigator.FoodWasteNavigator}
       />
       <Tab.Screen
         name="StackNavigator2"

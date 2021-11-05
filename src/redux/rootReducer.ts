@@ -5,6 +5,7 @@ import * as actionTypes from './actionTypes';
 const appReducer = combineReducers({
   ui: reducers.uiReducer,
   stores: reducers.storesReducer,
+  foodWaste: reducers.foodWasteReducer,
 });
 
 // redux co-creator recommends doing this to clear redux state

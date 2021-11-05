@@ -4,16 +4,12 @@ import * as Screens from '../screens';
 
 const Stack1 = createNativeStackNavigator();
 
-export const StackNavigator1 = (): React.ReactElement => {
+export const FoodWasteNavigator = (): React.ReactElement => {
   return (
     <Stack1.Navigator>
       <Stack1.Screen
-        name="Stack1"
-        component={Screens.Stack1}
-      />
-      <Stack1.Screen
-        name="Stack2"
-        component={Screens.Stack2}
+        name="FoodWaste"
+        component={Screens.FoodWaste}
       />
     </Stack1.Navigator>
   );
