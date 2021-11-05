@@ -3,6 +3,18 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+      <!--
+        MANUAL
+        to fix Linking.canOpenUrl()
+        https://github.com/facebook/react-native/issues/30497
+      -->
+      <queries>
+        <intent>
+          <action android:name="android.intent.action.VIEW" />
+          <data android:scheme="https"/>
+        </intent>
+      </queries>
+
     <application
       android:name=".MainApplication"
       android:label="@string/app_name"

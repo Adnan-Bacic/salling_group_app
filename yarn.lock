@@ -8154,12 +8154,12 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"react-native-clean-project@npm:4.0.0-alpha1.0":
-  version: 4.0.0-alpha1.0
-  resolution: "react-native-clean-project@npm:4.0.0-alpha1.0"
+"react-native-clean-project@npm:4.0.0-alpha4.0":
+  version: 4.0.0-alpha4.0
+  resolution: "react-native-clean-project@npm:4.0.0-alpha4.0"
   bin:
     react-native-clean-project: source/index.js
-  checksum: 9d04f768e075155ac185a2a9211d57687bb24759287f557e9db32e94d262d956aa3c35338f4d70c4a977db824df6012949265b1be2c98e1f4077a748abf78072
+  checksum: 55ffce03288bd9da9cc2b33eb43094d6b7eef17c82867d2531d733b2049bd657ebefa14b6fd5169212ba229ddc14a1468e0de429dc43a8352d329152a22bffbd
   languageName: node
   linkType: hard
 
@@ -8812,7 +8812,7 @@ resolve@^2.0.0-next.3:
     metro-react-native-babel-preset: ^0.66.2
     react: 17.0.2
     react-native: ^0.66.1
-    react-native-clean-project: 4.0.0-alpha1.0
+    react-native-clean-project: 4.0.0-alpha4.0
     react-native-dotenv: ^3.2.0
     react-native-paper: ^4.9.2
     react-native-safe-area-context: ^3.3.2

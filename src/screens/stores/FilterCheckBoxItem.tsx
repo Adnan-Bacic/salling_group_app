@@ -28,7 +28,7 @@ const FilterCheckBoxItem = ({
 
         </View>
         <View>
-          <Paper.Checkbox
+          <Paper.Checkbox.Android
             status={status}
             onPress={onPress}
           />

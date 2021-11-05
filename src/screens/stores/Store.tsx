@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { MainTemplate } from '../../templates';
 

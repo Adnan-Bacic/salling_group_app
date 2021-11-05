@@ -1,9 +1,9 @@
 import React from 'react';
 import {
-  View, StyleSheet, Linking, Alert,
+  View, StyleSheet,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
-import { enums } from '../../helpers';
+import * as enums from './enums';
 
 interface StoreItemInterface {
   name: string;
@@ -13,9 +13,10 @@ interface StoreItemInterface {
   country: string;
   attributes: Record<string, unknown>
   onPress: () => void;
+  onPressSmileyScheme: () => void;
 }
 const StoreItem = ({
-  name, street, city, zip, country, attributes, onPress,
+  name, street, city, zip, country, attributes, onPress, onPressSmileyScheme,
 }: StoreItemInterface): React.ReactElement => {
   return (
     <View
@@ -33,44 +34,37 @@ const StoreItem = ({
           <View
             style={styles.chipContainer}
           >
-            {Object.keys(attributes).map((item) => {
-              const attribute = enums.StoreAttributesToNormal(item);
-              // console.log(item, attribute);
+            {Object.entries(attributes).map((item) => {
+              const isParkingRestrictionsAttribute = item[0] === 'parkingRestrictions';
+
+              let attribute;
+              if (isParkingRestrictionsAttribute) {
+                attribute = enums.StoreAttributesNormalParking.parkingRestrictions;
+              } else {
+                attribute = enums.StoreAttributesToNormal(item[0]);
+              }
+              const attributeIsTrue = item[1] === true;
+
               return (
-                <Paper.Chip
-                  key={item}
-                  icon="information"
-                  style={styles.chip}
-                >
-                  {attribute}
-                </Paper.Chip>
+                <>
+                  {/* smiley scheme is a string, so only show boolean */}
+                  {typeof item[1] === 'boolean' && (
+                  <Paper.Chip
+                    icon={attributeIsTrue ? 'check' : 'block-helper'}
+                    style={styles.chip}
+                  >
+                    {attribute}
+                  </Paper.Chip>
+                  )}
+                </>
               );
             })}
+
           </View>
           {attributes.smileyscheme && (
             <View>
               <Paper.Text
-                onPress={async () => {
-                  const url = `https://www.findsmiley.dk/${attributes.smileyscheme}`;
-                  console.log('url', url);
-                  try {
-                    const res = await Linking.canOpenURL(url);
-                    console.log('res', res);
-                    if (res) {
-                      console.log(1);
-                    } else {
-                      console.log(2);
-                    }
-
-                    if (!await Linking.canOpenURL(url)) {
-                      throw new Error(`Cannot open URL. If you wish to manually look up the smiley scheme: ${url}`);
-                    }
-                    await Linking.openURL(url);
-                  } catch (err: any) {
-                    console.log('err', err);
-                    Alert.alert(err.name, err.message);
-                  }
-                }}
+                onPress={onPressSmileyScheme}
               >
                 Open smiley scheme
               </Paper.Text>

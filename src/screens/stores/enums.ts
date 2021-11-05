@@ -20,7 +20,11 @@ export enum StoreAttributesNormal {
   wifi = 'Wi-Fi',
 }
 
-export enum StoreAttributes {
+export enum StoreAttributesNormalParking {
+  parkingRestrictions = 'Parking restrictions',
+}
+
+enum StoreAttributes {
   babyChanging = 'babyChanging',
   bakery = 'bakery',
   carlsJunior = 'carlsJunior',
