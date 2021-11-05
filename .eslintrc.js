@@ -29,6 +29,8 @@ module.exports = {
   // for @typescript-eslint/eslint-plugin
   parser: '@typescript-eslint/parser',
   rules: {
+    // we use custom path alias
+    'import/no-unresolved': [0, 'always'],
     // no need for proptypes in ts
     'react/prop-types': [0, 'always'],
     'react/require-default-props': [0, 'always'],
