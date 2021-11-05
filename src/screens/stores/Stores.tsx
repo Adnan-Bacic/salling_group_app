@@ -3,7 +3,6 @@ import {
   View,
   StyleSheet,
   ScrollView,
-  FlatList,
   Linking,
   Alert,
 } from 'react-native';
@@ -119,9 +118,6 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
     street, swipBox, wc, wifi, zip,
   ]);
 
-  interface FlatListItemProps {
-    item: any;
-  }
   /*
   const renderStoreItem = ({ item }: FlatListItemProps) => {
     // TODO: handle br - not a food chain
@@ -146,7 +142,8 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
             const res = await Linking.canOpenURL(url);
 
             if (!res) {
-              throw new Error(`Cannot open URL. If you wish to manually look up the smiley scheme: ${url}`);
+              throw new Error(`Cannot open URL.
+              If you wish to manually look up the smiley scheme: ${url}`);
             }
 
             await Linking.openURL(url);
@@ -201,7 +198,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
           )}
         </Paper.Button>
         <ScrollView
-        ref={scrollRef}
+          ref={scrollRef}
         >
           {viewMode === ViewModes.filterView && (
             <>
@@ -522,7 +519,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
           {(stores.storesData && !ui.isLoading) && (
             stores.storesData.map((item: any) => {
-              //console.log('id', item.id);
+              // console.log('id', item.id);
               return (
                 <StoreItem
                   key={item.id}
@@ -559,20 +556,24 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
           {(stores.storesData && !ui.isLoading) && (
             <>
-            {(stores.storesData.length === 0) && (
-            <NoResults></NoResults>
-          )}
+              {(stores.storesData.length === 0) && (
+              <NoResults />
+              )}
             </>
           )}
 
         </ScrollView>
 
-        <Paper.Button onPress={() => {
+        <Paper.Button
+          onPress={() => {
             scrollRef.current?.scrollTo({
               y: 0,
               animated: true,
             });
-        }}>scroll to top</Paper.Button>
+          }}
+        >
+          scroll to top
+        </Paper.Button>
 
         {/*
           show regardless of viewMode.

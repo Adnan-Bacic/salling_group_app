@@ -16,7 +16,7 @@ interface StoreItemInterface {
   onPressSmileyScheme: () => void;
 }
 const StoreItem = ({
-  name, street, city, zip, country, attributes, onPress, onPressSmileyScheme
+  name, street, city, zip, country, attributes, onPress, onPressSmileyScheme,
 }: StoreItemInterface): React.ReactElement => {
   return (
     <View

@@ -29,7 +29,7 @@ const FilterRadioButtonItem = ({
 
         </View>
         <View>
-          <Paper.RadioButton
+          <Paper.RadioButton.Android
             status={status}
             value={value}
             onPress={onPress}
