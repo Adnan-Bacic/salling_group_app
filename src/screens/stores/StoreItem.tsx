@@ -16,7 +16,7 @@ interface StoreItemInterface {
   onPressSmileyScheme: () => void;
 }
 const StoreItem = ({
-  name, street, city, zip, country, attributes, onPress, onPressSmileyScheme,
+  name, street, city, zip, country, attributes, onPress, onPressSmileyScheme
 }: StoreItemInterface): React.ReactElement => {
   return (
     <View
@@ -50,7 +50,6 @@ const StoreItem = ({
                   {/* smiley scheme is a string, so only show boolean */}
                   {typeof item[1] === 'boolean' && (
                   <Paper.Chip
-                    key={item}
                     icon={attributeIsTrue ? 'check' : 'block-helper'}
                     style={styles.chip}
                   >
