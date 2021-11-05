@@ -7,10 +7,10 @@ import {
   Alert,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
-import { useAppDispatch, useAppSelector } from '../../redux/hooks';
-import * as functions from '../../redux/functions';
-import { MainTemplate } from '../../templates';
-import { Spinner, NoResults } from '../../components';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import * as functions from 'src/redux/functions';
+import { MainTemplate } from 'src/templates';
+import { Spinner, NoResults } from 'src/components';
 import * as enums from './enums';
 import StoreItem from './StoreItem';
 import FilterCheckBoxItem from './FilterCheckBoxItem';
