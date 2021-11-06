@@ -6,6 +6,8 @@ import { DispatchProps } from '../types';
 export const getFoodWasteByZip = (zip) => {
   console.log(zip)
   return async (dispatch, getState) => {
+    dispatch(actions.ui.setLoading(true));
+
     try {
       console.log(1)
       const url = `${API_URL}/v1/food-waste/?zip=${zip}`;
@@ -28,5 +30,7 @@ export const getFoodWasteByZip = (zip) => {
     } catch (err) {
       console.log(err);
     }
+    dispatch(actions.ui.setLoading(false));
+
   };
 };

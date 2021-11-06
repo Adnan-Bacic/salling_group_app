@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import { uiSelector, storesSelector } from 'src/redux/selectors'
 import * as functions from 'src/redux/functions';
 import { MainTemplate } from 'src/templates';
 import { Spinner, NoResults } from 'src/components';
@@ -74,8 +75,8 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
   const dispatch = useAppDispatch();
 
-  const stores = useAppSelector((state) => { return state.stores; });
-  const ui = useAppSelector((state) => { return state.ui; });
+  const stores = useAppSelector(storesSelector);
+  const ui = useAppSelector(uiSelector);
 
   useEffect(() => {
     const getStores = () => {
@@ -519,7 +520,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
           {(stores.storesData && !ui.isLoading) && (
             stores.storesData.map((item: any) => {
-              // console.log('id', item.id);
+              //console.log('id', item.id);
               return (
                 <StoreItem
                   key={item.id}
