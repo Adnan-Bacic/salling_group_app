@@ -9,9 +9,10 @@ import Store from './stores/Store';
 
 // food waste
 import FoodWaste from './foodwaste/FoodWaste';
+import FoodWasteStore from './foodwaste/FoodWasteStore';
 
 export {
   Tab1, Tab2, Stack1, Stack2,
   Stores, Store,
-  FoodWaste,
+  FoodWaste, FoodWasteStore,
 };

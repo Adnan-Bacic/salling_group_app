@@ -4,12 +4,12 @@ import * as actions from '../actions';
 import { DispatchProps } from '../types';
 
 export const getFoodWasteByZip = (zip) => {
-  console.log(zip)
+  console.log(zip);
   return async (dispatch, getState) => {
     dispatch(actions.ui.setLoading(true));
 
     try {
-      console.log(1)
+      console.log(1);
       const url = `${API_URL}/v1/food-waste/?zip=${zip}`;
 
       const res = await fetch(url, {
@@ -31,6 +31,5 @@ export const getFoodWasteByZip = (zip) => {
       console.log(err);
     }
     dispatch(actions.ui.setLoading(false));
-
   };
 };
