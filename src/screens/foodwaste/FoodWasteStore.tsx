@@ -3,22 +3,25 @@ import {
   Text,
   View,
   Button,
+  FlatList
 } from 'react-native';
+import FoodWasteItem from './FoodWasteItem';
 
-const FoodWasteStore = ({ navigation }): React.ReactElement => {
+const FoodWasteStore = ({ navigation, route }): React.ReactElement => {
+  const { items } = route.params
+  console.log(items)
+
+  const renderFoodItem = ({ item }) => {
+    return(
+      <FoodWasteItem></FoodWasteItem>
+    )
+  }
   return (
     <>
-      <View>
-        <Text>
-          food waste store
-        </Text>
-        <Button
-          title="nav"
-          onPress={() => {
-            console.log(1);
-          }}
-        />
-      </View>
+      <FlatList
+      data={items}
+      renderItem={renderFoodItem}
+      ></FlatList>
     </>
   );
 };

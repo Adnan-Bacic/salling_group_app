@@ -38,7 +38,9 @@ const FoodWaste = ({ navigation }): React.ReactElement => {
         zip={item.store.address.zip}
         country={item.store.address.country}
         onPressAction={() => {
-          navigation.navigate('FoodWasteStore');
+          navigation.navigate('FoodWasteStore', {
+            items: item.clearances
+          });
         }}
         amount={item.clearances.length}
       />
