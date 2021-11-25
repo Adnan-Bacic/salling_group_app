@@ -10,6 +10,8 @@ export const getFoodWasteByZip = (zip) => {
 
     try {
       console.log(1);
+
+      //todo: validation for zip length
       const url = `${API_URL}/v1/food-waste/?zip=${zip}`;
 
       const res = await fetch(url, {

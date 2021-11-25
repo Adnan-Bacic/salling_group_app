@@ -9,9 +9,11 @@ import { FoodItemBaseInterface } from 'src/components/food/FoodItemTemplate';
 interface StoreItemInterface extends FoodItemBaseInterface {
     children: any;
 }
-const FoodWasteItem = (): React.ReactElement => {
+const FoodWasteItem = ({ title, image }): React.ReactElement => {
   return (
     <FoodItemTemplate
+    title={title}
+    image={image}
     >
       <Paper.Text>
         children
