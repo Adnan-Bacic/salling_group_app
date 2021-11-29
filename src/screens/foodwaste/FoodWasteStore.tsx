@@ -14,11 +14,18 @@ const FoodWasteStore = ({ navigation, route }): React.ReactElement => {
   //console.log(items)
 
   const renderFoodItem = ({ item }) => {
-    console.log('item', item)
+    console.log('item stock', item.offer.stock)
     return(
         <FoodWasteItem
         title={item.product.description}
         image={item.product.image}
+        originalPrice={item.offer.originalPrice}
+        newPrice={item.offer.newPrice}
+        percentDiscount={item.offer.percentDiscount}
+        stock={item.offer.stock}
+        discount={item.offer.discount}
+        currency={item.offer.currency}
+        stockUnit={item.offer.stockUnit}
         ></FoodWasteItem>
     )
   }

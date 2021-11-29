@@ -11,12 +11,15 @@ export interface FoodItemBaseInterface {
 const FoodItemTemplate = ({
   children,
   title,
-  image
+  image,
+  originalPrice,
+  newPrice,
+  percentDiscount,
+  stock,
+  discount,
+  currency,
+  stockUnit
 }: FoodItemBaseInterface): React.ReactElement => {
-  if(image !== null){
-      //console.log('size', Image.getSize(image, (w, h) => console.log(w,h)))
-  }
-
   return (
     <View
       style={styles.container}
@@ -37,8 +40,21 @@ const FoodItemTemplate = ({
         <Image source={{ uri: image }} style={styles.image}></Image>
       )}
       {!image && (
-        <Paper.Text>No image</Paper.Text>
+        <Paper.Headline>No image</Paper.Headline>
       )}
+
+      <Paper.Subheading>Info</Paper.Subheading>
+      <Paper.Text>{`original price: ${originalPrice} ${currency}`}</Paper.Text>
+      <Paper.Text>{`new price: ${newPrice} ${currency}`}</Paper.Text>
+      <Paper.Text>{`percent discount ${percentDiscount}%`}</Paper.Text>
+      <Paper.Text>{`stock: ${stock} ${stockUnit === 'kg' ? 'kg' : 'each'}`}</Paper.Text>
+      <Paper.Text>{`discount ${discount} ${currency}`}</Paper.Text>
+
+
+      <Paper.Caption>caption</Paper.Caption>
+      <Paper.Headline>headline</Paper.Headline>
+      <Paper.Subheading>subheading</Paper.Subheading>
+
 
           {children}
         </Paper.Card.Content>
