@@ -36,15 +36,15 @@ module.exports = {
     'react/require-default-props': [0, 'always'],
     // in rn usually styles are at the bottom of the file
     '@typescript-eslint/no-use-before-define': ['error', { variables: false }],
-    // error when using any kind of styled components where the name isent "Text"
+    // error when using any kind of text components where the name isent "Text"
     'react-native/no-raw-text': [0, 'always'],
 
     // syntax
-    'react/jsx-first-prop-new-line': [2, 'always'],
-    'react/jsx-max-props-per-line': [2, { maximum: 1, when: 'always' }],
-    'react/jsx-one-expression-per-line': [2, { allow: 'none' }],
     'arrow-body-style': [2, 'always'],
     'import/prefer-default-export': 'off',
     'object-shorthand': ['warn', 'never'],
+    'react/jsx-first-prop-new-line': [2, 'always'],
+    'react/jsx-max-props-per-line': [2, { maximum: 1, when: 'always' }],
+    'react/jsx-one-expression-per-line': [2, { allow: 'none' }],
   },
 };

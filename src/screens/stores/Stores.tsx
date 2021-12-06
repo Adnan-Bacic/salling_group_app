@@ -2,12 +2,13 @@ import React, { useEffect, useState, useRef } from 'react';
 import {
   View,
   StyleSheet,
-  ScrollView,
   Linking,
   Alert,
+  ScrollView,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import { uiSelector, storesSelector } from 'src/redux/selectors';
 import * as functions from 'src/redux/functions';
 import { MainTemplate } from 'src/templates';
 import { Spinner, NoResults } from 'src/components';
@@ -20,7 +21,9 @@ interface StoresInterface {
   navigation: any
 }
 
-const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
+const Stores: React.FunctionComponent<StoresInterface> = ({
+  navigation,
+}): React.ReactElement => {
   enum ViewModes {
     filterView = 'filterView',
     storesView = 'storesView',
@@ -74,8 +77,8 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
   const dispatch = useAppDispatch();
 
-  const stores = useAppSelector((state) => { return state.stores; });
-  const ui = useAppSelector((state) => { return state.ui; });
+  const stores = useAppSelector(storesSelector);
+  const ui = useAppSelector(uiSelector);
 
   useEffect(() => {
     const getStores = () => {
@@ -130,7 +133,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
         zip={item.address.zip}
         country={item.address.country}
         attributes={item.attributes}
-        onPress={() => {
+        onPressAction={() => {
           navigation.navigate('Store', {
             name: item.name,
           });
@@ -177,19 +180,28 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
     setWifi(false);
   };
 
-  const scrollRef = useRef();
+  const scrollRef = useRef<any>();
+
+  const scrollToTop = () => {
+    scrollRef.current?.scrollTo({
+      y: 0,
+      animated: true,
+    });
+  };
+
+  const switchViewMode = () => {
+    if (viewMode === ViewModes.storesView) {
+      setViewMode(ViewModes.filterView);
+    } else {
+      setViewMode(ViewModes.storesView);
+    }
+  };
 
   return (
     <MainTemplate>
       <>
         <Paper.Button
-          onPress={() => {
-            if (viewMode === ViewModes.storesView) {
-              setViewMode(ViewModes.filterView);
-            } else {
-              setViewMode(ViewModes.storesView);
-            }
-          }}
+          onPress={switchViewMode}
         >
           {viewMode === ViewModes.storesView ? (
             'Show filters'
@@ -501,15 +513,14 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
               {/* filters */}
             </>
           )}
-
           <View
             style={styles.spacer}
           />
 
           {/*
-            todo: maybe use this and a expandable filter list
           {!ui.isLoading && (
             <FlatList
+            ref={scrollRef}
               data={stores.storesData}
               renderItem={renderStoreItem}
               ListEmptyComponent={NoResults}
@@ -519,7 +530,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 
           {(stores.storesData && !ui.isLoading) && (
             stores.storesData.map((item: any) => {
-              // console.log('id', item.id);
+              console.log('id', item.id);
               return (
                 <StoreItem
                   key={item.id}
@@ -529,9 +540,10 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
                   zip={item.address.zip}
                   country={item.address.country}
                   attributes={item.attributes}
-                  onPress={() => {
+                  onPressAction={() => {
                     navigation.navigate('Store', {
                       name: item.name,
+                      id: item.id,
                     });
                   }}
                   onPressSmileyScheme={async () => {
@@ -562,26 +574,23 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
             </>
           )}
 
-        </ScrollView>
-
-        <Paper.Button
-          onPress={() => {
-            scrollRef.current?.scrollTo({
-              y: 0,
-              animated: true,
-            });
-          }}
-        >
-          scroll to top
-        </Paper.Button>
-
-        {/*
+          {/*
+        <Paper.FAB icon="plus" onPress={switchViewMode} label="test" style={styles.fab}></Paper.FAB>
+      */}
+          {/*
           show regardless of viewMode.
           then we show the spinner even in filterView so users see new data is fetching
           */}
-        {ui.isLoading && (
-        <Spinner />
-        )}
+          {ui.isLoading && (
+          <Spinner />
+          )}
+        </ScrollView>
+
+        <Paper.Button
+          onPress={scrollToTop}
+        >
+          scroll to top
+        </Paper.Button>
       </>
     </MainTemplate>
   );
