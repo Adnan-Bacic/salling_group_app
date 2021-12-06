@@ -16,9 +16,9 @@ interface StoreItemInterface {
   onPressAction: () => void;
   onPressSmileyScheme: () => void;
 }
-const StoreItem = ({
+const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
   name, street, city, zip, country, attributes, onPressAction, onPressSmileyScheme,
-}: StoreItemInterface): React.ReactElement => {
+}): React.ReactElement => {
   return (
     <StoreItemTemplate
       name={name}

@@ -11,9 +11,9 @@ interface FilterCheckBoxItemInterface {
   status: StatusType;
   onPress: () => void;
 }
-const FilterCheckBoxItem = ({
+const FilterCheckBoxItem: React.FunctionComponent<FilterCheckBoxItemInterface> = ({
   title, status, onPress,
-}: FilterCheckBoxItemInterface): React.ReactElement => {
+}): React.ReactElement => {
   return (
     <>
       <View

@@ -12,9 +12,9 @@ interface FilterRadioButtonItemInterface {
   value: string;
   onPress: () => void;
 }
-const FilterRadioButtonItem = ({
+const FilterRadioButtonItem: React.FunctionComponent<FilterRadioButtonItemInterface> = ({
   title, status, value, onPress,
-}: FilterRadioButtonItemInterface): React.ReactElement => {
+}): React.ReactElement => {
   return (
     <>
       <View

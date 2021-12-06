@@ -9,10 +9,10 @@ import { StoreItemBaseInterface } from 'src/components/stores/StoreItemTemplate'
 interface StoreItemInterface extends StoreItemBaseInterface {
   amount: number;
 }
-const StoreItem = ({
+const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
   name, street, city, zip, country, onPressAction,
   amount,
-}: StoreItemInterface): React.ReactElement => {
+}): React.ReactElement => {
   return (
     <StoreItemTemplate
       name={name}

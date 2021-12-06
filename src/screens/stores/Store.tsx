@@ -10,7 +10,9 @@ interface StoreInterface {
     }
   }
 }
-const Store = ({ route }: StoreInterface): React.ReactElement => {
+const Store: React.FunctionComponent<StoreInterface> = ({
+  route,
+}): React.ReactElement => {
   const { name, id } = route.params;
   // console.log(id);
   return (

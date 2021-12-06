@@ -21,7 +21,9 @@ interface StoresInterface {
   navigation: any
 }
 
-const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
+const Stores: React.FunctionComponent<StoresInterface> = ({
+  navigation,
+}): React.ReactElement => {
   enum ViewModes {
     filterView = 'filterView',
     storesView = 'storesView',

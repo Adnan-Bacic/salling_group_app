@@ -5,18 +5,18 @@ import {
 import * as Paper from 'react-native-paper';
 
 export interface FoodItemBaseInterface {
-  children: any;
-  title: any;
-  image: any;
-  originalPrice: any;
-  newPrice: any;
-  percentDiscount: any;
-  stock: any;
-  discount: any;
-  currency: any;
-  stockUnit: any;
+  children: React.ReactElement;
+  title: string;
+  image: string;
+  originalPrice: number;
+  newPrice: number;
+  percentDiscount: number;
+  stock: number;
+  discount: number;
+  currency: string;
+  stockUnit: 'kg' | 'each';
 }
-const FoodItemTemplate = ({
+const FoodItemTemplate: React.FunctionComponent<FoodItemBaseInterface> = ({
   children,
   title,
   image,
@@ -27,7 +27,7 @@ const FoodItemTemplate = ({
   discount,
   currency,
   stockUnit,
-}: FoodItemBaseInterface): React.ReactElement => {
+}): React.ReactElement => {
   return (
     <View
       style={styles.container}

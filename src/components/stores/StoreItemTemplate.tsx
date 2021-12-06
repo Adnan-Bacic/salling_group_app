@@ -5,7 +5,7 @@ import {
 import * as Paper from 'react-native-paper';
 
 export interface StoreItemBaseInterface {
-  children: any;
+  children: React.ReactElement;
   name: string;
   street: string;
   city: string;
@@ -13,9 +13,9 @@ export interface StoreItemBaseInterface {
   country: string;
   onPressAction: () => void;
 }
-const StoreItemTemplate = ({
+const StoreItemTemplate: React.FunctionComponent<StoreItemBaseInterface> = ({
   children, name, street, city, zip, country, onPressAction,
-}: StoreItemBaseInterface): React.ReactElement => {
+}): React.ReactElement => {
   return (
     <View
       style={styles.container}
