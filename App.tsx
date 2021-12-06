@@ -18,7 +18,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import store from './src/redux/store';
 import Navigator from './src/navigation/Navigator';
 
-const App = (): React.ReactElement => {
+const App: React.FunctionComponent = (): React.ReactElement => {
   return (
     <StoreProvider
       store={store}
