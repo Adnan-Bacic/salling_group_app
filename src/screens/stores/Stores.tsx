@@ -530,7 +530,6 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
 
           {(stores.storesData && !ui.isLoading) && (
             stores.storesData.map((item: any) => {
-              console.log('id', item.id);
               return (
                 <StoreItem
                   key={item.id}
