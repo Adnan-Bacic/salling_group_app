@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, StyleSheet, Image
+  View, StyleSheet, Image, Dimensions
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 
@@ -18,16 +18,16 @@ const FoodItemTemplate = ({
   stock,
   discount,
   currency,
-  stockUnit
+  stockUnit,
 }: FoodItemBaseInterface): React.ReactElement => {
   return (
     <View
       style={styles.container}
     >
-              <Paper.Card>
+      <Paper.Card>
         <Paper.Card.Title
           title={title}
-          subtitle={'sub'}
+          subtitle="sub"
         />
         <Paper.Card.Content>
           <Paper.Title>
@@ -36,34 +36,53 @@ const FoodItemTemplate = ({
           <Paper.Paragraph>
             Paper.Card content
           </Paper.Paragraph>
-      {image && (
-        <Image source={{ uri: image }} style={styles.image}></Image>
-      )}
-      {!image && (
-        <Paper.Headline>No image</Paper.Headline>
-      )}
+          {image && (
+          <Image
+            source={{ uri: image }}
+            style={styles.image}
+          />
+          )}
+          {!image && (
+          <Paper.Headline>
+            No image
+          </Paper.Headline>
+          )}
 
-      <Paper.Subheading>Info</Paper.Subheading>
-      <Paper.Text>{`original price: ${originalPrice} ${currency}`}</Paper.Text>
-      <Paper.Text>{`new price: ${newPrice} ${currency}`}</Paper.Text>
-      <Paper.Text>{`percent discount ${percentDiscount}%`}</Paper.Text>
-      <Paper.Text>{`stock: ${stock} ${stockUnit === 'kg' ? 'kg' : 'each'}`}</Paper.Text>
-      <Paper.Text>{`discount ${discount} ${currency}`}</Paper.Text>
+          <Paper.Subheading>
+            Info
+          </Paper.Subheading>
+          <Paper.Text>
+            {`original price: ${originalPrice} ${currency}`}
+          </Paper.Text>
+          <Paper.Text>
+            {`new price: ${newPrice} ${currency}`}
+          </Paper.Text>
+          <Paper.Text>
+            {`percent discount ${percentDiscount}%`}
+          </Paper.Text>
+          <Paper.Text>
+            {`stock: ${stock} ${stockUnit === 'kg' ? 'kg' : 'each'}`}
+          </Paper.Text>
+          <Paper.Text>
+            {`discount ${discount} ${currency}`}
+          </Paper.Text>
 
-
-      <Paper.Caption>caption</Paper.Caption>
-      <Paper.Headline>headline</Paper.Headline>
-      <Paper.Subheading>subheading</Paper.Subheading>
-
+          <Paper.Caption>
+            caption
+          </Paper.Caption>
+          <Paper.Headline>
+            headline
+          </Paper.Headline>
+          <Paper.Subheading>
+            subheading
+          </Paper.Subheading>
 
           {children}
         </Paper.Card.Content>
         <Paper.Card.Actions
           style={styles.actionContainer}
         >
-          <Paper.Button
-           // onPress={}
-          >
+          <Paper.Button>
             see more
           </Paper.Button>
         </Paper.Card.Actions>
@@ -79,10 +98,10 @@ const styles = StyleSheet.create({
   container: {
     marginBottom: 20,
   },
-  image:{
+  image: {
+    height: 300,
     width: '100%',
-    height: 200,
-  }
+  },
 });
 
 export default FoodItemTemplate;

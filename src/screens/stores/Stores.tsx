@@ -178,7 +178,7 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
     setWifi(false);
   };
 
-  const scrollRef = useRef();
+  const scrollRef = useRef<any>();
 
   const scrollToTop = () => {
     scrollRef.current?.scrollTo({
@@ -595,12 +595,6 @@ const Stores = ({ navigation }: StoresInterface): React.ReactElement => {
 };
 
 const styles = StyleSheet.create({
-  fab: {
-    bottom: 0,
-    margin: 16,
-    position: 'absolute',
-    right: 0,
-  },
   filterRowContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',

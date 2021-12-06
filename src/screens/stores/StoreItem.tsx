@@ -72,9 +72,6 @@ const StoreItem = ({
 };
 
 const styles = StyleSheet.create({
-  actionContainer: {
-    alignSelf: 'flex-end',
-  },
   chip: {
     marginBottom: 5,
     marginRight: 5,
@@ -83,9 +80,6 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red',
     flexDirection: 'row',
     flexWrap: 'wrap',
-  },
-  container: {
-    marginBottom: 20,
   },
 });
 

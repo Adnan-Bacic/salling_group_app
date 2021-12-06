@@ -4,14 +4,12 @@ import * as actions from '../actions';
 import { DispatchProps } from '../types';
 
 export const getFoodWasteByZip = (zip) => {
-  console.log(zip);
   return async (dispatch, getState) => {
     dispatch(actions.ui.setLoading(true));
 
     try {
-      console.log(1);
 
-      //todo: validation for zip length
+      // todo: validation for zip length
       const url = `${API_URL}/v1/food-waste/?zip=${zip}`;
 
       const res = await fetch(url, {
@@ -22,7 +20,6 @@ export const getFoodWasteByZip = (zip) => {
       });
 
       const data = await res.json();
-      console.log(data);
 
       if (!res.ok) {
         throw new Error('Could not get stores');

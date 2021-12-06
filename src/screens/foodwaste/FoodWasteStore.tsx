@@ -4,19 +4,19 @@ import {
   View,
   Button,
   FlatList,
-  StyleSheet
+  StyleSheet,
 } from 'react-native';
-import {MainTemplate} from 'src/templates'
+import { MainTemplate } from 'src/templates';
 import FoodWasteItem from './FoodWasteItem';
 
 const FoodWasteStore = ({ navigation, route }): React.ReactElement => {
-  const { items } = route.params
-  //console.log(items)
+  const { items } = route.params;
+  // console.log(items)
 
   const renderFoodItem = ({ item }) => {
-    console.log('item stock', item.offer.stock)
-    return(
-        <FoodWasteItem
+    //console.log('item stock', item.offer.stock);
+    return (
+      <FoodWasteItem
         title={item.product.description}
         image={item.product.image}
         originalPrice={item.offer.originalPrice}
@@ -26,20 +26,20 @@ const FoodWasteStore = ({ navigation, route }): React.ReactElement => {
         discount={item.offer.discount}
         currency={item.offer.currency}
         stockUnit={item.offer.stockUnit}
-        ></FoodWasteItem>
-    )
-  }
+      />
+    );
+  };
   return (
     <MainTemplate>
-    <>
-                    <View
-            style={styles.spacer}
-          />
-      <FlatList
-      data={items}
-      renderItem={renderFoodItem}
-      ></FlatList>
-    </>
+      <>
+        <View
+          style={styles.spacer}
+        />
+        <FlatList
+          data={items}
+          renderItem={renderFoodItem}
+        />
+      </>
     </MainTemplate>
   );
 };

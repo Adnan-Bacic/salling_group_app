@@ -7,24 +7,26 @@ import { FoodItemTemplate } from 'src/components';
 import { FoodItemBaseInterface } from 'src/components/food/FoodItemTemplate';
 
 interface StoreItemInterface extends FoodItemBaseInterface {
-    children: any;
+  children: any;
 }
-const FoodWasteItem = ({ title, image, originalPrice,
+const FoodWasteItem = ({
+  title, image, originalPrice,
   newPrice,
   percentDiscount,
-stock,discount,
-currency, stockUnit }): React.ReactElement => {
+  stock, discount,
+  currency, stockUnit,
+}): React.ReactElement => {
   return (
     <FoodItemTemplate
-    title={title}
-    image={image}
-    newPrice={newPrice}
-    originalPrice={originalPrice}
-    percentDiscount={percentDiscount}
-    stock={stock}
-    discount={discount}
-    currency={currency}
-    stockUnit={stockUnit}
+      title={title}
+      image={image}
+      newPrice={newPrice}
+      originalPrice={originalPrice}
+      percentDiscount={percentDiscount}
+      stock={stock}
+      discount={discount}
+      currency={currency}
+      stockUnit={stockUnit}
     >
       <Paper.Text>
         children

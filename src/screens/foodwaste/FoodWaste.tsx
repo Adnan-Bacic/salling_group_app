@@ -16,18 +16,25 @@ import StoreItem from './StoreItem';
 
 const FoodWaste = ({ navigation }): React.ReactElement => {
   const [zip, setZip] = useState('');
+  const [prevZip, setPrevZip] = useState('');
 
   const dispatch = useAppDispatch();
   const foodWaste = useAppSelector(foodWasteSelector);
-  console.log('fw', foodWaste);
   const ui = useAppSelector(uiSelector);
 
   const getData = async () => {
-    await functions.foodWaste.getFoodWasteByZip(zip);
+    setPrevZip(zip)
+
+    //prevent exessive requests if zip hasent changed
+    if(zip === prevZip){
+      return
+    }
+
+    await dispatch(functions.foodWaste.getFoodWasteByZip(zip));
   };
 
   const renderStoreItem = ({ item }) => {
-    console.log(item.store.id);
+    //console.log(item.store.id);
 
     return (
       <StoreItem
@@ -39,7 +46,7 @@ const FoodWaste = ({ navigation }): React.ReactElement => {
         country={item.store.address.country}
         onPressAction={() => {
           navigation.navigate('FoodWasteStore', {
-            items: item.clearances
+            items: item.clearances,
           });
         }}
         amount={item.clearances.length}
@@ -60,11 +67,10 @@ const FoodWaste = ({ navigation }): React.ReactElement => {
           onChangeText={(text) => { return setZip(text); }}
           mode="outlined"
           keyboardType="number-pad"
+          onSubmitEditing={getData}
         />
         <Paper.Button
-          onPress={async () => {
-            await dispatch(functions.foodWaste.getFoodWasteByZip(zip));
-          }}
+          onPress={getData}
         >
           search
         </Paper.Button>
@@ -117,9 +123,6 @@ const FoodWaste = ({ navigation }): React.ReactElement => {
 };
 
 const styles = StyleSheet.create({
-  actionContainer: {
-    alignSelf: 'flex-end',
-  },
   container: {
     flex: 1,
   },

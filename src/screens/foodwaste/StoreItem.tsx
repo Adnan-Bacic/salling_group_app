@@ -5,7 +5,6 @@ import {
 import * as Paper from 'react-native-paper';
 import { StoreItemTemplate } from 'src/components';
 import { StoreItemBaseInterface } from 'src/components/stores/StoreItemTemplate';
-import * as enums from './enums';
 
 interface StoreItemInterface extends StoreItemBaseInterface {
   amount: number;
