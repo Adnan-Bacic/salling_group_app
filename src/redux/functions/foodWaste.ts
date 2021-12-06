@@ -8,7 +8,6 @@ export const getFoodWasteByZip = (zip) => {
     dispatch(actions.ui.setLoading(true));
 
     try {
-
       // todo: validation for zip length
       const url = `${API_URL}/v1/food-waste/?zip=${zip}`;
 

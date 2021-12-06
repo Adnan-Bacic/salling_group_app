@@ -14,7 +14,7 @@ const FoodWasteStore = ({ navigation, route }): React.ReactElement => {
   // console.log(items)
 
   const renderFoodItem = ({ item }) => {
-    //console.log('item stock', item.offer.stock);
+    // console.log('item stock', item.offer.stock);
     return (
       <FoodWasteItem
         title={item.product.description}

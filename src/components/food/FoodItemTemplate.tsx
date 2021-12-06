@@ -1,12 +1,20 @@
 import React from 'react';
 import {
-  View, StyleSheet, Image, Dimensions
+  View, StyleSheet, Image,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 
 export interface FoodItemBaseInterface {
   children: any;
   title: any;
+  image: any;
+  originalPrice: any;
+  newPrice: any;
+  percentDiscount: any;
+  stock: any;
+  discount: any;
+  currency: any;
+  stockUnit: any;
 }
 const FoodItemTemplate = ({
   children,

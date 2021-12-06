@@ -12,7 +12,7 @@ interface StoreInterface {
 }
 const Store = ({ route }: StoreInterface): React.ReactElement => {
   const { name, id } = route.params;
-  //console.log(id);
+  // console.log(id);
   return (
     <MainTemplate>
       <View

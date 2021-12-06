@@ -23,18 +23,18 @@ const FoodWaste = ({ navigation }): React.ReactElement => {
   const ui = useAppSelector(uiSelector);
 
   const getData = async () => {
-    setPrevZip(zip)
+    setPrevZip(zip);
 
-    //prevent exessive requests if zip hasent changed
-    if(zip === prevZip){
-      return
+    // prevent exessive requests if zip hasent changed
+    if (zip === prevZip) {
+      return;
     }
 
     await dispatch(functions.foodWaste.getFoodWasteByZip(zip));
   };
 
   const renderStoreItem = ({ item }) => {
-    //console.log(item.store.id);
+    // console.log(item.store.id);
 
     return (
       <StoreItem
