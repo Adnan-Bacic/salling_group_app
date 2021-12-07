@@ -2,7 +2,7 @@ import * as actionTypes from '../actionTypes';
 import { DispatchProps } from '../types';
 
 interface DefaultState {
-    relevantProducts: null | any
+  relevantProducts: null | any
 }
 const defaultState: DefaultState = {
   relevantProducts: null,

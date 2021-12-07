@@ -7,5 +7,5 @@ export {
   ui,
   stores,
   foodWaste,
-  suggestions
+  suggestions,
 };

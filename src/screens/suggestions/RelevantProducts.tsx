@@ -3,6 +3,8 @@ import {
   Text,
   View,
   FlatList,
+  Linking,
+  Alert,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -10,13 +12,15 @@ import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
 import { suggestionsSelector, uiSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
+import { Image } from 'react-native-paper/lib/typescript/components/Avatar/Avatar';
+import ProductSuggestionItem from './ProductSuggestionItem';
 
 interface RelevantProductsProps {
-    navigation: any;
+  navigation: any;
 }
 
 const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
-    navigation
+  navigation,
 }): React.ReactElement => {
   const [query, setQuery] = useState('');
   const [prevQuery, setPrevQuery] = useState('');
@@ -37,34 +41,37 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
   };
 
   const renderStoreItem = ({ item }) => {
-     console.log(item);
-      /*
-      <StoreItem
-        key={item.store.id}
-        name={item.store.name}
-        street={item.store.address.street}
-        city={item.store.address.city}
-        zip={item.store.address.zip}
-        country={item.store.address.country}
-        onPressAction={() => {
-          navigation.navigate('FoodWasteStore', {
-            items: item.clearances,
-          });
-        }}
-        amount={item.clearances.length}
-      />
-      */
-
+    console.log(item);
     return (
-      <Text>123</Text>
+      <ProductSuggestionItem
+        key={item.id}
+        title={item.title}
+        image={item.img}
+        price={item.price}
+        link={item.link}
+        onPressLink={async () => {
+          const url = item.link;
 
+          try {
+            const res = await Linking.canOpenURL(url);
+
+            if (!res) {
+              throw new Error(`Cannot open link. If you wish to manually look up the item: ${url}`);
+            }
+
+            await Linking.openURL(url);
+          } catch (err: any) {
+            Alert.alert(err.name, err.message);
+          }
+        }}
+      />
     );
   };
 
   return (
     <MainTemplate>
       <>
-      <Paper.Title>
+        <Paper.Title>
           Search product
         </Paper.Title>
         <Paper.TextInput
@@ -88,7 +95,7 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
         />
         )}
 
-{ui.isLoading && (
+        {ui.isLoading && (
         <Spinner />
         )}
       </>

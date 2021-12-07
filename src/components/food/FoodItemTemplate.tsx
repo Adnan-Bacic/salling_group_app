@@ -1,8 +1,10 @@
 import React from 'react';
 import {
-  View, StyleSheet, Image,
+  View, StyleSheet, Image, Dimensions,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
+
+const { width, height } = Dimensions.get('window');
 
 export interface FoodItemBaseInterface {
   children: React.ReactElement;
@@ -20,13 +22,6 @@ const FoodItemTemplate: React.FunctionComponent<FoodItemBaseInterface> = ({
   children,
   title,
   image,
-  originalPrice,
-  newPrice,
-  percentDiscount,
-  stock,
-  discount,
-  currency,
-  stockUnit,
 }): React.ReactElement => {
   return (
     <View
@@ -45,35 +40,20 @@ const FoodItemTemplate: React.FunctionComponent<FoodItemBaseInterface> = ({
             Paper.Card content
           </Paper.Paragraph>
           {image && (
-          <Image
-            source={{ uri: image }}
-            style={styles.image}
-          />
+          <View
+            style={styles.imageContainer}
+          >
+            <Image
+              source={{ uri: image }}
+              style={styles.image}
+            />
+          </View>
           )}
           {!image && (
           <Paper.Headline>
             No image
           </Paper.Headline>
           )}
-
-          <Paper.Subheading>
-            Info
-          </Paper.Subheading>
-          <Paper.Text>
-            {`original price: ${originalPrice} ${currency}`}
-          </Paper.Text>
-          <Paper.Text>
-            {`new price: ${newPrice} ${currency}`}
-          </Paper.Text>
-          <Paper.Text>
-            {`percent discount ${percentDiscount}%`}
-          </Paper.Text>
-          <Paper.Text>
-            {`stock: ${stock} ${stockUnit === 'kg' ? 'kg' : 'each'}`}
-          </Paper.Text>
-          <Paper.Text>
-            {`discount ${discount} ${currency}`}
-          </Paper.Text>
 
           <Paper.Caption>
             caption
@@ -109,6 +89,10 @@ const styles = StyleSheet.create({
   image: {
     height: 300,
     width: '100%',
+  },
+  imageContainer: {
+    backgroundColor: 'red',
+    flex: 1,
   },
 });
 

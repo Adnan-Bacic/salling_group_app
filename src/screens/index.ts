@@ -6,9 +6,8 @@ import Store from './stores/Store';
 import FoodWaste from './foodwaste/FoodWaste';
 import FoodWasteStore from './foodwaste/FoodWasteStore';
 
-//suggestions
+// suggestions
 import RelevantProducts from './suggestions/RelevantProducts';
-
 
 export {
   Stores, Store,
