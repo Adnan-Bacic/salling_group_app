@@ -539,7 +539,8 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
                   zip={item.address.zip}
                   country={item.address.country}
                   attributes={item.attributes}
-                  onPressAction={() => {
+                  actionButton1Text="see more"
+                  actionButton1OnPress={() => {
                     navigation.navigate('Store', {
                       name: item.name,
                       id: item.id,

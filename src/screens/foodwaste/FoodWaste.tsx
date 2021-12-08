@@ -44,12 +44,13 @@ const FoodWaste = ({ navigation }): React.ReactElement => {
         city={item.store.address.city}
         zip={item.store.address.zip}
         country={item.store.address.country}
-        onPressAction={() => {
+        amount={item.clearances.length}
+        actionButton1Text="food waste"
+        actionButton1OnPress={() => {
           navigation.navigate('FoodWasteStore', {
             items: item.clearances,
           });
         }}
-        amount={item.clearances.length}
       />
     );
   };

@@ -11,11 +11,22 @@ export interface StoreItemBaseInterface {
   city: string;
   zip: string;
   country: string;
-  onPressAction: () => void;
+  actionButton1OnPress: () => void;
+  actionButton1Text: string;
 }
 const StoreItemTemplate: React.FunctionComponent<StoreItemBaseInterface> = ({
-  children, name, street, city, zip, country, onPressAction,
+  children, name, street, city, zip, country,
+  actionButton1OnPress, actionButton1Text,
 }): React.ReactElement => {
+  const ActionButton = ({ children, onPress }) => {
+    return (
+      <Paper.Button
+        onPress={onPress}
+      >
+        {children}
+      </Paper.Button>
+    );
+  };
   return (
     <View
       style={styles.container}
@@ -38,11 +49,13 @@ const StoreItemTemplate: React.FunctionComponent<StoreItemBaseInterface> = ({
         <Paper.Card.Actions
           style={styles.actionContainer}
         >
-          <Paper.Button
-            onPress={onPressAction}
+          {actionButton1Text && (
+          <ActionButton
+            onPress={actionButton1OnPress}
           >
-            see more
-          </Paper.Button>
+            {actionButton1Text}
+          </ActionButton>
+          )}
         </Paper.Card.Actions>
       </Paper.Card>
     </View>

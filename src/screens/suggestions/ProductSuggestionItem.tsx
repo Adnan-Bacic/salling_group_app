@@ -10,6 +10,7 @@ interface ProductSuggestionItemInterface extends FoodItemBaseInterface {
   children: React.ReactElement;
   price: number;
   link: string;
+  description: string;
   onPressLink: () => void;
 }
 const ProductSuggestionItem: React.FunctionComponent<ProductSuggestionItemInterface> = ({
@@ -28,7 +29,7 @@ const ProductSuggestionItem: React.FunctionComponent<ProductSuggestionItemInterf
         children
       </Paper.Text>
       <Paper.Text>
-        {price}
+        {`price: ${price}`}
       </Paper.Text>
       <Paper.Text
         onPress={onPressLink}

@@ -10,13 +10,6 @@ export interface FoodItemBaseInterface {
   children: React.ReactElement;
   title: string;
   image: string;
-  originalPrice: number;
-  newPrice: number;
-  percentDiscount: number;
-  stock: number;
-  discount: number;
-  currency: string;
-  stockUnit: 'kg' | 'each';
 }
 const FoodItemTemplate: React.FunctionComponent<FoodItemBaseInterface> = ({
   children,

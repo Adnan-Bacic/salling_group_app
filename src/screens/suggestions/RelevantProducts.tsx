@@ -45,7 +45,7 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
     return (
       <ProductSuggestionItem
         key={item.id}
-        title={item.title}
+        title={item.description}
         image={item.img}
         price={item.price}
         link={item.link}

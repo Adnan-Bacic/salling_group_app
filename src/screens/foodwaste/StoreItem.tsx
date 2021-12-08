@@ -10,8 +10,8 @@ interface StoreItemInterface extends StoreItemBaseInterface {
   amount: number;
 }
 const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
-  name, street, city, zip, country, onPressAction,
-  amount,
+  name, street, city, zip, country, amount,
+  actionButton1OnPress, actionButton1Text,
 }): React.ReactElement => {
   return (
     <StoreItemTemplate
@@ -20,7 +20,8 @@ const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
       city={city}
       zip={zip}
       country={country}
-      onPressAction={onPressAction}
+      actionButton1Text={actionButton1Text}
+      actionButton1OnPress={actionButton1OnPress}
     >
       <Paper.Text>
         children
