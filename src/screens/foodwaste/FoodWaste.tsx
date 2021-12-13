@@ -37,7 +37,7 @@ const FoodWaste: React.FunctionComponent<FoodWasteInterface> = ({
     await dispatch(functions.foodWaste.getFoodWasteByZip(zip));
   };
 
-  const renderStoreItem = ({ item }) => {
+  const renderStoreItem = ({ item }: any) => {
     // console.log(item.store.id);
 
     return (
@@ -55,7 +55,9 @@ const FoodWaste: React.FunctionComponent<FoodWasteInterface> = ({
             items: item.clearances,
           });
         }}
-      />
+      >
+        children
+      </StoreItem>
     );
   };
   return (

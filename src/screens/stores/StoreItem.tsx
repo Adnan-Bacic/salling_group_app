@@ -28,7 +28,7 @@ const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
       <View
         style={styles.chipContainer}
       >
-        {Object.entries(attributes).map((item) => {
+        {Object.entries(attributes).map((item: any) => {
           const isParkingRestrictionsAttribute = item[0] === 'parkingRestrictions';
 
           let attribute;

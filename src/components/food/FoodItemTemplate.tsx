@@ -5,7 +5,7 @@ import {
 import * as Paper from 'react-native-paper';
 
 export interface FoodItemBaseInterface {
-  children: React.ReactElement;
+  children: any;
   title: string;
   image: string;
 }

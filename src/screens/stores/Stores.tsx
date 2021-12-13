@@ -561,7 +561,9 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
                       Alert.alert(err.name, err.message);
                     }
                   }}
-                />
+                >
+                  children
+                </StoreItem>
               );
             })
           )}

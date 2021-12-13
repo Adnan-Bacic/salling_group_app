@@ -7,7 +7,7 @@ import { FoodItemTemplate } from 'src/components';
 import { FoodItemBaseInterface } from 'src/components/food/FoodItemTemplate';
 
 interface FoodWasteItemInterface extends FoodItemBaseInterface {
-  children: React.ReactElement;
+  children: any;
   originalPrice: number;
   newPrice: number;
   percentDiscount: number

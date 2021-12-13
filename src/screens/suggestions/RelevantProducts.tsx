@@ -37,7 +37,7 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
     await dispatch(functions.suggestions.getRelevantProducts(query));
   };
 
-  const renderStoreItem = ({ item }) => {
+  const renderStoreItem = ({ item }: any) => {
     console.log(item);
     return (
       <ProductSuggestionItem
@@ -61,7 +61,9 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
             Alert.alert(err.name, err.message);
           }
         }}
-      />
+      >
+        children
+      </ProductSuggestionItem>
     );
   };
 

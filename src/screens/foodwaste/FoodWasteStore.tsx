@@ -21,7 +21,7 @@ const FoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
   const { items } = route.params;
   // console.log(items)
 
-  const renderFoodItem = ({ item }) => {
+  const renderFoodItem = ({ item }: any) => {
     // console.log('item stock', item.offer.stock);
     return (
       <FoodWasteItem
@@ -34,7 +34,9 @@ const FoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
         discount={item.offer.discount}
         currency={item.offer.currency}
         stockUnit={item.offer.stockUnit}
-      />
+      >
+        children
+      </FoodWasteItem>
     );
   };
   return (
