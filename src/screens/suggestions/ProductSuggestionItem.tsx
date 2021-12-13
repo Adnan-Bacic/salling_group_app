@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, StyleSheet,
+  StyleSheet,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { FoodItemTemplate } from 'src/components';

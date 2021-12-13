@@ -18,15 +18,22 @@ const StoreItemTemplate: React.FunctionComponent<StoreItemBaseInterface> = ({
   children, name, street, city, zip, country,
   actionButton1OnPress, actionButton1Text,
 }): React.ReactElement => {
-  const ActionButton = ({ children, onPress }) => {
+  interface ActionButtonInterface {
+    children1: React.ReactElement;
+    onPress1: () => void;
+  }
+  const ActionButton: React.FunctionComponent<ActionButtonInterface> = ({
+    children1, onPress1,
+  }): React.ReactElement => {
     return (
       <Paper.Button
-        onPress={onPress}
+        onPress={onPress1}
       >
-        {children}
+        {children1}
       </Paper.Button>
     );
   };
+
   return (
     <View
       style={styles.container}

@@ -1,15 +1,23 @@
 import React from 'react';
 import {
-  Text,
   View,
-  Button,
   FlatList,
   StyleSheet,
 } from 'react-native';
 import { MainTemplate } from 'src/templates';
 import FoodWasteItem from './FoodWasteItem';
 
-const FoodWasteStore = ({ navigation, route }): React.ReactElement => {
+interface FoodWasteInterface {
+  navigation: any;
+  route: {
+    params: {
+      items: any;
+    }
+  }
+}
+const FoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
+  navigation, route,
+}): React.ReactElement => {
   const { items } = route.params;
   // console.log(items)
 

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import {
-  Text,
-  View,
   FlatList,
   Linking,
   Alert,
@@ -12,7 +10,6 @@ import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
 import { suggestionsSelector, uiSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
-import { Image } from 'react-native-paper/lib/typescript/components/Avatar/Avatar';
 import ProductSuggestionItem from './ProductSuggestionItem';
 
 interface RelevantProductsProps {

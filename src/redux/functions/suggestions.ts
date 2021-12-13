@@ -1,10 +1,8 @@
 import { API_URL, API_TOKEN } from 'react-native-dotenv';
-import { Alert } from 'react-native';
 import * as actions from '../actions';
-import { DispatchProps } from '../types';
 
-export const getRelevantProducts = (query) => {
-  return async (dispatch, getState) => {
+export const getRelevantProducts = (query: any) => {
+  return async (dispatch: any) => {
     dispatch(actions.ui.setLoading(true));
 
     try {

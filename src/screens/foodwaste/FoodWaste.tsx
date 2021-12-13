@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import {
-  Text,
   View,
-  Button,
   FlatList,
   StyleSheet,
 } from 'react-native';
@@ -14,7 +12,13 @@ import { foodWasteSelector, uiSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
 import StoreItem from './StoreItem';
 
-const FoodWaste = ({ navigation }): React.ReactElement => {
+interface FoodWasteInterface {
+  navigation: any;
+}
+
+const FoodWaste: React.FunctionComponent<FoodWasteInterface> = ({
+  navigation,
+}): React.ReactElement => {
   const [zip, setZip] = useState('');
   const [prevZip, setPrevZip] = useState('');
 

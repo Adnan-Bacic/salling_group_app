@@ -1,10 +1,8 @@
 import React from 'react';
 import {
-  View, StyleSheet, Image, Dimensions,
+  View, StyleSheet, Image,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
-
-const { width, height } = Dimensions.get('window');
 
 export interface FoodItemBaseInterface {
   children: React.ReactElement;

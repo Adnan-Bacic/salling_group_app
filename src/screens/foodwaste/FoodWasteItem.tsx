@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  View, StyleSheet,
+  StyleSheet,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { FoodItemTemplate } from 'src/components';
@@ -8,6 +8,13 @@ import { FoodItemBaseInterface } from 'src/components/food/FoodItemTemplate';
 
 interface FoodWasteItemInterface extends FoodItemBaseInterface {
   children: React.ReactElement;
+  originalPrice: number;
+  newPrice: number;
+  percentDiscount: number
+  stock: number;
+  discount: number;
+  currency: string;
+  stockUnit: 'kg' | 'each';
 }
 const FoodWasteItem: React.FunctionComponent<FoodWasteItemInterface> = ({
   title,

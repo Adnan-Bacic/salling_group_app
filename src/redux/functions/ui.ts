@@ -1,8 +1,7 @@
 import * as actions from '../actions';
-import { DispatchProps } from '../types';
 
 export const setLoading = (isLoading: boolean) => {
-  return (dispatch: (p: DispatchProps<boolean>) => void): void => {
+  return (dispatch: any): void => {
     dispatch(actions.ui.setLoading(isLoading));
   };
 };

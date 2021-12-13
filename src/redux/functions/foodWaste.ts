@@ -1,10 +1,9 @@
 import { API_URL, API_TOKEN } from 'react-native-dotenv';
 import { Alert } from 'react-native';
 import * as actions from '../actions';
-import { DispatchProps } from '../types';
 
-export const getFoodWasteByZip = (zip) => {
-  return async (dispatch, getState) => {
+export const getFoodWasteByZip = (zip: string) => {
+  return async (dispatch: any) => {
     dispatch(actions.ui.setLoading(true));
 
     try {
