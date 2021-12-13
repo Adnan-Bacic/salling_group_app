@@ -1,4 +1,4 @@
-import { API_URL, API_TOKEN } from 'react-native-dotenv';
+import { API_URL, API_TOKEN } from '@env';
 import { Alert } from 'react-native';
 import * as actions from '../actions';
 

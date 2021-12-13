@@ -3,7 +3,7 @@ module.exports = {
   plugins: [
     [
       'module:react-native-dotenv', {
-        moduleName: 'react-native-dotenv',
+        moduleName: '@env',
       },
     ],
     // https://reactnative.dev/docs/typescript#using-custom-path-aliases-with-typescript
