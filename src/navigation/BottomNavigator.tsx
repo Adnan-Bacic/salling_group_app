@@ -29,10 +29,6 @@ const BottomNavigator: React.FunctionComponent = (): React.ReactElement => {
       }}
     >
       <Tab.Screen
-        name="SuggestionsNavigator"
-        component={SuggestionsNavigator}
-      />
-      <Tab.Screen
         name="StoresNavigator"
         component={StoresNavigator}
       />
@@ -40,7 +36,10 @@ const BottomNavigator: React.FunctionComponent = (): React.ReactElement => {
         name="FoodWasteNavigator"
         component={FoodWasteNavigator}
       />
-
+      <Tab.Screen
+        name="SuggestionsNavigator"
+        component={SuggestionsNavigator}
+      />
     </Tab.Navigator>
   );
 };
