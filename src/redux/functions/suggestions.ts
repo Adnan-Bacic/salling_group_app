@@ -1,4 +1,4 @@
-import { API_URL, API_TOKEN } from 'react-native-dotenv';
+import { API_URL, API_TOKEN } from '@env';
 import * as actions from '../actions';
 
 export const getRelevantProducts = (query: any) => {
