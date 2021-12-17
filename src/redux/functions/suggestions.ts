@@ -18,6 +18,15 @@ export const getRelevantProducts = (query: any) => {
 
       const data = await res.json();
 
+      /*
+      if the search query doesnt return any items, the server throws a 500 error
+      so dispatch empty array to show we have no results
+      */
+      if (!data.suggestions) {
+        dispatch(actions.suggestions.getRelevantProducts([]));
+        throw new Error('Invalid search');
+      }
+
       if (!res.ok) {
         throw new Error('Could not get products');
       }

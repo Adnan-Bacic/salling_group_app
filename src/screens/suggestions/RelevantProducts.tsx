@@ -38,7 +38,7 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
   };
 
   const renderStoreItem = ({ item }: any) => {
-    console.log(item);
+    // console.log(item);
     return (
       <ProductSuggestionItem
         key={item.id}
