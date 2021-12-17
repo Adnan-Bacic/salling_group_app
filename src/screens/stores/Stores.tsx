@@ -4,7 +4,7 @@ import {
   StyleSheet,
   Linking,
   Alert,
-  ScrollView,
+  ScrollView, FlatList, UIManager, Platform, LayoutAnimation
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -29,6 +29,13 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     storesView = 'storesView',
   }
   const [viewMode, setViewMode] = useState<ViewModes>(ViewModes.storesView);
+
+  if (
+    Platform.OS === "android" &&
+    UIManager.setLayoutAnimationEnabledExperimental
+  ) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
 
   // OPTIONS FOR SEARCH
   // filters
@@ -121,43 +128,44 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     street, swipBox, wc, wifi, zip,
   ]);
 
-  /*
+  
   const renderStoreItem = ({ item }: FlatListItemProps) => {
     // TODO: handle br - not a food chain
     return (
       <StoreItem
-        key={item.id}
-        name={item.name}
-        street={item.address.street}
-        city={item.address.city}
-        zip={item.address.zip}
-        country={item.address.country}
-        attributes={item.attributes}
-        onPressAction={() => {
-          navigation.navigate('Store', {
-            name: item.name,
-          });
-        }}
-        onPressSmileyScheme={async () => {
-          const url = `https://www.findsmiley.dk/${item.attributes.smileyscheme}`;
+      key={item.id}
+      name={item.name}
+      street={item.address.street}
+      city={item.address.city}
+      zip={item.address.zip}
+      country={item.address.country}
+      attributes={item.attributes}
+      actionButton1Text="see more"
+      actionButton1OnPress={() => {
+        navigation.navigate('Store', {
+          name: item.name,
+          id: item.id,
+        });
+      }}
+      onPressSmileyScheme={async () => {
+        const url = `https://www.findsmiley.dk/${item.attributes.smileyscheme}`;
 
-          try {
-            const res = await Linking.canOpenURL(url);
+        try {
+          const res = await Linking.canOpenURL(url);
 
-            if (!res) {
-              throw new Error(`Cannot open URL.
-              If you wish to manually look up the smiley scheme: ${url}`);
-            }
-
-            await Linking.openURL(url);
-          } catch (err: any) {
-            Alert.alert(err.name, err.message);
+          if (!res) {
+            throw new Error(`Cannot open link. If you wish to manually look up the smiley scheme: ${url}`);
           }
-        }}
+
+          await Linking.openURL(url);
+        } catch (err: any) {
+          Alert.alert(err.name, err.message);
+        }
+      }}
       />
     );
   };
-  */
+  
 
   const setAllAttributsFalse = () => {
     setBabyChanging(false);
@@ -183,13 +191,20 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   const scrollRef = useRef<any>();
 
   const scrollToTop = () => {
+    /*
     scrollRef.current?.scrollTo({
       y: 0,
       animated: true,
     });
+    */
+
+    scrollRef.current.scrollToOffset({ animated: true, offset: 0 })
+
   };
 
   const switchViewMode = () => {
+    LayoutAnimation.easeInEaseOut()
+
     if (viewMode === ViewModes.storesView) {
       setViewMode(ViewModes.filterView);
     } else {
@@ -197,23 +212,14 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     }
   };
 
-  return (
-    <MainTemplate>
-      <>
-        <Paper.Button
-          onPress={switchViewMode}
-        >
-          {viewMode === ViewModes.storesView ? (
-            'Show filters'
-          ) : (
-            'Hide filters'
-          )}
-        </Paper.Button>
-        <ScrollView
-          ref={scrollRef}
-        >
-          {viewMode === ViewModes.filterView && (
-            <>
+  const Header = () => {
+    //return nothing if user isent toggling to show filters
+    if(viewMode !== ViewModes.filterView){
+      return null
+    }
+
+    return(
+      <View>
               <Paper.Title>
                 Add filters for more precise content
               </Paper.Title>
@@ -511,70 +517,38 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
                 reset filters
               </Paper.Button>
               {/* filters */}
-            </>
+              </View>
+    )
+  }
+
+  return (
+    <MainTemplate>
+      <>
+        <Paper.Button
+          onPress={switchViewMode}
+        >
+          {viewMode === ViewModes.storesView ? (
+            'Show filters'
+          ) : (
+            'Hide filters'
           )}
+        </Paper.Button>
+      
           <View
             style={styles.spacer}
           />
 
-          {/*
+          
           {!ui.isLoading && (
             <FlatList
             ref={scrollRef}
               data={stores.storesData}
               renderItem={renderStoreItem}
               ListEmptyComponent={NoResults}
+              ListHeaderComponent={Header}
             />
           )}
-          */}
-
-          {(stores.storesData && !ui.isLoading) && (
-            stores.storesData.map((item: any) => {
-              return (
-                <StoreItem
-                  key={item.id}
-                  name={item.name}
-                  street={item.address.street}
-                  city={item.address.city}
-                  zip={item.address.zip}
-                  country={item.address.country}
-                  attributes={item.attributes}
-                  actionButton1Text="see more"
-                  actionButton1OnPress={() => {
-                    navigation.navigate('Store', {
-                      name: item.name,
-                      id: item.id,
-                    });
-                  }}
-                  onPressSmileyScheme={async () => {
-                    const url = `https://www.findsmiley.dk/${item.attributes.smileyscheme}`;
-
-                    try {
-                      const res = await Linking.canOpenURL(url);
-
-                      if (!res) {
-                        throw new Error(`Cannot open link. If you wish to manually look up the smiley scheme: ${url}`);
-                      }
-
-                      await Linking.openURL(url);
-                    } catch (err: any) {
-                      Alert.alert(err.name, err.message);
-                    }
-                  }}
-                >
-                  children
-                </StoreItem>
-              );
-            })
-          )}
-
-          {(stores.storesData && !ui.isLoading) && (
-            <>
-              {(stores.storesData.length === 0) && (
-              <NoResults />
-              )}
-            </>
-          )}
+          
 
           {/*
         <Paper.FAB icon="plus" onPress={switchViewMode} label="test" style={styles.fab}></Paper.FAB>
@@ -586,7 +560,6 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           {ui.isLoading && (
           <Spinner />
           )}
-        </ScrollView>
 
         <Paper.Button
           onPress={scrollToTop}
