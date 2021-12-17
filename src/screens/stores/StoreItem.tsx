@@ -4,20 +4,16 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { StoreItemTemplate } from 'src/components';
+import { StoreItemBaseInterface } from 'src/components/stores/StoreItemTemplate';
 import * as enums from './enums';
 
-interface StoreItemInterface {
-  name: string;
-  street: string;
-  city: string;
-  zip: string;
-  country: string;
-  attributes: Record<string, unknown>
-  onPressAction: () => void;
+interface StoreItemInterface extends StoreItemBaseInterface {
+  attributes: Record<string, unknown>;
   onPressSmileyScheme: () => void;
 }
 const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
-  name, street, city, zip, country, attributes, onPressAction, onPressSmileyScheme,
+  name, street, city, zip, country, attributes, onPressSmileyScheme,
+  actionButton1OnPress, actionButton1Text,
 }): React.ReactElement => {
   return (
     <StoreItemTemplate
@@ -26,12 +22,13 @@ const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
       city={city}
       zip={zip}
       country={country}
-      onPressAction={onPressAction}
+      actionButton1OnPress={actionButton1OnPress}
+      actionButton1Text={actionButton1Text}
     >
       <View
         style={styles.chipContainer}
       >
-        {Object.entries(attributes).map((item) => {
+        {Object.entries(attributes).map((item: any) => {
           const isParkingRestrictionsAttribute = item[0] === 'parkingRestrictions';
 
           let attribute;

@@ -1,7 +1,6 @@
 import { API_URL, API_TOKEN } from '@env';
 import { Alert } from 'react-native';
 import * as actions from '../actions';
-import { DispatchProps } from '../types';
 
 interface Options {
   // filters
@@ -32,7 +31,7 @@ interface Options {
   wifi?: null | boolean;
 }
 export const getStores = (options: Options) => {
-  return async (dispatch: (p: DispatchProps<any>) => void): Promise<void> => {
+  return async (dispatch: any): Promise<void> => {
     dispatch(actions.ui.setLoading(true));
 
     try {

@@ -4,7 +4,7 @@ import * as Screens from '../screens';
 
 const FoodWasteStack = createNativeStackNavigator();
 
-const FoodWasteNavigator = (): React.ReactElement => {
+const FoodWasteNavigator: React.FunctionComponent = (): React.ReactElement => {
   return (
     <FoodWasteStack.Navigator>
       <FoodWasteStack.Screen

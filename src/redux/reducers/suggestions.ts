@@ -1,18 +1,18 @@
 import * as actionTypes from '../actionTypes';
 
 interface DefaultState {
-  foodItems: null | any
+  relevantProducts: null | any
 }
 const defaultState: DefaultState = {
-  foodItems: null,
+  relevantProducts: null,
 };
 
-export const foodWasteReducer = (state = defaultState, action: any): any => {
+export const suggestionsReducer = (state = defaultState, action: any): any => {
   switch (action.type) {
-    case actionTypes.GET_FOOD_WASTE_ZIP:
+    case actionTypes.GET_RELEVANT_PRODUCTS:
       return {
         ...state,
-        foodItems: action.payload,
+        relevantProducts: action.payload,
       };
 
     default:

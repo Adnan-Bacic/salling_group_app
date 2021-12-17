@@ -6,6 +6,7 @@ const appReducer = combineReducers({
   ui: reducers.uiReducer,
   stores: reducers.storesReducer,
   foodWaste: reducers.foodWasteReducer,
+  suggestions: reducers.suggestionsReducer,
 });
 
 // redux co-creator recommends doing this to clear redux state

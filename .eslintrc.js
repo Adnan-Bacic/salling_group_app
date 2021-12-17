@@ -46,5 +46,9 @@ module.exports = {
     'react/jsx-first-prop-new-line': [2, 'always'],
     'react/jsx-max-props-per-line': [2, { maximum: 1, when: 'always' }],
     'react/jsx-one-expression-per-line': [2, { allow: 'none' }],
+
+    // for easier finding other linter errors
+    '@typescript-eslint/no-explicit-any': [0, 'always'],
+    '@typescript-eslint/explicit-module-boundary-types': [0, 'always'],
   },
 };

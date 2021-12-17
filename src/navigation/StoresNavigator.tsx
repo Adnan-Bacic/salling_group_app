@@ -4,7 +4,7 @@ import * as Screens from '../screens';
 
 const StoresStack = createNativeStackNavigator();
 
-const StoresNavigator = (): React.ReactElement => {
+const StoresNavigator: React.FunctionComponent = (): React.ReactElement => {
   return (
     <StoresStack.Navigator>
       <StoresStack.Screen

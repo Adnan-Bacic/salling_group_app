@@ -530,7 +530,6 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
 
           {(stores.storesData && !ui.isLoading) && (
             stores.storesData.map((item: any) => {
-              console.log('id', item.id);
               return (
                 <StoreItem
                   key={item.id}
@@ -540,7 +539,8 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
                   zip={item.address.zip}
                   country={item.address.country}
                   attributes={item.attributes}
-                  onPressAction={() => {
+                  actionButton1Text="see more"
+                  actionButton1OnPress={() => {
                     navigation.navigate('Store', {
                       name: item.name,
                       id: item.id,
@@ -561,7 +561,9 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
                       Alert.alert(err.name, err.message);
                     }
                   }}
-                />
+                >
+                  children
+                </StoreItem>
               );
             })
           )}
