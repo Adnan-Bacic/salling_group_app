@@ -1,16 +1,16 @@
 import { API_URL, API_TOKEN } from '@env';
 import { Alert } from 'react-native';
+import { requests } from 'src/helpers';
 import * as actions from '../actions';
 
 export const getFoodWasteByZip = (zip: string) => {
   return async (dispatch: any) => {
-    dispatch(actions.ui.setLoading(true));
-
     try {
-      // todo: validation for zip length
+      dispatch(actions.ui.setLoading(true));
+
       const url = `${API_URL}/v1/food-waste/?zip=${zip}`;
 
-      const res = await fetch(url, {
+      const res: any = await fetch(url, {
         method: 'GET',
         headers: {
           Authorization: `Bearer ${API_TOKEN}`,
@@ -20,13 +20,20 @@ export const getFoodWasteByZip = (zip: string) => {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error('Could not get stores');
+        if (res.status === 429) {
+          const d = requests.requestBlockDuration(res.headers.map['retry-after']);
+
+          throw new Error(`Too many requests in a short amount of time. Wait ${d.getMinutes()} minutes and try again`);
+        }
+
+        throw new Error('Could not get food data');
       }
 
       dispatch(actions.foodWaste.getFoodWasteByZip(data));
-    } catch (err) {
-      console.log(err);
+    } catch (err: any) {
+      Alert.alert(err.name, err.message);
+    } finally {
+      dispatch(actions.ui.setLoading(false));
     }
-    dispatch(actions.ui.setLoading(false));
   };
 };
