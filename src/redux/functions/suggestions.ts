@@ -21,10 +21,8 @@ export const getRelevantProducts = (query: any) => {
           Authorization: `Bearer ${API_TOKEN}`,
         },
       });
-      console.log('res', res);
 
       const data = await res.json();
-      console.log('data', data);
 
       if (!res.ok) {
         if (res.status === 429) {
