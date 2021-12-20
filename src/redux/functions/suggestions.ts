@@ -27,9 +27,6 @@ export const getRelevantProducts = (query: any) => {
       console.log('data', data);
 
       if (!res.ok) {
-        // see #1
-        dispatch(actions.suggestions.getRelevantProducts([]));
-
         if (res.status === 429) {
           const d = requests.requestBlockDuration(res.headers.map['retry-after']);
 
@@ -37,12 +34,11 @@ export const getRelevantProducts = (query: any) => {
         }
 
         // see #1 - not an error that there are no search results, so we dont want to alert
-        //todo: handle quota limit error, should be shown. mail sent asking
-        //throw new Error('Could not get products');
+        // todo: handle quota limit error, should be shown. mail sent asking
+        // throw new Error('Could not get products');
       }
 
       if (!data.suggestions) {
-        // see #1
         dispatch(actions.suggestions.getRelevantProducts([]));
         return;
       }
