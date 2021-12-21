@@ -32,21 +32,21 @@ const BottomNavigator: React.FunctionComponent = (): React.ReactElement => {
         name="StoresNavigator"
         component={StoresNavigator}
         options={{
-          tabBarLabel: 'Stores'
+          tabBarLabel: 'Stores',
         }}
       />
       <Tab.Screen
         name="AntiFoodWasteNavigator"
         component={AntiFoodWasteNavigator}
         options={{
-          tabBarLabel: 'Anti Food Waste',  
+          tabBarLabel: 'Anti Food Waste',
         }}
       />
       <Tab.Screen
         name="SuggestionsNavigator"
         component={SuggestionsNavigator}
         options={{
-          tabBarLabel: 'Suggestions'
+          tabBarLabel: 'Suggestions',
         }}
       />
     </Tab.Navigator>
