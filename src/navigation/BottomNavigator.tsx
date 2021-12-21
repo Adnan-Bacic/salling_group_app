@@ -29,6 +29,10 @@ const BottomNavigator: React.FunctionComponent = (): React.ReactElement => {
       }}
     >
       <Tab.Screen
+        name="SuggestionsNavigator"
+        component={SuggestionsNavigator}
+      />
+      <Tab.Screen
         name="StoresNavigator"
         component={StoresNavigator}
         options={{

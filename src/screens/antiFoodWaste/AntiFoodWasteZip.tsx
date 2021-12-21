@@ -75,6 +75,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
           mode="outlined"
           keyboardType="number-pad"
           onSubmitEditing={getData}
+          maxLength={6}
         />
         <Paper.Button
           onPress={getData}

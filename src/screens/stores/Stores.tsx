@@ -227,6 +227,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
                 onChangeText={(text) => {
                   setZip(text);
                 }}
+                maxLength={6}
               />
               <Paper.TextInput
                 label="City"
