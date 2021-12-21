@@ -3,8 +3,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
-import { FoodItemTemplate } from 'src/components';
-import { FoodItemBaseInterface } from 'src/components/food/FoodItemTemplate';
+import { FoodItemTemplate, FoodItemBaseInterface } from 'src/components';
 
 interface FoodWasteItemInterface extends FoodItemBaseInterface {
   children: any;
