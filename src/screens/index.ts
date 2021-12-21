@@ -3,8 +3,8 @@ import Stores from './stores/Stores';
 import Store from './stores/Store';
 
 // food waste
-import AntiFoodWasteZip from './AntiFoodWaste/AntiFoodWasteZip';
-import AntiFoodWasteStore from './AntiFoodWaste/AntiFoodWasteStore';
+import AntiFoodWasteZip from './antiFoodWaste/AntiFoodWasteZip';
+import AntiFoodWasteStore from './antiFoodWaste/AntiFoodWasteStore';
 
 // suggestions
 import RelevantProducts from './suggestions/RelevantProducts';
