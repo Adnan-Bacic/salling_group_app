@@ -8,12 +8,12 @@ const FoodWasteNavigator: React.FunctionComponent = (): React.ReactElement => {
   return (
     <FoodWasteStack.Navigator>
       <FoodWasteStack.Screen
-        name="FoodWaste"
-        component={Screens.FoodWaste}
+        name="AntiFoodWasteZip"
+        component={Screens.AntiFoodWasteZip}
       />
       <FoodWasteStack.Screen
-        name="FoodWasteStore"
-        component={Screens.FoodWasteStore}
+        name="AntiFoodWasteStore"
+        component={Screens.AntiFoodWasteStore}
       />
     </FoodWasteStack.Navigator>
   );
