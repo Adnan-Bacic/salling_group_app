@@ -10,13 +10,13 @@ import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
 import { foodWasteSelector, uiSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
-import StoreItem from './StoreItem';
+import { StoreItem } from './components';
 
 interface FoodWasteInterface {
   navigation: any;
 }
 
-const FoodWaste: React.FunctionComponent<FoodWasteInterface> = ({
+const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
   navigation,
 }): React.ReactElement => {
   const [zip, setZip] = useState('');
@@ -51,7 +51,7 @@ const FoodWaste: React.FunctionComponent<FoodWasteInterface> = ({
         amount={item.clearances.length}
         actionButton1Text="food waste"
         actionButton1OnPress={() => {
-          navigation.navigate('FoodWasteStore', {
+          navigation.navigate('AntiFoodWasteStore', {
             items: item.clearances,
           });
         }}
@@ -136,4 +136,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FoodWaste;
+export default AntiFoodWasteZip;

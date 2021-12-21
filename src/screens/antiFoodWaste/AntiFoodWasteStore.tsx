@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { MainTemplate } from 'src/templates';
-import FoodWasteItem from './FoodWasteItem';
+import { FoodWasteItem } from './components';
 
 interface FoodWasteInterface {
   navigation: any;
@@ -15,7 +15,7 @@ interface FoodWasteInterface {
     }
   }
 }
-const FoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
+const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
   navigation, route,
 }): React.ReactElement => {
   const { items } = route.params;
@@ -60,4 +60,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FoodWasteStore;
+export default AntiFoodWasteStore;

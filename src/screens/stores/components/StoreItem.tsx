@@ -3,9 +3,8 @@ import {
   View, StyleSheet,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
-import { StoreItemTemplate } from 'src/components';
-import { StoreItemBaseInterface } from 'src/components/stores/StoreItemTemplate';
-import * as enums from './enums';
+import { StoreItemTemplate, StoreItemBaseInterface } from 'src/components';
+import { enums } from '../helpers';
 
 interface StoreItemInterface extends StoreItemBaseInterface {
   attributes: Record<string, unknown>;

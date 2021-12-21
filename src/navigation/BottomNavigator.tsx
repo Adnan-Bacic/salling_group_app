@@ -2,7 +2,7 @@ import React from 'react';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import Ionicons from 'react-native-vector-icons/dist/Ionicons';
 import StoresNavigator from './StoresNavigator';
-import FoodWasteNavigator from './FoodWasteNavigator';
+import AntiFoodWasteNavigator from './AntiFoodWasteNavigator';
 import SuggestionsNavigator from './SuggestionsNavigator';
 
 const Tab = createMaterialBottomTabNavigator();
@@ -35,12 +35,24 @@ const BottomNavigator: React.FunctionComponent = (): React.ReactElement => {
       <Tab.Screen
         name="StoresNavigator"
         component={StoresNavigator}
+        options={{
+          tabBarLabel: 'Stores',
+        }}
       />
       <Tab.Screen
-        name="FoodWasteNavigator"
-        component={FoodWasteNavigator}
+        name="AntiFoodWasteNavigator"
+        component={AntiFoodWasteNavigator}
+        options={{
+          tabBarLabel: 'Anti Food Waste',
+        }}
       />
-
+      <Tab.Screen
+        name="SuggestionsNavigator"
+        component={SuggestionsNavigator}
+        options={{
+          tabBarLabel: 'Suggestions',
+        }}
+      />
     </Tab.Navigator>
   );
 };
