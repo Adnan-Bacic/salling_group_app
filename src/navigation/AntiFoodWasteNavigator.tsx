@@ -4,7 +4,7 @@ import * as Screens from '../screens';
 
 const FoodWasteStack = createNativeStackNavigator();
 
-const FoodWasteNavigator: React.FunctionComponent = (): React.ReactElement => {
+const AntiFoodWasteNavigator: React.FunctionComponent = (): React.ReactElement => {
   return (
     <FoodWasteStack.Navigator>
       <FoodWasteStack.Screen
@@ -19,4 +19,4 @@ const FoodWasteNavigator: React.FunctionComponent = (): React.ReactElement => {
   );
 };
 
-export default FoodWasteNavigator;
+export default AntiFoodWasteNavigator;
