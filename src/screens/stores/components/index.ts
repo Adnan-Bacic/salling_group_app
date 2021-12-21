@@ -1,9 +1,9 @@
-import StoreItem from "./StoreItem";
-import FilterCheckBoxItem from "./FilterCheckBoxItem";
-import FilterRadioButtonItem from "./FilterRadioButtonItem";
+import StoreItem from './StoreItem';
+import FilterCheckBoxItem from './FilterCheckBoxItem';
+import FilterRadioButtonItem from './FilterRadioButtonItem';
 
 export {
-    StoreItem,
-    FilterCheckBoxItem,
-    FilterRadioButtonItem
-}
+  StoreItem,
+  FilterCheckBoxItem,
+  FilterRadioButtonItem,
+};

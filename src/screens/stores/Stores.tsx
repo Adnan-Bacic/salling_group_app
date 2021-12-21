@@ -12,8 +12,8 @@ import { uiSelector, storesSelector } from 'src/redux/selectors';
 import * as functions from 'src/redux/functions';
 import { MainTemplate } from 'src/templates';
 import { Spinner, NoResults } from 'src/components';
-import {enums} from './helpers';
-import {StoreItem, FilterRadioButtonItem, FilterCheckBoxItem} from './components';
+import { enums } from './helpers';
+import { StoreItem, FilterRadioButtonItem, FilterCheckBoxItem } from './components';
 
 interface StoresInterface {
   navigation: any

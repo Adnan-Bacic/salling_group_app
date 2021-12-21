@@ -1,5 +1,5 @@
-import ProductSuggestionItem from "./ProductSuggestionItem";
+import ProductSuggestionItem from './ProductSuggestionItem';
 
 export {
-    ProductSuggestionItem
-}
+  ProductSuggestionItem,
+};

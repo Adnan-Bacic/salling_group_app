@@ -5,7 +5,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { MainTemplate } from 'src/templates';
-import {FoodWasteItem} from './components';
+import { FoodWasteItem } from './components';
 
 interface FoodWasteInterface {
   navigation: any;

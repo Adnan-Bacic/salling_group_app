@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { StoreItemTemplate, StoreItemBaseInterface } from 'src/components';
-import {enums} from '../helpers';
+import { enums } from '../helpers';
 
 interface StoreItemInterface extends StoreItemBaseInterface {
   attributes: Record<string, unknown>;

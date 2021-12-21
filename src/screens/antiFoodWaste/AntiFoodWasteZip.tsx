@@ -10,7 +10,7 @@ import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
 import { foodWasteSelector, uiSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
-import {StoreItem} from './components';
+import { StoreItem } from './components';
 
 interface FoodWasteInterface {
   navigation: any;

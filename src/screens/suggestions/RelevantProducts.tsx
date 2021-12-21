@@ -10,7 +10,7 @@ import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
 import { suggestionsSelector, uiSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
-import {ProductSuggestionItem} from './components';
+import { ProductSuggestionItem } from './components';
 
 interface RelevantProductsProps {
   navigation: any;

@@ -1,7 +1,7 @@
-import StoreItem from "./StoreItem";
-import FoodWasteItem from "./FoodWasteItem";
+import StoreItem from './StoreItem';
+import FoodWasteItem from './FoodWasteItem';
 
 export {
-    StoreItem,
-    FoodWasteItem
-}
+  StoreItem,
+  FoodWasteItem,
+};

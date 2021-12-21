@@ -17,8 +17,8 @@ export {
   FoodItemTemplate,
 };
 
-    //interfaces
+// interfaces
 export type {
   StoreItemBaseInterface,
-    FoodItemBaseInterface,
-}
+  FoodItemBaseInterface,
+};
