@@ -200,6 +200,11 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   };
 
   const FilterViewContent = () => {
+    // return nothing if user isent toggling to show filters
+    if (viewMode !== ViewModes.filterView) {
+      return null;
+    }
+
     return (
       <View>
         <Paper.Title>
