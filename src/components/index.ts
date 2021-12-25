@@ -5,14 +5,20 @@ import Spinner from './spinners/Spinner';
 import NoResults from './results/NoResults';
 
 // stores
-import StoreItemTemplate from './stores/StoreItemTemplate';
+import StoreItemTemplate, { StoreItemBaseInterface } from './stores/StoreItemTemplate';
 
 // food
-import FoodItemTemplate from './food/FoodItemTemplate';
+import FoodItemTemplate, { FoodItemBaseInterface } from './food/FoodItemTemplate';
 
 export {
   Spinner,
   NoResults,
   StoreItemTemplate,
   FoodItemTemplate,
+};
+
+// interfaces
+export type {
+  StoreItemBaseInterface,
+  FoodItemBaseInterface,
 };
