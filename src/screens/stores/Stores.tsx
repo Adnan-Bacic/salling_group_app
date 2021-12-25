@@ -5,6 +5,7 @@ import {
   Linking,
   Alert,
   ScrollView,
+  LayoutAnimation,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -188,11 +189,317 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   };
 
   const switchViewMode = () => {
+    LayoutAnimation.easeInEaseOut();
+
     if (viewMode === ViewModes.storesView) {
       setViewMode(ViewModes.filterView);
     } else {
       setViewMode(ViewModes.storesView);
     }
+  };
+
+  const FilterView = () => {
+    return (
+      <>
+        <Paper.Title>
+          Add filters for more precise content
+        </Paper.Title>
+        <Paper.Subheading>
+          Location
+        </Paper.Subheading>
+        {/* filters */}
+        <Paper.TextInput
+          keyboardType="numeric"
+          label="Zip code"
+          value={zip}
+          mode="outlined"
+          onChangeText={(text) => {
+            setZip(text);
+          }}
+          maxLength={6}
+        />
+        <Paper.TextInput
+          label="City"
+          value={city}
+          mode="outlined"
+          onChangeText={(text) => {
+            setCity(text);
+          }}
+        />
+        <Paper.TextInput
+          label="Street (exact match only)"
+          value={street}
+          mode="outlined"
+          onChangeText={(text) => {
+            setStreet(text);
+          }}
+        />
+
+        <Paper.Subheading>
+          Country
+        </Paper.Subheading>
+
+        <View
+          style={styles.filterRowContainer}
+        >
+          <FilterRadioButtonItem
+            title="Denmark"
+            value={Countries.dk}
+            status={country === Countries.dk ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setCountry(Countries.dk);
+            }}
+          />
+
+          <FilterRadioButtonItem
+            title="Sweden"
+            value={Countries.se}
+            status={country === Countries.se ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setCountry(Countries.se);
+            }}
+          />
+
+          <FilterRadioButtonItem
+            title="Germany"
+            value={Countries.de}
+            status={country === Countries.de ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setCountry(Countries.de);
+            }}
+          />
+
+          <FilterRadioButtonItem
+            title="Poland"
+            value={Countries.pl}
+            status={country === Countries.pl ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setCountry(Countries.pl);
+            }}
+          />
+        </View>
+
+        <Paper.Button
+          onPress={() => {
+            setCountry(Countries.empty);
+          }}
+        >
+          reset country
+        </Paper.Button>
+
+        <Paper.Subheading>
+          Brand
+        </Paper.Subheading>
+
+        <View
+          style={styles.filterRowContainer}
+        >
+          <FilterRadioButtonItem
+            title="Netto"
+            value={Brands.netto}
+            status={brand === Brands.netto ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setBrand(Brands.netto);
+            }}
+          />
+
+          <FilterRadioButtonItem
+            title="Bilka"
+            value={Brands.bilka}
+            status={brand === Brands.bilka ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setBrand(Brands.bilka);
+            }}
+          />
+
+          <FilterRadioButtonItem
+            title="Foetex"
+            value={Brands.foetex}
+            status={brand === Brands.foetex ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setBrand(Brands.foetex);
+            }}
+          />
+
+          <FilterRadioButtonItem
+            title="Salling"
+            value={Brands.salling}
+            status={brand === Brands.salling ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setBrand(Brands.salling);
+            }}
+          />
+
+          <FilterRadioButtonItem
+            title="Carl's Jr"
+            value={Brands.carlsjr}
+            status={brand === Brands.carlsjr ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setBrand(Brands.carlsjr);
+            }}
+          />
+
+          <FilterRadioButtonItem
+            title="BR"
+            value={Brands.br}
+            status={brand === Brands.br ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setBrand(Brands.br);
+            }}
+          />
+        </View>
+
+        <Paper.Button
+          onPress={() => {
+            setBrand(Brands.empty);
+          }}
+        >
+          reset brand
+        </Paper.Button>
+
+        <Paper.Subheading>
+          Attributes
+        </Paper.Subheading>
+        <View
+          style={styles.filterRowContainer}
+        >
+
+          {/* attributes */}
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.babyChanging}
+            status={babyChanging ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setBabyChanging((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.bakery}
+            status={bakery ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setBakery((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.carlsJunior}
+            status={carlsJunior ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setCarlsJunior((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.enablingFacilities}
+            status={enablingFacilities ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setEnablingFacilities((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.flowers}
+            status={flowers ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setFlowers((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.garden}
+            status={garden ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setGarden((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.holidayOpen}
+            status={holidayOpen ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setHolidayOpen((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.nonFood}
+            status={nonFood ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setNonFood((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.open247}
+            status={open247 ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setOpen247((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.parking}
+            status={parking ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setParking((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.parkingRestrictions}
+            status={parkingRestrictions ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setParkingRestrictions((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.petFood}
+            status={petFood ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setPetFood((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.pharmacy}
+            status={pharmacy ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setPharmacy((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.scanAndGo}
+            status={scanAndGo ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setScanAndGo((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.starbucks}
+            status={starbucks ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setStarbucks((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.swipBox}
+            status={swipBox ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setSwipBox((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.wc}
+            status={wc ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setWc((prevState) => { return !prevState; });
+            }}
+          />
+          <FilterCheckBoxItem
+            title={enums.StoreAttributesNormal.wifi}
+            status={wifi ? 'checked' : 'unchecked'}
+            onPress={() => {
+              setWifi((prevState) => { return !prevState; });
+            }}
+          />
+        </View>
+        <Paper.Button
+          onPress={setAllAttributsFalse}
+        >
+          reset filters
+        </Paper.Button>
+        {/* filters */}
+      </>
+    );
   };
 
   return (
@@ -211,306 +518,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           ref={scrollRef}
         >
           {viewMode === ViewModes.filterView && (
-            <>
-              <Paper.Title>
-                Add filters for more precise content
-              </Paper.Title>
-              <Paper.Subheading>
-                Location
-              </Paper.Subheading>
-              {/* filters */}
-              <Paper.TextInput
-                keyboardType="numeric"
-                label="Zip code"
-                value={zip}
-                mode="outlined"
-                onChangeText={(text) => {
-                  setZip(text);
-                }}
-                maxLength={6}
-              />
-              <Paper.TextInput
-                label="City"
-                value={city}
-                mode="outlined"
-                onChangeText={(text) => {
-                  setCity(text);
-                }}
-              />
-              <Paper.TextInput
-                label="Street (exact match only)"
-                value={street}
-                mode="outlined"
-                onChangeText={(text) => {
-                  setStreet(text);
-                }}
-              />
-
-              <Paper.Subheading>
-                Country
-              </Paper.Subheading>
-
-              <View
-                style={styles.filterRowContainer}
-              >
-                <FilterRadioButtonItem
-                  title="Denmark"
-                  value={Countries.dk}
-                  status={country === Countries.dk ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setCountry(Countries.dk);
-                  }}
-                />
-
-                <FilterRadioButtonItem
-                  title="Sweden"
-                  value={Countries.se}
-                  status={country === Countries.se ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setCountry(Countries.se);
-                  }}
-                />
-
-                <FilterRadioButtonItem
-                  title="Germany"
-                  value={Countries.de}
-                  status={country === Countries.de ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setCountry(Countries.de);
-                  }}
-                />
-
-                <FilterRadioButtonItem
-                  title="Poland"
-                  value={Countries.pl}
-                  status={country === Countries.pl ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setCountry(Countries.pl);
-                  }}
-                />
-              </View>
-
-              <Paper.Button
-                onPress={() => {
-                  setCountry(Countries.empty);
-                }}
-                // mode="contained"
-              >
-                reset country
-              </Paper.Button>
-
-              <Paper.Subheading>
-                Brand
-              </Paper.Subheading>
-
-              <View
-                style={styles.filterRowContainer}
-              >
-                <FilterRadioButtonItem
-                  title="Netto"
-                  value={Brands.netto}
-                  status={brand === Brands.netto ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setBrand(Brands.netto);
-                  }}
-                />
-
-                <FilterRadioButtonItem
-                  title="Bilka"
-                  value={Brands.bilka}
-                  status={brand === Brands.bilka ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setBrand(Brands.bilka);
-                  }}
-                />
-
-                <FilterRadioButtonItem
-                  title="Foetex"
-                  value={Brands.foetex}
-                  status={brand === Brands.foetex ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setBrand(Brands.foetex);
-                  }}
-                />
-
-                <FilterRadioButtonItem
-                  title="Salling"
-                  value={Brands.salling}
-                  status={brand === Brands.salling ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setBrand(Brands.salling);
-                  }}
-                />
-
-                <FilterRadioButtonItem
-                  title="Carl's Jr"
-                  value={Brands.carlsjr}
-                  status={brand === Brands.carlsjr ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setBrand(Brands.carlsjr);
-                  }}
-                />
-
-                <FilterRadioButtonItem
-                  title="BR"
-                  value={Brands.br}
-                  status={brand === Brands.br ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setBrand(Brands.br);
-                  }}
-                />
-              </View>
-
-              <Paper.Button
-                onPress={() => {
-                  setBrand(Brands.empty);
-                }}
-              >
-                reset brand
-              </Paper.Button>
-
-              <Paper.Subheading>
-                Attributes
-              </Paper.Subheading>
-              <View
-                style={styles.filterRowContainer}
-              >
-
-                {/* attributes */}
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.babyChanging}
-                  status={babyChanging ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setBabyChanging((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.bakery}
-                  status={bakery ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setBakery((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.carlsJunior}
-                  status={carlsJunior ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setCarlsJunior((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.enablingFacilities}
-                  status={enablingFacilities ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setEnablingFacilities((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.flowers}
-                  status={flowers ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setFlowers((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.garden}
-                  status={garden ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setGarden((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.holidayOpen}
-                  status={holidayOpen ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setHolidayOpen((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.nonFood}
-                  status={nonFood ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setNonFood((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.open247}
-                  status={open247 ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setOpen247((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.parking}
-                  status={parking ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setParking((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.parkingRestrictions}
-                  status={parkingRestrictions ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setParkingRestrictions((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.petFood}
-                  status={petFood ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setPetFood((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.pharmacy}
-                  status={pharmacy ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setPharmacy((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.scanAndGo}
-                  status={scanAndGo ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setScanAndGo((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.starbucks}
-                  status={starbucks ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setStarbucks((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.swipBox}
-                  status={swipBox ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setSwipBox((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.wc}
-                  status={wc ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setWc((prevState) => { return !prevState; });
-                  }}
-                />
-                <FilterCheckBoxItem
-                  title={enums.StoreAttributesNormal.wifi}
-                  status={wifi ? 'checked' : 'unchecked'}
-                  onPress={() => {
-                    setWifi((prevState) => { return !prevState; });
-                  }}
-                />
-              </View>
-              <Paper.Button
-                onPress={setAllAttributsFalse}
-              >
-                reset filters
-              </Paper.Button>
-              {/* filters */}
-            </>
+            <FilterView />
           )}
           <View
             style={styles.spacer}
