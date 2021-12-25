@@ -11,12 +11,20 @@
 import React from 'react';
 import {
   StatusBar,
+  Platform,
+  UIManager,
 } from 'react-native';
 import { Provider as StoreProvider } from 'react-redux';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import store from './src/redux/store';
 import Navigator from './src/navigation/Navigator';
+
+if (Platform.OS === 'android') {
+  if (UIManager.setLayoutAnimationEnabledExperimental) {
+    UIManager.setLayoutAnimationEnabledExperimental(true);
+  }
+}
 
 const App: React.FunctionComponent = (): React.ReactElement => {
   return (
