@@ -120,16 +120,20 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   ]);
 
   const renderStoreItem = ({ item }: FlatListItemProps) => {
-    const ActionContent = ({ item }) => {
-      return(
-        <Paper.Button onPress={() => {
-          navigation.navigate('Store', {
-            name: item.name,
-            id: item.id,
-          });
-        }}>store</Paper.Button>
-      )
-    }
+    const ActionContent = ({ item }: any) => {
+      return (
+        <Paper.Button
+          onPress={() => {
+            navigation.navigate('Store', {
+              name: item.name,
+              id: item.id,
+            });
+          }}
+        >
+          store
+        </Paper.Button>
+      );
+    };
     // TODO: handle br - not a food chain
     return (
       <StoreItem
@@ -139,7 +143,11 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         zip={item.address.zip}
         country={item.address.country}
         attributes={item.attributes}
-        actionContent={<ActionContent item={item}></ActionContent>}
+        actionContent={(
+          <ActionContent
+            item={item}
+          />
+)}
         onPressSmileyScheme={async () => {
           const url = `https://www.findsmiley.dk/${item.attributes.smileyscheme}`;
 
@@ -508,7 +516,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           reset filters
         </Paper.Button>
         {/* filters */}
-        </View>
+      </View>
     );
   };
 
