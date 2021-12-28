@@ -4,8 +4,7 @@ import {
   StyleSheet,
   Linking,
   Alert,
-  ScrollView,
-  LayoutAnimation,
+  ScrollView, FlatList, LayoutAnimation,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -120,23 +119,27 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     street, swipBox, wc, wifi, zip,
   ]);
 
-  /*
   const renderStoreItem = ({ item }: FlatListItemProps) => {
+    const ActionContent = ({ item }) => {
+      return(
+        <Paper.Button onPress={() => {
+          navigation.navigate('Store', {
+            name: item.name,
+            id: item.id,
+          });
+        }}>store</Paper.Button>
+      )
+    }
     // TODO: handle br - not a food chain
     return (
       <StoreItem
-        key={item.id}
         name={item.name}
         street={item.address.street}
         city={item.address.city}
         zip={item.address.zip}
         country={item.address.country}
         attributes={item.attributes}
-        onPressAction={() => {
-          navigation.navigate('Store', {
-            name: item.name,
-          });
-        }}
+        actionContent={<ActionContent item={item}></ActionContent>}
         onPressSmileyScheme={async () => {
           const url = `https://www.findsmiley.dk/${item.attributes.smileyscheme}`;
 
@@ -144,8 +147,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
             const res = await Linking.canOpenURL(url);
 
             if (!res) {
-              throw new Error(`Cannot open URL.
-              If you wish to manually look up the smiley scheme: ${url}`);
+              throw new Error(`Cannot open link. If you wish to manually look up the smiley scheme: ${url}`);
             }
 
             await Linking.openURL(url);
@@ -156,7 +158,6 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
       />
     );
   };
-  */
 
   const setAllAttributsFalse = () => {
     setBabyChanging(false);
@@ -182,10 +183,14 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   const scrollRef = useRef<any>();
 
   const scrollToTop = () => {
+    /*
     scrollRef.current?.scrollTo({
       y: 0,
       animated: true,
     });
+    */
+
+    scrollRef.current.scrollToOffset({ animated: true, offset: 0 });
   };
 
   const switchViewMode = () => {
@@ -198,9 +203,14 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     }
   };
 
-  const FilterView = () => {
+  const FilterViewContent = () => {
+    // return nothing if user isent toggling to show filters
+    if (viewMode !== ViewModes.filterView) {
+      return null;
+    }
+
     return (
-      <>
+      <View>
         <Paper.Title>
           Add filters for more precise content
         </Paper.Title>
@@ -498,7 +508,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           reset filters
         </Paper.Button>
         {/* filters */}
-      </>
+        </View>
     );
   };
 
@@ -529,84 +539,26 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
             'Hide filters'
           )}
         </Paper.Button>
-        <ScrollView
+
+        <View
+          style={styles.spacer}
+        />
+
+        {/*
+          its important to only render certain props depending on ui.isLoading
+          to have the correct ui elements show
+          */}
+        <FlatList
           ref={scrollRef}
-        >
-          {viewMode === ViewModes.filterView && (
-            <FilterView />
-          )}
-          <View
-            style={styles.spacer}
-          />
-
-          {/*
-          {!ui.isLoading && (
-            <FlatList
-            ref={scrollRef}
-              data={stores.storesData}
-              renderItem={renderStoreItem}
-              ListEmptyComponent={NoResults}
-            />
-          )}
-          */}
-
-          {(stores.storesData && !ui.isLoading) && (
-            stores.storesData.map((item: any) => {
-              return (
-                <StoreItem
-                  key={item.id}
-                  name={item.name}
-                  street={item.address.street}
-                  city={item.address.city}
-                  zip={item.address.zip}
-                  country={item.address.country}
-                  attributes={item.attributes}
-                  actionContent={(
-                    <StoresActionContent
-                      item={item}
-                    />
-)}
-                  onPressSmileyScheme={async () => {
-                    const url = `https://www.findsmiley.dk/${item.attributes.smileyscheme}`;
-
-                    try {
-                      const res = await Linking.canOpenURL(url);
-
-                      if (!res) {
-                        throw new Error(`Cannot open link. If you wish to manually look up the smiley scheme: ${url}`);
-                      }
-
-                      await Linking.openURL(url);
-                    } catch (err: any) {
-                      Alert.alert(err.name, err.message);
-                    }
-                  }}
-                >
-                  children
-                </StoreItem>
-              );
-            })
-          )}
-
-          {(stores.storesData && !ui.isLoading) && (
-            <>
-              {(stores.storesData.length === 0) && (
-              <NoResults />
-              )}
-            </>
-          )}
-
-          {/*
-        <Paper.FAB icon="plus" onPress={switchViewMode} label="test" style={styles.fab}></Paper.FAB>
-      */}
-          {/*
-          show regardless of viewMode.
-          then we show the spinner even in filterView so users see new data is fetching
-          */}
-          {ui.isLoading && (
-            <Spinner />
-          )}
-        </ScrollView>
+          data={!ui.isLoading ? stores.storesData : []}
+          renderItem={!ui.isLoading ? renderStoreItem : null}
+          ListEmptyComponent={ui.isLoading === false ? NoResults : null}
+          ListHeaderComponent={FilterViewContent}
+          ListFooterComponent={ui.isLoading && Spinner}
+          keyExtractor={(item) => {
+            return item.id;
+          }}
+        />
 
         <Paper.Button
           onPress={scrollToTop}
