@@ -6,11 +6,13 @@ import * as Paper from 'react-native-paper';
 
 export interface FoodItemBaseInterface {
   children: any;
+  actionContent: React.ReactElement;
   title: string;
   image: string;
 }
 const FoodItemTemplate: React.FunctionComponent<FoodItemBaseInterface> = ({
   children,
+  actionContent,
   title,
   image,
 }): React.ReactElement => {
@@ -61,9 +63,7 @@ const FoodItemTemplate: React.FunctionComponent<FoodItemBaseInterface> = ({
         <Paper.Card.Actions
           style={styles.actionContainer}
         >
-          <Paper.Button>
-            see more
-          </Paper.Button>
+          {actionContent}
         </Paper.Card.Actions>
       </Paper.Card>
     </View>

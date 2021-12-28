@@ -502,6 +502,21 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     );
   };
 
+  const StoresActionContent = ({ item }: any) => {
+    return (
+      <Paper.Button
+        onPress={() => {
+          navigation.navigate('Store', {
+            name: item.name,
+            id: item.id,
+          });
+        }}
+      >
+        See more
+      </Paper.Button>
+    );
+  };
+
   return (
     <MainTemplate>
       <>
@@ -546,13 +561,11 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
                   zip={item.address.zip}
                   country={item.address.country}
                   attributes={item.attributes}
-                  actionButton1Text="see more"
-                  actionButton1OnPress={() => {
-                    navigation.navigate('Store', {
-                      name: item.name,
-                      id: item.id,
-                    });
-                  }}
+                  actionContent={(
+                    <StoresActionContent
+                      item={item}
+                    />
+)}
                   onPressSmileyScheme={async () => {
                     const url = `https://www.findsmiley.dk/${item.attributes.smileyscheme}`;
 
@@ -591,7 +604,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           then we show the spinner even in filterView so users see new data is fetching
           */}
           {ui.isLoading && (
-          <Spinner />
+            <Spinner />
           )}
         </ScrollView>
 

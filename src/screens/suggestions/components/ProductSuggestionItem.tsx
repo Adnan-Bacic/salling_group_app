@@ -13,6 +13,7 @@ interface ProductSuggestionItemInterface extends FoodItemBaseInterface {
 }
 const ProductSuggestionItem: React.FunctionComponent<ProductSuggestionItemInterface> = ({
   children,
+  actionContent,
   title,
   image,
   price,
@@ -23,6 +24,7 @@ const ProductSuggestionItem: React.FunctionComponent<ProductSuggestionItemInterf
     <FoodItemTemplate
       title={title}
       image={image}
+      actionContent={actionContent}
     >
       <Paper.Text>
         {children}

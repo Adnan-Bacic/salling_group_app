@@ -40,6 +40,19 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
   const renderStoreItem = ({ item }: any) => {
     // console.log(item.store.id);
 
+    const ActionContent = ({ items }: any) => {
+      return (
+        <Paper.Button
+          onPress={() => {
+            navigation.navigate('AntiFoodWasteStore', {
+              items: items.clearances,
+            });
+          }}
+        >
+          food waste
+        </Paper.Button>
+      );
+    };
     return (
       <StoreItem
         key={item.store.id}
@@ -49,12 +62,11 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         zip={item.store.address.zip}
         country={item.store.address.country}
         amount={item.clearances.length}
-        actionButton1Text="food waste"
-        actionButton1OnPress={() => {
-          navigation.navigate('AntiFoodWasteStore', {
-            items: item.clearances,
-          });
-        }}
+        actionContent={(
+          <ActionContent
+            items={item}
+          />
+)}
       >
         children
       </StoreItem>

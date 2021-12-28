@@ -3,7 +3,6 @@ import {
   View, StyleSheet,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
-import ActionButton from './ActionButton';
 
 export interface StoreItemBaseInterface {
   children: any;
@@ -12,12 +11,11 @@ export interface StoreItemBaseInterface {
   city: string;
   zip: string;
   country: string;
-  actionButton1OnPress: () => void;
-  actionButton1Text: string;
+  actionContent: React.ReactElement;
 }
 const StoreItemTemplate: React.FunctionComponent<StoreItemBaseInterface> = ({
   children, name, street, city, zip, country,
-  actionButton1OnPress, actionButton1Text,
+  actionContent,
 }): React.ReactElement => {
   return (
     <View
@@ -41,13 +39,7 @@ const StoreItemTemplate: React.FunctionComponent<StoreItemBaseInterface> = ({
         <Paper.Card.Actions
           style={styles.actionContainer}
         >
-          {actionButton1Text && (
-          <ActionButton
-            onPress={actionButton1OnPress}
-          >
-            {actionButton1Text}
-          </ActionButton>
-          )}
+          {actionContent}
         </Paper.Card.Actions>
       </Paper.Card>
     </View>

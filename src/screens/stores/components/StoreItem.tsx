@@ -12,7 +12,7 @@ interface StoreItemInterface extends StoreItemBaseInterface {
 }
 const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
   name, street, city, zip, country, attributes, onPressSmileyScheme,
-  actionButton1OnPress, actionButton1Text,
+  actionContent,
 }): React.ReactElement => {
   return (
     <StoreItemTemplate
@@ -21,8 +21,7 @@ const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
       city={city}
       zip={zip}
       country={country}
-      actionButton1OnPress={actionButton1OnPress}
-      actionButton1Text={actionButton1Text}
+      actionContent={actionContent}
     >
       <View
         style={styles.chipContainer}

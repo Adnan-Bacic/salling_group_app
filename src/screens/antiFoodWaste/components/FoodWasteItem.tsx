@@ -16,6 +16,7 @@ interface FoodWasteItemInterface extends FoodItemBaseInterface {
   stockUnit: 'kg' | 'each';
 }
 const FoodWasteItem: React.FunctionComponent<FoodWasteItemInterface> = ({
+  actionContent,
   title,
   image,
   originalPrice,
@@ -30,6 +31,7 @@ const FoodWasteItem: React.FunctionComponent<FoodWasteItemInterface> = ({
     <FoodItemTemplate
       title={title}
       image={image}
+      actionContent={actionContent}
     >
       <Paper.Text>
         children

@@ -4,6 +4,7 @@ import {
   FlatList,
   StyleSheet,
 } from 'react-native';
+import * as Paper from 'react-native-paper';
 import { MainTemplate } from 'src/templates';
 import { FoodWasteItem } from './components';
 
@@ -23,6 +24,18 @@ const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
 
   const renderFoodItem = ({ item }: any) => {
     // console.log('item stock', item.offer.stock);
+
+    const ActionContent = () => {
+      return (
+        <Paper.Button
+          onPress={() => {
+            console.log('antifoodwastestore');
+          }}
+        >
+          123
+        </Paper.Button>
+      );
+    };
     return (
       <FoodWasteItem
         title={item.product.description}
@@ -34,6 +47,7 @@ const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
         discount={item.offer.discount}
         currency={item.offer.currency}
         stockUnit={item.offer.stockUnit}
+        actionContent={<ActionContent />}
       >
         children
       </FoodWasteItem>

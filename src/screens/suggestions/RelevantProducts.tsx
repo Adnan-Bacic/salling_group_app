@@ -39,6 +39,18 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
 
   const renderStoreItem = ({ item }: any) => {
     // console.log(item);
+
+    const ActionContent = () => {
+      return (
+        <Paper.Button
+          onPress={() => {
+            console.log(345);
+          }}
+        >
+          suggestions
+        </Paper.Button>
+      );
+    };
     return (
       <ProductSuggestionItem
         key={item.id}
@@ -61,6 +73,7 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
             Alert.alert(err.name, err.message);
           }
         }}
+        actionContent={<ActionContent />}
       >
         children
       </ProductSuggestionItem>
