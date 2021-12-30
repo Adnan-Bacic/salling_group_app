@@ -1,10 +1,12 @@
 import * as actionTypes from '../actionTypes';
 
 interface DefaultState {
-  foodItems: null | any
+  foodItems: null | any;
+  foodItemsId: null | any;
 }
 const defaultState: DefaultState = {
   foodItems: null,
+  foodItemsId: null,
 };
 
 export const foodWasteReducer = (state = defaultState, action: any): any => {
@@ -13,6 +15,12 @@ export const foodWasteReducer = (state = defaultState, action: any): any => {
       return {
         ...state,
         foodItems: action.payload,
+      };
+
+    case actionTypes.GET_FOOD_WASTE_ID:
+      return {
+        ...state,
+        foodItemsId: action.payload,
       };
 
     default:

@@ -48,7 +48,8 @@ const StoreItemTemplate: React.FunctionComponent<StoreItemBaseInterface> = ({
 
 const styles = StyleSheet.create({
   actionContainer: {
-    alignSelf: 'flex-end',
+    // button position
+    alignSelf: 'center',
   },
   container: {
     marginBottom: 20,

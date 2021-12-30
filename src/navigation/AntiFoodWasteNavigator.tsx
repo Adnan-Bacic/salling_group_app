@@ -15,6 +15,10 @@ const AntiFoodWasteNavigator: React.FunctionComponent = (): React.ReactElement =
         name="AntiFoodWasteStore"
         component={Screens.AntiFoodWasteStore}
       />
+      <FoodWasteStack.Screen
+        name="AntiFoodWasteId"
+        component={Screens.AntiFoodWasteId}
+      />
     </FoodWasteStack.Navigator>
   );
 };

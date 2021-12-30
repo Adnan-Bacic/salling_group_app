@@ -122,16 +122,48 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   const renderStoreItem = ({ item }: FlatListItemProps) => {
     const ActionContent = ({ item }: any) => {
       return (
-        <Paper.Button
-          onPress={() => {
-            navigation.navigate('Store', {
-              name: item.name,
-              id: item.id,
-            });
-          }}
-        >
-          store
-        </Paper.Button>
+        <>
+          <View
+            style={{
+              width: '100%',
+            }}
+          >
+            <Paper.Button
+              onPress={() => {
+                navigation.navigate('Store', {
+                  name: item.name,
+                  id: item.id,
+                });
+              }}
+            >
+              see more
+            </Paper.Button>
+            <Paper.Button
+              onPress={() => {
+                console.log('id1', item.id);
+                dispatch(functions.foodWaste.getFoodWasteById(item.id));
+                return
+                navigation.navigate('AntiFoodWasteNavigator', {
+                  screen: 'AntiFoodWasteId',
+                  params:{
+                    id: item.id
+                  }
+                })
+              }}
+              mode="contained"
+            >
+              anti food waste
+            </Paper.Button>
+            <Paper.Button
+              onPress={() => {
+                console.log(2);
+              }}
+              mode="outlined"
+            >
+              suggestions
+            </Paper.Button>
+          </View>
+        </>
       );
     };
     // TODO: handle br - not a food chain
@@ -520,21 +552,6 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     );
   };
 
-  const StoresActionContent = ({ item }: any) => {
-    return (
-      <Paper.Button
-        onPress={() => {
-          navigation.navigate('Store', {
-            name: item.name,
-            id: item.id,
-          });
-        }}
-      >
-        See more
-      </Paper.Button>
-    );
-  };
-
   return (
     <MainTemplate>
       <>
@@ -558,14 +575,11 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           */}
         <FlatList
           ref={scrollRef}
-          data={!ui.isLoading ? stores.storesData : []}
-          renderItem={!ui.isLoading ? renderStoreItem : null}
+          data={stores.storesData}
+          renderItem={renderStoreItem}
           ListEmptyComponent={ui.isLoading === false ? NoResults : null}
           ListHeaderComponent={FilterViewContent}
           ListFooterComponent={ui.isLoading && Spinner}
-          keyExtractor={(item) => {
-            return item.id;
-          }}
         />
 
         <Paper.Button

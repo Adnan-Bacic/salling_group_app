@@ -9,6 +9,7 @@ export const GET_STORES = 'GET_STORES';
 
 // food waste
 export const GET_FOOD_WASTE_ZIP = 'GET_FOOD_WASTE_ZIP';
+export const GET_FOOD_WASTE_ID = 'GET_FOOD_WASTE_ID';
 
 // suggestions
 export const GET_RELEVANT_PRODUCTS = 'GET_RELEVANT_PRODUCTS';
