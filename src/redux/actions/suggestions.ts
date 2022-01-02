@@ -7,3 +7,10 @@ export const getRelevantProducts = (query: any): DispatchProps<any> => {
     payload: query,
   };
 };
+
+export const getSimilarProducts = (data: any): DispatchProps<any> => {
+  return {
+    type: actionTypes.GET_SIMILAR_PRODUCTS,
+    payload: data,
+  };
+};

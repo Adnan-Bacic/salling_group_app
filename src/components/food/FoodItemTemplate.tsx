@@ -72,7 +72,8 @@ const FoodItemTemplate: React.FunctionComponent<FoodItemBaseInterface> = ({
 
 const styles = StyleSheet.create({
   actionContainer: {
-    alignSelf: 'flex-end',
+    // button position
+    alignSelf: 'center',
   },
   container: {
     marginBottom: 20,

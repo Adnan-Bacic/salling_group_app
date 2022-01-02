@@ -18,8 +18,6 @@ export const getFoodWasteByZip = (zip: string) => {
         },
       });
 
-      const data = await res.json();
-
       if (!res.ok) {
         if (res.status === 429) {
           const d = requests.requestBlockDuration(res.headers.map['retry-after']);
@@ -29,6 +27,8 @@ export const getFoodWasteByZip = (zip: string) => {
 
         throw new Error('Could not get food data');
       }
+
+      const data = await res.json();
 
       dispatch(actions.foodWaste.getFoodWasteByZip(data));
     } catch (err: any) {
@@ -42,6 +42,8 @@ export const getFoodWasteByZip = (zip: string) => {
 export const getFoodWasteById = (id: string) => {
   return async (dispatch: any, getState: any) => {
     try {
+      dispatch(actions.ui.setLoading(true));
+
       // if user clicks on the same item, no need to make request, show already saved items
       if (id === getState()?.foodWaste?.foodItemsId?.store?.id) {
         RootNavigation.navigate('AntiFoodWasteNavigator', {
@@ -53,7 +55,6 @@ export const getFoodWasteById = (id: string) => {
         });
         return;
       }
-
       dispatch(actions.ui.setLoading(true));
 
       const url = `${API_URL}/v1/food-waste/${id}`;
@@ -78,7 +79,6 @@ export const getFoodWasteById = (id: string) => {
       const data = await res.json();
 
       dispatch(actions.foodWaste.getFoodWasteById(data));
-      dispatch(actions.ui.setLoading(false));
 
       RootNavigation.navigate('AntiFoodWasteNavigator', {
         screen: 'AntiFoodWasteStore',
@@ -89,6 +89,8 @@ export const getFoodWasteById = (id: string) => {
       });
     } catch (err: any) {
       Alert.alert(err.name, err.message);
+    } finally {
+      dispatch(actions.ui.setLoading(false));
     }
   };
 };

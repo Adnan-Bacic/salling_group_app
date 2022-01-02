@@ -127,6 +127,16 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
             style={stylesButtons.container}
           >
             <Paper.Button
+              onPress={() => {
+                navigation.navigate('Store', {
+                  name: item.name,
+                  id: item1.id,
+                });
+              }}
+            >
+              see more
+            </Paper.Button>
+            <Paper.Button
               onPress={async () => {
                 const url = `https://www.findsmiley.dk/${item1.attributes.smileyscheme}`;
 
@@ -143,17 +153,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
                 }
               }}
             >
-              open smiley scheme
-            </Paper.Button>
-            <Paper.Button
-              onPress={() => {
-                navigation.navigate('Store', {
-                  name: item1.name,
-                  id: item1.id,
-                });
-              }}
-            >
-              see more
+              open findsmiley.dk
             </Paper.Button>
             <Paper.Button
               onPress={() => {
@@ -162,14 +162,6 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
               mode="contained"
             >
               anti food waste
-            </Paper.Button>
-            <Paper.Button
-              onPress={() => {
-                console.log(2);
-              }}
-              mode="outlined"
-            >
-              suggestions
             </Paper.Button>
           </View>
         </>
@@ -189,7 +181,9 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
             item1={item}
           />
 )}
-      />
+      >
+        children
+      </StoreItem>
     );
   };
 
@@ -214,7 +208,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     setWifi(false);
   };
 
-  const switchViewMode = () => {
+  const toggleFiltersShown = () => {
     LayoutAnimation.easeInEaseOut();
 
     setFiltersShown((prevState) => { return !prevState; });
@@ -533,7 +527,8 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     <MainTemplate>
       <>
         <Paper.Button
-          onPress={switchViewMode}
+          onPress={toggleFiltersShown}
+          mode="contained"
         >
           {filtersShown ? (
             'Hide filters'
@@ -541,10 +536,6 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
             'Show filters'
           )}
         </Paper.Button>
-
-        <View
-          style={styles.spacer}
-        />
 
         {/*
           its important to only render certain props depending on ui.isLoading
@@ -567,9 +558,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-  },
-  spacer: {
-    marginTop: 20,
   },
 });
 

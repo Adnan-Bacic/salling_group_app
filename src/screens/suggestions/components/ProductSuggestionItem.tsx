@@ -8,8 +8,6 @@ import { FoodItemTemplate, FoodItemBaseInterface } from 'src/components';
 interface ProductSuggestionItemInterface extends FoodItemBaseInterface {
   children: any;
   price: number;
-  link: string;
-  onPressLink: () => void;
 }
 const ProductSuggestionItem: React.FunctionComponent<ProductSuggestionItemInterface> = ({
   children,
@@ -17,8 +15,6 @@ const ProductSuggestionItem: React.FunctionComponent<ProductSuggestionItemInterf
   title,
   image,
   price,
-  link,
-  onPressLink,
 }): React.ReactElement => {
   return (
     <FoodItemTemplate
@@ -31,11 +27,6 @@ const ProductSuggestionItem: React.FunctionComponent<ProductSuggestionItemInterf
       </Paper.Text>
       <Paper.Text>
         {`price: ${price}`}
-      </Paper.Text>
-      <Paper.Text
-        onPress={onPressLink}
-      >
-        {link}
       </Paper.Text>
     </FoodItemTemplate>
   );

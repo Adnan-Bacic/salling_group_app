@@ -47,7 +47,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
             });
           }}
         >
-          food waste
+          see items
         </Paper.Button>
       );
     };

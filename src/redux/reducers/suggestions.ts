@@ -1,10 +1,12 @@
 import * as actionTypes from '../actionTypes';
 
 interface DefaultState {
-  relevantProducts: null | any
+  relevantProducts: null | any;
+  similarProducts: null | any;
 }
 const defaultState: DefaultState = {
   relevantProducts: null,
+  similarProducts: null,
 };
 
 export const suggestionsReducer = (state = defaultState, action: any): any => {
@@ -13,6 +15,12 @@ export const suggestionsReducer = (state = defaultState, action: any): any => {
       return {
         ...state,
         relevantProducts: action.payload,
+      };
+
+    case actionTypes.GET_SIMILAR_PRODUCTS:
+      return {
+        ...state,
+        similarProducts: action.payload,
       };
 
     default:

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import {
-  FlatList,
-  Linking,
-  Alert,
+  View, FlatList, Linking, Alert, StyleSheet,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -16,9 +14,7 @@ interface RelevantProductsProps {
   navigation: any;
 }
 
-const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
-  navigation,
-}): React.ReactElement => {
+const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = (): React.ReactElement => {
   const [query, setQuery] = useState('');
   const [prevQuery, setPrevQuery] = useState('');
 
@@ -38,15 +34,45 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
   };
 
   const renderStoreItem = ({ item }: any) => {
-    const ActionContent = () => {
+    const ActionContent: React.FunctionComponent<any> = ({
+      item1,
+    }): React.ReactElement => {
+      const stylesButtons = StyleSheet.create({
+        container: {
+          width: '100%',
+        },
+      });
       return (
-        <Paper.Button
-          onPress={() => {
-            console.log(345);
-          }}
+        <View
+          style={stylesButtons.container}
         >
-          suggestions
-        </Paper.Button>
+          <Paper.Button
+            onPress={async () => {
+              const url = item1.link;
+
+              try {
+                const res = await Linking.canOpenURL(url);
+
+                if (!res) {
+                  throw new Error(`Cannot open link. If you wish to manually look up the item: ${url}`);
+                }
+
+                await Linking.openURL(url);
+              } catch (err: any) {
+                Alert.alert(err.name, err.message);
+              }
+            }}
+          >
+            open bilkatogo.dk
+          </Paper.Button>
+          <Paper.Button
+            onPress={() => {
+              dispatch(functions.suggestions.getSimilarProducts(item1.prod_id));
+            }}
+          >
+            similar products
+          </Paper.Button>
+        </View>
       );
     };
     return (
@@ -55,23 +81,11 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
         title={item.description}
         image={item.img}
         price={item.price}
-        link={item.link}
-        onPressLink={async () => {
-          const url = item.link;
-
-          try {
-            const res = await Linking.canOpenURL(url);
-
-            if (!res) {
-              throw new Error(`Cannot open link. If you wish to manually look up the item: ${url}`);
-            }
-
-            await Linking.openURL(url);
-          } catch (err: any) {
-            Alert.alert(err.name, err.message);
-          }
-        }}
-        actionContent={<ActionContent />}
+        actionContent={(
+          <ActionContent
+            item1={item}
+          />
+)}
       >
         children
       </ProductSuggestionItem>
