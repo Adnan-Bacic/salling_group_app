@@ -38,8 +38,6 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
   };
 
   const renderStoreItem = ({ item }: any) => {
-    // console.log(item);
-
     const ActionContent = () => {
       return (
         <Paper.Button

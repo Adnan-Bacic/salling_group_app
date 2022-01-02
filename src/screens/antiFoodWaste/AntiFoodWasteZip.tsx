@@ -38,8 +38,6 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
   };
 
   const renderStoreItem = ({ item }: any) => {
-    // console.log(item.store.id);
-
     const ActionContent = ({ items }: any) => {
       return (
         <Paper.Button
@@ -103,37 +101,6 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         />
         )}
 
-        {/*
-        {(foodWaste.foodItems && !ui.isLoading) && (
-          foodWaste.foodItems.map((item) => {
-            console.log('item', item)
-            return(
-              <Paper.Card>
-              <Paper.Card.Title title="Card Title" subtitle="Card Subtitle" />
-              <Paper.Card.Content>
-                <Paper.Title>Card title</Paper.Title>
-                <Paper.Paragraph>Card content</Paper.Paragraph>
-              </Paper.Card.Content>
-              <Paper.Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-              <Paper.Card.Actions>
-                <Paper.Button>Cancel</Paper.Button>
-                <Paper.Button>Ok</Paper.Button>
-              </Paper.Card.Actions>
-            </Paper.Card>
-            )
-          })
-        )}
-      </View>
-
-      {(foodWaste.foodItems && !ui.isLoading) && (
-            <>
-              {(foodWaste.foodItems.length === 0) && (
-              <NoResults></NoResults>
-              )}
-            </>
-          )}
-
-           */}
         {ui.isLoading && (
         <Spinner />
         )}

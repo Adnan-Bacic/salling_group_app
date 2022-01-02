@@ -39,11 +39,23 @@ export const getFoodWasteByZip = (zip: string) => {
   };
 };
 
-export const getFoodWasteById = (id) => {
-  return async (dispatch) => {
+export const getFoodWasteById = (id: string) => {
+  return async (dispatch: any, getState: any) => {
     try {
-      // dispatch(actions.ui.setLoading(true));
-      console.log('id', id);
+      // if user clicks on the same item, no need to make request, show already saved items
+      if (id === getState()?.foodWaste?.foodItemsId?.store?.id) {
+        RootNavigation.navigate('AntiFoodWasteNavigator', {
+          screen: 'AntiFoodWasteStore',
+          initial: false,
+          params: {
+            items: getState().foodWaste.foodItemsId.clearances,
+          },
+        });
+        return;
+      }
+
+      dispatch(actions.ui.setLoading(true));
+
       const url = `${API_URL}/v1/food-waste/${id}`;
 
       const res: any = await fetch(url, {
@@ -52,7 +64,6 @@ export const getFoodWasteById = (id) => {
           Authorization: `Bearer ${API_TOKEN}`,
         },
       });
-      console.log('res', res);
 
       if (!res.ok) {
         if (res.status === 429) {
@@ -65,18 +76,19 @@ export const getFoodWasteById = (id) => {
       }
 
       const data = await res.json();
-      console.log('data', data);
 
       dispatch(actions.foodWaste.getFoodWasteById(data));
+      dispatch(actions.ui.setLoading(false));
 
       RootNavigation.navigate('AntiFoodWasteNavigator', {
-        screen: 'AntiFoodWasteId',
-        params:{
-          data: data
-        }
+        screen: 'AntiFoodWasteStore',
+        initial: false,
+        params: {
+          items: data.clearances,
+        },
       });
-    } catch (err) {
-      console.log('err', err);
+    } catch (err: any) {
+      Alert.alert(err.name, err.message);
     }
   };
 };

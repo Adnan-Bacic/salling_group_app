@@ -20,11 +20,8 @@ const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
   navigation, route,
 }): React.ReactElement => {
   const { items } = route.params;
-  // console.log(items)
 
   const renderFoodItem = ({ item }: any) => {
-    // console.log('item stock', item.offer.stock);
-
     const ActionContent = () => {
       return (
         <Paper.Button

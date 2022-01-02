@@ -5,13 +5,12 @@ import Store from './stores/Store';
 // food waste
 import AntiFoodWasteZip from './antiFoodWaste/AntiFoodWasteZip';
 import AntiFoodWasteStore from './antiFoodWaste/AntiFoodWasteStore';
-import AntiFoodWasteId from './antiFoodWaste/AntiFoodWasteId';
 
 // suggestions
 import RelevantProducts from './suggestions/RelevantProducts';
 
 export {
   Stores, Store,
-  AntiFoodWasteZip, AntiFoodWasteStore, AntiFoodWasteId,
+  AntiFoodWasteZip, AntiFoodWasteStore,
   RelevantProducts,
 };

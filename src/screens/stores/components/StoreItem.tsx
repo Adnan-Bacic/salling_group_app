@@ -8,10 +8,9 @@ import { enums } from '../helpers';
 
 interface StoreItemInterface extends StoreItemBaseInterface {
   attributes: Record<string, unknown>;
-  onPressSmileyScheme: () => void;
 }
 const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
-  name, street, city, zip, country, attributes, onPressSmileyScheme,
+  name, street, city, zip, country, attributes,
   actionContent,
 }): React.ReactElement => {
   return (
@@ -53,15 +52,6 @@ const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
         })}
 
       </View>
-      {attributes.smileyscheme && (
-      <View>
-        <Paper.Text
-          onPress={onPressSmileyScheme}
-        >
-          Open smiley scheme
-        </Paper.Text>
-      </View>
-      )}
     </StoreItemTemplate>
   );
 };
