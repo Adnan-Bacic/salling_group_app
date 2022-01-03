@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View, StyleSheet, Linking, Alert, FlatList, LayoutAnimation, Platform,
+  View, StyleSheet, FlatList, LayoutAnimation, Platform,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -8,7 +8,7 @@ import { uiSelector, storesSelector } from 'src/redux/selectors';
 import * as functions from 'src/redux/functions';
 import { MainTemplate } from 'src/templates';
 import { Spinner, NoResults } from 'src/components';
-import { validators } from 'src/utility';
+import { validators, links } from 'src/utility';
 import { enums } from './helpers';
 import { StoreItem, FilterRadioButtonItem, FilterCheckBoxItem } from './components';
 
@@ -139,20 +139,10 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
               see more
             </Paper.Button>
             <Paper.Button
-              onPress={async () => {
+              onPress={() => {
                 const url = `https://www.findsmiley.dk/${item1.attributes.smileyscheme}`;
 
-                try {
-                  const res = await Linking.canOpenURL(url);
-
-                  if (!res) {
-                    throw new Error(`Cannot open link. If you wish to manually look up the smiley scheme: ${url}`);
-                  }
-
-                  await Linking.openURL(url);
-                } catch (err: any) {
-                  Alert.alert(err.name, err.message);
-                }
+                links.linkOpener(url);
               }}
             >
               open findsmiley.dk

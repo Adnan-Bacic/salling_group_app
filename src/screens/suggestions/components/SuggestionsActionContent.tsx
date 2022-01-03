@@ -1,10 +1,11 @@
 import React from 'react';
 import {
-  View, StyleSheet, Linking, Alert,
+  View, StyleSheet,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import * as functions from 'src/redux/functions';
 import { useAppDispatch } from 'src/redux/hooks';
+import { links } from 'src/utility';
 
 const SuggestionsActionContent: React.FunctionComponent<any> = ({
   item1,
@@ -16,20 +17,10 @@ const SuggestionsActionContent: React.FunctionComponent<any> = ({
       style={styles.container}
     >
       <Paper.Button
-        onPress={async () => {
+        onPress={() => {
           const url = item1.link;
 
-          try {
-            const res = await Linking.canOpenURL(url);
-
-            if (!res) {
-              throw new Error(`Cannot open link. If you wish to manually look up the item: ${url}`);
-            }
-
-            await Linking.openURL(url);
-          } catch (err: any) {
-            Alert.alert(err.name, err.message);
-          }
+          links.linkOpener(url);
         }}
       >
         open bilkatogo.dk

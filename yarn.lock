@@ -7676,6 +7676,15 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
+"opencollective-postinstall@npm:^2.0.2":
+  version: 2.0.3
+  resolution: "opencollective-postinstall@npm:2.0.3"
+  bin:
+    opencollective-postinstall: index.js
+  checksum: 0a68c5cef135e46d11e665d5077398285d1ce5311c948e8327b435791c409744d4a6bb9c55bd6507fb5f2ef34b0ad920565adcdaf974cbdae701aead6f32b396
+  languageName: node
+  linkType: hard
+
 "optionator@npm:^0.8.1":
   version: 0.8.3
   resolution: "optionator@npm:0.8.3"
@@ -8221,6 +8230,18 @@ fsevents@^2.1.2:
   dependencies:
     dotenv: ^10.0.0
   checksum: 31012bd58d014fb9bbe0253441581bb9fd955f0ebe5996aca9a6e342b6142ccdf6de58533887610017c7f3bd5d17d90ff6159be1862665a986f8ce3e85db9b5c
+  languageName: node
+  linkType: hard
+
+"react-native-inappbrowser-reborn@npm:^3.6.3":
+  version: 3.6.3
+  resolution: "react-native-inappbrowser-reborn@npm:3.6.3"
+  dependencies:
+    invariant: ^2.2.4
+    opencollective-postinstall: ^2.0.2
+  peerDependencies:
+    react-native: ">=0.56"
+  checksum: 745ee4e33092b5b839f74cd622835e882d37c9f7f18072640de17cbbf6e9debb63f3628097d433bfd5be714556e5d05df986cb42635e46deccbc938f2642ac63
   languageName: node
   linkType: hard
 
@@ -8863,6 +8884,7 @@ resolve@^2.0.0-next.3:
     react-native: ^0.66.1
     react-native-clean-project: 4.0.0-alpha4.0
     react-native-dotenv: ^3.2.0
+    react-native-inappbrowser-reborn: ^3.6.3
     react-native-paper: ^4.9.2
     react-native-safe-area-context: ^3.3.2
     react-native-screens: ^3.6.0
