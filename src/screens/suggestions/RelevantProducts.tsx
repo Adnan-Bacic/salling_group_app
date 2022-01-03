@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  View, FlatList, Linking, Alert, StyleSheet,
+  FlatList,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -8,7 +8,7 @@ import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
 import { suggestionsSelector, uiSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
-import { ProductSuggestionItem } from './components';
+import { ProductSuggestionItem, SuggestionsActionContent } from './components';
 
 interface RelevantProductsProps {
   navigation: any;
@@ -34,47 +34,6 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = (): Rea
   };
 
   const renderStoreItem = ({ item }: any) => {
-    const ActionContent: React.FunctionComponent<any> = ({
-      item1,
-    }): React.ReactElement => {
-      const stylesButtons = StyleSheet.create({
-        container: {
-          width: '100%',
-        },
-      });
-      return (
-        <View
-          style={stylesButtons.container}
-        >
-          <Paper.Button
-            onPress={async () => {
-              const url = item1.link;
-
-              try {
-                const res = await Linking.canOpenURL(url);
-
-                if (!res) {
-                  throw new Error(`Cannot open link. If you wish to manually look up the item: ${url}`);
-                }
-
-                await Linking.openURL(url);
-              } catch (err: any) {
-                Alert.alert(err.name, err.message);
-              }
-            }}
-          >
-            open bilkatogo.dk
-          </Paper.Button>
-          <Paper.Button
-            onPress={() => {
-              dispatch(functions.suggestions.getSimilarProducts(item1.prod_id));
-            }}
-          >
-            similar products
-          </Paper.Button>
-        </View>
-      );
-    };
     return (
       <ProductSuggestionItem
         key={item.id}
@@ -82,7 +41,7 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = (): Rea
         image={item.img}
         price={item.price}
         actionContent={(
-          <ActionContent
+          <SuggestionsActionContent
             item1={item}
           />
 )}

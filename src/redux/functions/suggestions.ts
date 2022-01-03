@@ -56,6 +56,7 @@ export const getSimilarProducts = (id: string) => {
     try {
       dispatch(actions.ui.setLoading(true));
 
+      /*
       // if user clicks on the same item, no need to make request, show already saved items
       if (id === getState()?.suggestions?.similarProducts?.similarProductsLastItemId) {
         RootNavigation.navigate('AntiFoodWasteNavigator', {
@@ -67,6 +68,7 @@ export const getSimilarProducts = (id: string) => {
         });
         return;
       }
+      */
 
       const url = `${API_URL}/v1-beta/product-suggestions/similar-products?productId=${id}`;
 
@@ -96,7 +98,66 @@ export const getSimilarProducts = (id: string) => {
 
       dispatch(actions.suggestions.getSimilarProducts(data2));
 
-      RootNavigation.navigate('SimilarProducts', {
+      RootNavigation.push('SimilarProducts', {
+        // initial: false,
+        items: data,
+      });
+    } catch (err: any) {
+      Alert.alert(err.name, err.message);
+    } finally {
+      dispatch(actions.ui.setLoading(false));
+    }
+  };
+};
+
+export const getFrequentlyBoughtTogehter = (id: string) => {
+  return async (dispatch: any, getState: any) => {
+    try {
+      dispatch(actions.ui.setLoading(true));
+
+      /*
+      // if user clicks on the same item, no need to make request, show already saved items
+      if (id === getState()?.suggestions?.similarProducts?.similarProductsLastItemId) {
+        RootNavigation.navigate('AntiFoodWasteNavigator', {
+          screen: 'AntiFoodWasteStore',
+          initial: false,
+          params: {
+            items: getState()?.suggestions?.similarProducts,
+          },
+        });
+        return;
+      }
+      */
+
+      const url = `${API_URL}/v1-beta/product-suggestions/frequently-bought-together?productId=${id}`;
+
+      const res: any = await fetch(url, {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${API_TOKEN}`,
+        },
+      });
+
+      if (!res.ok) {
+        if (res.status === 429) {
+          const d = requests.requestBlockDuration(res.headers.map['retry-after']);
+
+          throw new Error(`Too many requests in a short amount of time. Wait ${d.getMinutes()} minutes and try again`);
+        }
+
+        throw new Error('Could not get products');
+      }
+
+      const data = await res.json();
+
+      const data2 = {
+        similarProductsLastItemId: id,
+        similarProducts: data,
+      };
+
+      dispatch(actions.suggestions.getFrequentlyBoughtTogehter(data));
+
+      RootNavigation.push('FrequentlyBoughtTogehter', {
         // initial: false,
         items: data,
       });

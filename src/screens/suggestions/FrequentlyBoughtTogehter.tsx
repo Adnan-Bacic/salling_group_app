@@ -1,48 +1,38 @@
 import React from 'react';
 import { FlatList } from 'react-native';
-import { NoResults, Spinner } from 'src/components';
-import { useAppSelector } from 'src/redux/hooks';
 import { MainTemplate } from 'src/templates';
-import { uiSelector } from 'src/redux/selectors';
+import { NoResults } from 'src/components';
 import { ProductSuggestionItem, SuggestionsActionContent } from './components';
 
-interface SimilarProductsInterface {
+interface FrequentlyBoughtTogehterProps {
   route:{
     params:{
       items: any
     }
   }
 }
-const SimilarProducts: React.FunctionComponent<SimilarProductsInterface> = ({
+const FrequentlyBoughtTogehter: React.FunctionComponent<FrequentlyBoughtTogehterProps> = ({
   route,
 }): React.ReactElement => {
   const { items } = route.params;
 
-  const ui = useAppSelector(uiSelector);
-
   const renderItem = ({ item }: any) => {
     return (
       <ProductSuggestionItem
+        key={item.id}
+        title={item.description}
+        image={item.img}
+        price={item.price}
         actionContent={(
           <SuggestionsActionContent
             item1={item}
           />
-        )}
-        title={item.title}
-        image={item.img}
-        price={item.price}
+)}
       >
         children
       </ProductSuggestionItem>
     );
   };
-
-  if (ui.isLoading) {
-    return (
-      <Spinner />
-    );
-  }
-
   return (
     <MainTemplate>
       <FlatList
@@ -54,4 +44,4 @@ const SimilarProducts: React.FunctionComponent<SimilarProductsInterface> = ({
   );
 };
 
-export default SimilarProducts;
+export default FrequentlyBoughtTogehter;

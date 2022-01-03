@@ -50,7 +50,7 @@ export const getFoodWasteById = (id: string) => {
           screen: 'AntiFoodWasteStore',
           initial: false,
           params: {
-            items: getState().foodWaste.foodItemsId.clearances,
+            items: getState().foodWaste.foodItemsId,
           },
         });
         return;
@@ -84,7 +84,7 @@ export const getFoodWasteById = (id: string) => {
         screen: 'AntiFoodWasteStore',
         initial: false,
         params: {
-          items: data.clearances,
+          items: data,
         },
       });
     } catch (err: any) {

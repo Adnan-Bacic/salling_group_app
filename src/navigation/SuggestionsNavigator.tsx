@@ -15,6 +15,10 @@ const AntiFoodWasteNavigator: React.FunctionComponent = (): React.ReactElement =
         name="SimilarProducts"
         component={Screens.SimilarProducts}
       />
+      <SuggestionsStack.Screen
+        name="FrequentlyBoughtTogehter"
+        component={Screens.FrequentlyBoughtTogehter}
+      />
     </SuggestionsStack.Navigator>
   );
 };

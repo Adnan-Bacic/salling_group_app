@@ -14,3 +14,10 @@ export const getSimilarProducts = (data: any): DispatchProps<any> => {
     payload: data,
   };
 };
+
+export const getFrequentlyBoughtTogehter = (data: any): DispatchProps<any> => {
+  return {
+    type: actionTypes.GET_FREQUENTLY_BOUGHT_TOGEHTER,
+    payload: data,
+  };
+};

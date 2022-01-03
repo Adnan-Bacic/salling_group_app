@@ -43,7 +43,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         <Paper.Button
           onPress={() => {
             navigation.navigate('AntiFoodWasteStore', {
-              items: items.clearances,
+              items: items,
             });
           }}
         >

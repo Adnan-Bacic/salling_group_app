@@ -3,10 +3,12 @@ import * as actionTypes from '../actionTypes';
 interface DefaultState {
   relevantProducts: null | any;
   similarProducts: null | any;
+  frequentlyBoughtTogehter: null | any;
 }
 const defaultState: DefaultState = {
   relevantProducts: null,
   similarProducts: null,
+  frequentlyBoughtTogehter: null,
 };
 
 export const suggestionsReducer = (state = defaultState, action: any): any => {
@@ -21,6 +23,12 @@ export const suggestionsReducer = (state = defaultState, action: any): any => {
       return {
         ...state,
         similarProducts: action.payload,
+      };
+
+    case actionTypes.GET_FREQUENTLY_BOUGHT_TOGEHTER:
+      return {
+        ...state,
+        frequentlyBoughtTogehter: action.payload,
       };
 
     default:

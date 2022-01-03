@@ -8,6 +8,14 @@ export const navigate = (name: string, params?: Record<string, unknown>): void =
   }
 };
 
+export const push = (screenName: string, params?: any): void => {
+  if (navigationRef.isReady()) {
+    navigationRef.dispatch(
+      StackActions.push(screenName, params),
+    );
+  }
+};
+
 export const navigateAndResetStack = (screenName: string): void => {
   if (navigationRef.isReady()) {
     navigationRef.dispatch(

@@ -18,6 +18,7 @@ const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
   route,
 }): React.ReactElement => {
   const { items } = route.params;
+  console.log(items.clearances);
 
   const renderFoodItem = ({ item }: any) => {
     const ActionContent = () => {
@@ -53,7 +54,7 @@ const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
     <MainTemplate>
       <>
         <FlatList
-          data={items}
+          data={items.clearances}
           renderItem={renderFoodItem}
           ListEmptyComponent={NoResults}
         />
