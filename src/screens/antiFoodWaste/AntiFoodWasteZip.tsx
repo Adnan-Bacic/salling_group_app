@@ -4,6 +4,7 @@ import {
   FlatList,
   StyleSheet,
   Alert,
+  Platform,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -11,6 +12,7 @@ import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
 import { foodWasteSelector, uiSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
+import { validators } from 'src/utility';
 import { StoreItem } from './components';
 
 interface FoodWasteInterface {
@@ -35,9 +37,9 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
       return;
     }
 
-    if(zip.length < 4){
-      Alert.alert('Zip must be at least 4 characters long')
-      return
+    if (zip.length < 4) {
+      Alert.alert('Zip must be at least 4 characters long');
+      return;
     }
 
     dispatch(functions.foodWaste.getFoodWasteByZip(zip));
@@ -87,9 +89,14 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         <Paper.TextInput
           label="zip"
           value={zip}
-          onChangeText={(text) => { return setZip(text); }}
+          onChangeText={(text) => {
+            if (!validators.numbersAndDashZip(text)) {
+              return;
+            }
+            setZip(text);
+          }}
           mode="outlined"
-          keyboardType="number-pad"
+          keyboardType={Platform.OS === 'android' ? 'numeric' : 'numbers-and-punctuation'}
           onSubmitEditing={getData}
           maxLength={6}
         />

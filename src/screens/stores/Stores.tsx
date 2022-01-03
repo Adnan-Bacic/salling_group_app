@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  View, StyleSheet, Linking, Alert, FlatList, LayoutAnimation,
+  View, StyleSheet, Linking, Alert, FlatList, LayoutAnimation, Platform,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -8,6 +8,7 @@ import { uiSelector, storesSelector } from 'src/redux/selectors';
 import * as functions from 'src/redux/functions';
 import { MainTemplate } from 'src/templates';
 import { Spinner, NoResults } from 'src/components';
+import { validators } from 'src/utility';
 import { enums } from './helpers';
 import { StoreItem, FilterRadioButtonItem, FilterCheckBoxItem } from './components';
 
@@ -59,7 +60,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   const [petFood, setPetFood] = useState<boolean>(false);
   const [pharmacy, setPharmacy] = useState<boolean>(false);
   const [scanAndGo, setScanAndGo] = useState<boolean>(false);
-  // const [smileyscheme, setSmileyscheme] = useState<boolean>(false);
+  const [smileyscheme, setSmileyscheme] = useState<string>('');
   const [starbucks, setStarbucks] = useState<boolean>(false);
   const [swipBox, setSwipBox] = useState<boolean>(false);
   const [wc, setWc] = useState<boolean>(false);
@@ -95,6 +96,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         petFood: petFood,
         pharmacy: pharmacy,
         scanAndGo: scanAndGo,
+        smileyscheme: smileyscheme,
         starbucks: starbucks,
         swipBox: swipBox,
         wc: wc,
@@ -107,7 +109,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   }, [
     babyChanging, bakery, brand, carlsJunior, city, country, dispatch,
     enablingFacilities, flowers, garden, holidayOpen, parkingRestrictions,
-    nonFood, open247, parking, petFood, pharmacy, scanAndGo, starbucks,
+    nonFood, open247, parking, petFood, pharmacy, scanAndGo, smileyscheme, starbucks,
     street, swipBox, wc, wifi, zip,
   ]);
 
@@ -214,6 +216,12 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     setFiltersShown((prevState) => { return !prevState; });
   };
 
+  const resetLocationFilters = () => {
+    setZip('');
+    setCity('');
+    setStreet('');
+  };
+
   const FilterViewContent = () => {
     // return nothing if user isent toggling to show filters
     if (filtersShown === false) {
@@ -230,11 +238,14 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         </Paper.Subheading>
         {/* filters */}
         <Paper.TextInput
-          keyboardType="numeric"
+          keyboardType={Platform.OS === 'android' ? 'numeric' : 'numbers-and-punctuation'}
           label="Zip code"
           value={zip}
           mode="outlined"
           onChangeText={(text) => {
+            if (!validators.numbersAndDashZip(text)) {
+              return;
+            }
             setZip(text);
           }}
           maxLength={6}
@@ -255,7 +266,27 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
             setStreet(text);
           }}
         />
-
+        <Paper.Button
+          onPress={resetLocationFilters}
+        >
+          reset location
+        </Paper.Button>
+        <Paper.TextInput
+          keyboardType="numeric"
+          label="Smiley scheme (findsmiley.dk)"
+          value={smileyscheme}
+          mode="outlined"
+          onChangeText={(text) => {
+            setSmileyscheme(text);
+          }}
+        />
+        <Paper.Button
+          onPress={() => {
+            setSmileyscheme('');
+          }}
+        >
+          reset smiley scheme
+        </Paper.Button>
         <Paper.Subheading>
           Country
         </Paper.Subheading>

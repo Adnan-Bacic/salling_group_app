@@ -25,6 +25,7 @@ interface Options {
   petFood?: null | boolean;
   pharmacy?: null | boolean;
   scanAndGo?: null | boolean;
+  smileyscheme?: string;
   starbucks?: null | boolean;
   swipBox?: null | boolean;
   wc?: null | boolean;
@@ -97,6 +98,9 @@ export const getStores = (options: Options) => {
       }
       if (options.scanAndGo === true) {
         query += 'scanAndGo=true&';
+      }
+      if (options.smileyscheme !== '') {
+        query += `smileyscheme=${options.smileyscheme}&`;
       }
       if (options.starbucks === true) {
         query += 'starbucks=true&';
