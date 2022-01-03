@@ -3,6 +3,7 @@ import {
   View,
   FlatList,
   StyleSheet,
+  Alert,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -34,7 +35,12 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
       return;
     }
 
-    await dispatch(functions.foodWaste.getFoodWasteByZip(zip));
+    if(zip.length < 4){
+      Alert.alert('Zip must be at least 4 characters long')
+      return
+    }
+
+    dispatch(functions.foodWaste.getFoodWasteByZip(zip));
   };
 
   const renderStoreItem = ({ item }: any) => {

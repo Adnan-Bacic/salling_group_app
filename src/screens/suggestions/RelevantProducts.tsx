@@ -30,7 +30,7 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = (): Rea
       return;
     }
 
-    await dispatch(functions.suggestions.getRelevantProducts(query));
+    dispatch(functions.suggestions.getRelevantProducts(query));
   };
 
   const renderStoreItem = ({ item }: any) => {
