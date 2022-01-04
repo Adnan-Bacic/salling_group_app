@@ -18,17 +18,16 @@ const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
   route,
 }): React.ReactElement => {
   const { items } = route.params;
-  console.log(items.clearances);
 
   const renderFoodItem = ({ item }: any) => {
-    const ActionContent = () => {
+    const ActionContent: React.FunctionComponent = (): React.ReactElement => {
       return (
         <Paper.Button
           onPress={() => {
-            console.log('antifoodwastestore');
+            console.log('todo');
           }}
         >
-          123
+          todo
         </Paper.Button>
       );
     };
@@ -52,13 +51,11 @@ const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
 
   return (
     <MainTemplate>
-      <>
-        <FlatList
-          data={items.clearances}
-          renderItem={renderFoodItem}
-          ListEmptyComponent={NoResults}
-        />
-      </>
+      <FlatList
+        data={items.clearances}
+        renderItem={renderFoodItem}
+        ListEmptyComponent={NoResults}
+      />
     </MainTemplate>
   );
 };

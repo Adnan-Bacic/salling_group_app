@@ -46,7 +46,9 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
   };
 
   const renderStoreItem = ({ item }: any) => {
-    const ActionContent = ({ items }: any) => {
+    const ActionContent: React.FunctionComponent<any> = ({
+      items,
+    }): React.ReactElement => {
       return (
         <Paper.Button
           onPress={() => {
@@ -72,7 +74,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
           <ActionContent
             items={item}
           />
-)}
+        )}
       >
         children
       </StoreItem>
@@ -115,7 +117,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         )}
 
         {ui.isLoading && (
-        <Spinner />
+          <Spinner />
         )}
       </View>
     </MainTemplate>

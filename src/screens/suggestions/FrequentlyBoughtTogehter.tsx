@@ -1,7 +1,9 @@
 import React from 'react';
 import { FlatList } from 'react-native';
 import { MainTemplate } from 'src/templates';
-import { NoResults } from 'src/components';
+import { NoResults, Spinner } from 'src/components';
+import { useAppSelector } from 'src/redux/hooks';
+import { uiSelector } from 'src/redux/selectors';
 import { ProductSuggestionItem, SuggestionsActionContent } from './components';
 
 interface FrequentlyBoughtTogehterProps {
@@ -15,6 +17,8 @@ const FrequentlyBoughtTogehter: React.FunctionComponent<FrequentlyBoughtTogehter
   route,
 }): React.ReactElement => {
   const { items } = route.params;
+
+  const ui = useAppSelector(uiSelector);
 
   const renderItem = ({ item }: any) => {
     return (
@@ -33,6 +37,13 @@ const FrequentlyBoughtTogehter: React.FunctionComponent<FrequentlyBoughtTogehter
       </ProductSuggestionItem>
     );
   };
+
+  if (ui.isLoading) {
+    return (
+      <Spinner />
+    );
+  }
+
   return (
     <MainTemplate>
       <FlatList

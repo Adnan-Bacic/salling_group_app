@@ -52,23 +52,9 @@ export const getRelevantProducts = (query: any) => {
 };
 
 export const getSimilarProducts = (id: string) => {
-  return async (dispatch: any, getState: any) => {
+  return async (dispatch: any) => {
     try {
       dispatch(actions.ui.setLoading(true));
-
-      /*
-      // if user clicks on the same item, no need to make request, show already saved items
-      if (id === getState()?.suggestions?.similarProducts?.similarProductsLastItemId) {
-        RootNavigation.navigate('AntiFoodWasteNavigator', {
-          screen: 'AntiFoodWasteStore',
-          initial: false,
-          params: {
-            items: getState()?.suggestions?.similarProducts,
-          },
-        });
-        return;
-      }
-      */
 
       const url = `${API_URL}/v1-beta/product-suggestions/similar-products?productId=${id}`;
 
@@ -111,23 +97,9 @@ export const getSimilarProducts = (id: string) => {
 };
 
 export const getFrequentlyBoughtTogehter = (id: string) => {
-  return async (dispatch: any, getState: any) => {
+  return async (dispatch: any) => {
     try {
       dispatch(actions.ui.setLoading(true));
-
-      /*
-      // if user clicks on the same item, no need to make request, show already saved items
-      if (id === getState()?.suggestions?.similarProducts?.similarProductsLastItemId) {
-        RootNavigation.navigate('AntiFoodWasteNavigator', {
-          screen: 'AntiFoodWasteStore',
-          initial: false,
-          params: {
-            items: getState()?.suggestions?.similarProducts,
-          },
-        });
-        return;
-      }
-      */
 
       const url = `${API_URL}/v1-beta/product-suggestions/frequently-bought-together?productId=${id}`;
 
@@ -149,11 +121,6 @@ export const getFrequentlyBoughtTogehter = (id: string) => {
       }
 
       const data = await res.json();
-
-      const data2 = {
-        similarProductsLastItemId: id,
-        similarProducts: data,
-      };
 
       dispatch(actions.suggestions.getFrequentlyBoughtTogehter(data));
 

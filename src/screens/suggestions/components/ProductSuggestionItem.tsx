@@ -1,7 +1,4 @@
 import React from 'react';
-import {
-  StyleSheet,
-} from 'react-native';
 import * as Paper from 'react-native-paper';
 import { FoodItemTemplate, FoodItemBaseInterface } from 'src/components';
 
@@ -31,9 +28,5 @@ const ProductSuggestionItem: React.FunctionComponent<ProductSuggestionItemInterf
     </FoodItemTemplate>
   );
 };
-
-const styles = StyleSheet.create({
-
-});
 
 export default ProductSuggestionItem;

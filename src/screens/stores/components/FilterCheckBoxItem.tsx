@@ -15,26 +15,24 @@ const FilterCheckBoxItem: React.FunctionComponent<FilterCheckBoxItemInterface> =
   title, status, onPress,
 }): React.ReactElement => {
   return (
-    <>
+    <View
+      style={styles.container}
+    >
       <View
-        style={styles.container}
+        style={styles.titleContainer}
       >
-        <View
-          style={styles.titleContainer}
-        >
-          <Paper.Text>
-            {title}
-          </Paper.Text>
+        <Paper.Text>
+          {title}
+        </Paper.Text>
 
-        </View>
-        <View>
-          <Paper.Checkbox.Android
-            status={status}
-            onPress={onPress}
-          />
-        </View>
       </View>
-    </>
+      <View>
+        <Paper.Checkbox.Android
+          status={status}
+          onPress={onPress}
+        />
+      </View>
+    </View>
   );
 };
 

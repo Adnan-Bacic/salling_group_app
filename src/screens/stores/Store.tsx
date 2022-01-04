@@ -7,6 +7,7 @@ interface StoreInterface {
   route:{
     params:{
       name: string;
+      id: string;
     }
   }
 }
@@ -21,6 +22,9 @@ const Store: React.FunctionComponent<StoreInterface> = ({
       >
         <Paper.Text>
           {name}
+        </Paper.Text>
+        <Paper.Text>
+          {id}
         </Paper.Text>
       </View>
     </MainTemplate>

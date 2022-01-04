@@ -124,39 +124,36 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
       });
 
       return (
-        <>
-          <View
-            style={stylesButtons.container}
+        <View
+          style={stylesButtons.container}
+        >
+          <Paper.Button
+            onPress={() => {
+              navigation.navigate('Store', {
+                name: item.name,
+                id: item1.id,
+              });
+            }}
           >
-            <Paper.Button
-              onPress={() => {
-                navigation.navigate('Store', {
-                  name: item.name,
-                  id: item1.id,
-                });
-              }}
-            >
-              see more
-            </Paper.Button>
-            <Paper.Button
-              onPress={() => {
-                const url = `https://www.findsmiley.dk/${item1.attributes.smileyscheme}`;
+            see more
+          </Paper.Button>
+          <Paper.Button
+            onPress={() => {
+              const url = `https://www.findsmiley.dk/${item1.attributes.smileyscheme}`;
 
-                links.linkOpener(url);
-              }}
-            >
-              open findsmiley.dk
-            </Paper.Button>
-            <Paper.Button
-              onPress={() => {
-                dispatch(functions.foodWaste.getFoodWasteById(item1.id));
-              }}
-              mode="contained"
-            >
-              anti food waste
-            </Paper.Button>
-          </View>
-        </>
+              links.linkOpener(url);
+            }}
+          >
+            open findsmiley.dk
+          </Paper.Button>
+          <Paper.Button
+            onPress={() => {
+              dispatch(functions.foodWaste.getFoodWasteById(item1.id));
+            }}
+          >
+            anti food waste
+          </Paper.Button>
+        </View>
       );
     };
     // TODO: handle br - not a food chain
@@ -563,7 +560,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           to have the correct ui elements show
           */}
         <FlatList
-          data={stores.storesData}
+          data={!ui.isLoading && stores.storesData}
           renderItem={renderStoreItem}
           ListEmptyComponent={ui.isLoading === false ? NoResults : null}
           ListHeaderComponent={FilterViewContent}

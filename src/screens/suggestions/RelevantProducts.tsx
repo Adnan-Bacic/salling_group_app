@@ -79,7 +79,7 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = (): Rea
         )}
 
         {ui.isLoading && (
-        <Spinner />
+          <Spinner />
         )}
       </>
     </MainTemplate>
