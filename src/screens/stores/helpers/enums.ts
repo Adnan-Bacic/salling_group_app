@@ -1,3 +1,5 @@
+// STORE FILTERS
+
 export enum StoreAttributesNormal {
   babyChanging = 'Baby changing',
   bakery = 'Bakery',
@@ -132,3 +134,35 @@ export const StoreAttributesToNormal = (attribute: StoreAttributes): string => {
 
   return res;
 };
+
+// OPENING HOURS
+
+export enum HourTypes {
+  store = 'Store',
+  gardencenter = 'Garden center',
+  foodClickCollect = 'Food click & collect',
+  bakery = 'Bakery',
+  flowers = 'Flowers',
+  vareudlevering = 'Goods delivery',
+  servicecenter = 'Service center',
+  bistro = 'Bistro',
+  quickfood = 'Quickfood',
+  sushi = 'Sushi',
+  pakketarn = 'Pakketarn',
+}
+
+export const hourTypesToNormal = (type: string) => {
+  let res
+
+  switch(type){
+    case HourTypes.store:
+    res = 'Store'
+    break;
+
+    default:
+      res = 'test'
+      break;
+  }
+
+  return res
+}

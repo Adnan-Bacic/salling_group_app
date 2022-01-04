@@ -1862,6 +1862,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-native-vector-icons@npm:^6.4.10":
+  version: 6.4.10
+  resolution: "@types/react-native-vector-icons@npm:6.4.10"
+  dependencies:
+    "@types/react": "*"
+    "@types/react-native": "*"
+  checksum: 765319410bcaa9fb89545750ef257d11c2e92f84ab3117db5fc45845cfebcb979f0aca9c5c101cf6f1e5fbf14a207c5c732fd4e00801e9bec4aabaf1a1a15b11
+  languageName: node
+  linkType: hard
+
+"@types/react-native@npm:*":
+  version: 0.66.11
+  resolution: "@types/react-native@npm:0.66.11"
+  dependencies:
+    "@types/react": "*"
+  checksum: 072fd0bb041483d3d66249a190a8683b26fa9dfe1c12ed5cadfbae1fe68822eeb12087204328e0203796fe8492d8730609c6525cb6bce69b1c2b180199b620c1
+  languageName: node
+  linkType: hard
+
 "@types/react-native@npm:^0.64.5":
   version: 0.64.13
   resolution: "@types/react-native@npm:0.64.13"
@@ -8865,6 +8884,7 @@ resolve@^2.0.0-next.3:
     "@types/jest": ^26.0.23
     "@types/react-native": ^0.64.5
     "@types/react-native-dotenv": ^0.2.0
+    "@types/react-native-vector-icons": ^6.4.10
     "@types/react-test-renderer": ^16.9.2
     "@typescript-eslint/eslint-plugin": ^4.30.0
     "@typescript-eslint/parser": ^4.30.0

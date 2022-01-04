@@ -62,7 +62,6 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   chipContainer: {
-    // backgroundColor: 'red',
     flexDirection: 'row',
     flexWrap: 'wrap',
   },

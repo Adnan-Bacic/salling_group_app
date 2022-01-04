@@ -132,6 +132,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
               navigation.navigate('Store', {
                 name: item.name,
                 id: item1.id,
+                hours: item.hours,
               });
             }}
           >
@@ -209,7 +210,12 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     setStreet('');
   };
 
-  const FilterViewContent = () => {
+  /*
+  functions instead of component to avoid re-render after changing a filter
+  as we lose focus of the textinputs after every keystroke
+  https://stackoverflow.com/a/59537621/12197001
+  */
+  const filterViewContent = () => {
     // return nothing if user isent toggling to show filters
     if (filtersShown === false) {
       return null;
@@ -556,14 +562,14 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         </Paper.Button>
 
         {/*
-          its important to only render certain props depending on ui.isLoading
+          its important to only render certain props depending on loading state
           to have the correct ui elements show
           */}
         <FlatList
           data={!ui.isLoading && stores.storesData}
           renderItem={renderStoreItem}
           ListEmptyComponent={ui.isLoading === false ? NoResults : null}
-          ListHeaderComponent={FilterViewContent}
+          ListHeaderComponent={filterViewContent()}
           ListFooterComponent={ui.isLoading && Spinner}
         />
       </>
