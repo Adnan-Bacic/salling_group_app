@@ -18,12 +18,13 @@ const Store: React.FunctionComponent<StoreInterface> = ({
 }): React.ReactElement => {
   const { name, id, hours } = route.params;
 
-  const [hourType, setHourType] = useState('');
-  const [ndata, setnData] = useState(null);
+  const [hoursType, setHoursType] = useState('');
+  const [currentlyFilteredItems, setCurrentlyFilteredItems] = useState(null);
 
   useEffect(() => {
+    console.log(1)
     const setInitialData = () => {
-      setnData(hours);
+      setCurrentlyFilteredItems(hours);
     };
 
     setInitialData();
@@ -31,20 +32,22 @@ const Store: React.FunctionComponent<StoreInterface> = ({
   }, [hours]);
 
   useEffect(() => {
+    console.log(3);
     const handleChangeHourType = () => {
-      if (ndata !== null && hourType !== '') {
-        const test = hours.filter((item: any) => { return item.type === hourType; });
-        setnData(test);
+      // if not null / not empty string so it doesnt run on first render
+      if (currentlyFilteredItems !== null && hoursType !== '') {
+        const filteredItemsByType = hours.filter((item: any) => { return item.type === hoursType; });
+        setCurrentlyFilteredItems(filteredItemsByType);
       }
     };
 
     handleChangeHourType();
-    // dont need nData to avoid infinite re-render
-  }, [hourType, hours]);
+    // dont need currentlyFilteredItems to avoid infinite re-render
+  }, [hoursType]);
 
   const reset = () => {
-    setHourType('');
-    setnData(hours)
+    setHoursType('');
+    setCurrentlyFilteredItems(hours)
   }
 
   const renderItem = ({ item }: any) => {
@@ -70,6 +73,7 @@ const Store: React.FunctionComponent<StoreInterface> = ({
       </View>
     );
   };
+
   return (
     <MainTemplate>
       <View
@@ -90,11 +94,11 @@ const Store: React.FunctionComponent<StoreInterface> = ({
           {Object.entries(enums.HourTypes).map((type) => {
             return (
               <Paper.Chip
-                selected={hourType === type[0]}
+                selected={hoursType === type[0]}
                 style={styles.chip}
-                icon={hourType === type[0] ? 'check' : 'information'}
+                icon={hoursType === type[0] ? 'check' : 'information'}
                 onPress={() => {
-                  setHourType(type[0]);
+                  setHoursType(type[0]);
                 }}
                 key={type[0]}
               >
@@ -109,7 +113,7 @@ const Store: React.FunctionComponent<StoreInterface> = ({
           </Paper.Button>
         </View>
         <FlatList
-          data={ndata}
+          data={currentlyFilteredItems}
           renderItem={renderItem}
         />
       </View>
