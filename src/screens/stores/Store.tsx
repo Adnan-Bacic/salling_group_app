@@ -22,7 +22,6 @@ const Store: React.FunctionComponent<StoreInterface> = ({
   const [currentlyFilteredItems, setCurrentlyFilteredItems] = useState(null);
 
   useEffect(() => {
-    console.log(1)
     const setInitialData = () => {
       setCurrentlyFilteredItems(hours);
     };
@@ -32,11 +31,14 @@ const Store: React.FunctionComponent<StoreInterface> = ({
   }, [hours]);
 
   useEffect(() => {
-    console.log(3);
     const handleChangeHourType = () => {
+      console.log(1);
       // if not null / not empty string so it doesnt run on first render
       if (currentlyFilteredItems !== null && hoursType !== '') {
-        const filteredItemsByType = hours.filter((item: any) => { return item.type === hoursType; });
+        const filteredItemsByType = hours.filter((item: any) => {
+          return item.type === hoursType;
+        });
+
         setCurrentlyFilteredItems(filteredItemsByType);
       }
     };
@@ -47,29 +49,51 @@ const Store: React.FunctionComponent<StoreInterface> = ({
 
   const reset = () => {
     setHoursType('');
-    setCurrentlyFilteredItems(hours)
-  }
+    setCurrentlyFilteredItems(hours);
+  };
+
+  const showOpenOnly = () => {
+    const openOnly = hours.filter((item: any) => {
+      return item.closed === false;
+    });
+    // console.log(openOnly)
+    setCurrentlyFilteredItems(openOnly);
+  };
 
   const renderItem = ({ item }: any) => {
+    const hourTypeNormal = enums.hourTypesToNormal(item.type);
     return (
       <View
         style={styles.hourItemContainer}
       >
         <Paper.Text>
-          {item.date}
+          {`Date: ${item.date}`}
         </Paper.Text>
         <Paper.Text>
-          {item.type}
+          {`Section - ${hourTypeNormal}`}
         </Paper.Text>
-        <Paper.Text>
-          {item.closed.toString()}
+        <Paper.Text
+          style={{
+            color: item.closed ? 'red' : 'green',
+          }}
+        >
+          {item.closed ? (
+            'Closed'
+          ) : (
+            'Open'
+          )}
         </Paper.Text>
-        <Paper.Text>
-          {item.open}
-        </Paper.Text>
-        <Paper.Text>
-          {item.close}
-        </Paper.Text>
+        {item.open && (
+          <Paper.Text>
+            {`Opens at: ${item.open}`}
+          </Paper.Text>
+
+        )}
+        {item.close && (
+          <Paper.Text>
+            {`Closes at: ${item.close}`}
+          </Paper.Text>
+        )}
       </View>
     );
   };
@@ -91,7 +115,7 @@ const Store: React.FunctionComponent<StoreInterface> = ({
         <View
           style={styles.chipContainer}
         >
-          {Object.entries(enums.HourTypes).map((type) => {
+          {Object.entries(enums.HourTypesNormal).map((type) => {
             return (
               <Paper.Chip
                 selected={hoursType === type[0]}
@@ -106,12 +130,17 @@ const Store: React.FunctionComponent<StoreInterface> = ({
               </Paper.Chip>
             );
           })}
-          <Paper.Button
-            onPress={reset}
-          >
-            reset
-          </Paper.Button>
         </View>
+        <Paper.Button
+          onPress={reset}
+        >
+          reset type
+        </Paper.Button>
+        <Paper.Button
+          onPress={showOpenOnly}
+        >
+          only show opened
+        </Paper.Button>
         <FlatList
           data={currentlyFilteredItems}
           renderItem={renderItem}
