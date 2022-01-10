@@ -48,7 +48,7 @@ const SimilarProducts: React.FunctionComponent<SimilarProductsInterface> = ({
       <FlatList
         data={items}
         renderItem={renderItem}
-        ListEmptyComponent={NoResults}
+        ListEmptyComponent={<NoResults />}
       />
     </MainTemplate>
   );

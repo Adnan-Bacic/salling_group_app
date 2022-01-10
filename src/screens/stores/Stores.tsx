@@ -131,12 +131,11 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
             onPress={() => {
               navigation.navigate('Store', {
                 name: item.name,
-                id: item1.id,
                 hours: item.hours,
               });
             }}
           >
-            see more
+            show opening hours
           </Paper.Button>
           <Paper.Button
             onPress={() => {
@@ -568,9 +567,9 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         <FlatList
           data={!ui.isLoading && stores.storesData}
           renderItem={renderStoreItem}
-          ListEmptyComponent={ui.isLoading === false ? NoResults : null}
+          ListEmptyComponent={ui.isLoading === false ? <NoResults /> : null}
           ListHeaderComponent={filterViewContent()}
-          ListFooterComponent={ui.isLoading && Spinner}
+          ListFooterComponent={ui.isLoading && <Spinner />}
         />
       </>
     </MainTemplate>

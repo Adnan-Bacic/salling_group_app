@@ -49,7 +49,7 @@ const FrequentlyBoughtTogehter: React.FunctionComponent<FrequentlyBoughtTogehter
       <FlatList
         data={items}
         renderItem={renderItem}
-        ListEmptyComponent={NoResults}
+        ListEmptyComponent={<NoResults />}
       />
     </MainTemplate>
   );

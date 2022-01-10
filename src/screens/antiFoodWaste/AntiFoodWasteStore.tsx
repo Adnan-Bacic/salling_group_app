@@ -54,7 +54,7 @@ const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
       <FlatList
         data={items.clearances}
         renderItem={renderFoodItem}
-        ListEmptyComponent={NoResults}
+        ListEmptyComponent={<NoResults />}
       />
     </MainTemplate>
   );

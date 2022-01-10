@@ -112,7 +112,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         <FlatList
           data={foodWaste.foodItems}
           renderItem={renderStoreItem}
-          ListEmptyComponent={NoResults}
+          ListEmptyComponent={<NoResults />}
         />
         )}
 

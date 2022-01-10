@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, FlatList } from 'react-native';
+import {
+  View, StyleSheet, FlatList, LayoutAnimation,
+} from 'react-native';
 import * as Paper from 'react-native-paper';
 import { MainTemplate } from 'src/templates';
 import { enums } from './helpers';
@@ -8,7 +10,6 @@ interface StoreInterface {
   route:{
     params:{
       name: string;
-      id: string;
       hours: any;
     }
   }
@@ -16,8 +17,9 @@ interface StoreInterface {
 const Store: React.FunctionComponent<StoreInterface> = ({
   route,
 }): React.ReactElement => {
-  const { name, id, hours } = route.params;
+  const { name, hours } = route.params;
 
+  const [filtersShown, setFiltersShown] = useState(false);
   const [hoursType, setHoursType] = useState('');
   const [currentlyFilteredItems, setCurrentlyFilteredItems] = useState(null);
 
@@ -61,7 +63,19 @@ const Store: React.FunctionComponent<StoreInterface> = ({
   };
 
   const renderItem = ({ item }: any) => {
+    //console.log('item', item?.customerFlow)
     const hourTypeNormal = enums.hourTypesToNormal(item.type);
+
+
+  const t = hours.forEach(el => {
+    
+    //can be empty
+    if(el.customerFlow){
+      //console.log(el.customerFlow)
+    }
+  });
+  //console.log(t)
+
     return (
       <View
         style={styles.hourItemContainer}
@@ -94,24 +108,47 @@ const Store: React.FunctionComponent<StoreInterface> = ({
             {`Closes at: ${item.close}`}
           </Paper.Text>
         )}
+
+        {item.customerFlow && (
+          <>
+          <Paper.Text>Expected customer flow</Paper.Text>
+          {item.customerFlow.map((item1) => {
+            console.log('item1', item1)
+            return(
+              <>
+
+              <View style={{
+                //flex: 1,
+                width: 1,
+    height: 1,
+                backgroundColor: 'red',
+                flexDirection: "row",
+    flexWrap: "wrap",
+              }}>
+
+              </View>
+              </>
+            )
+          })}
+          </>
+        )}
       </View>
     );
   };
 
-  return (
-    <MainTemplate>
-      <View
-        style={styles.container}
-      >
-        <Paper.Text>
-          {name}
-        </Paper.Text>
-        <Paper.Text>
-          {id}
-        </Paper.Text>
-        <Paper.Title>
-          Opening hours
-        </Paper.Title>
+  const toggleFiltersShown = () => {
+    LayoutAnimation.easeInEaseOut();
+
+    setFiltersShown((prevState) => { return !prevState; });
+  };
+
+  const FilterContent = () => {
+    if (!filtersShown) {
+      return null;
+    }
+
+    return (
+      <>
         <View
           style={styles.chipContainer}
         >
@@ -141,9 +178,34 @@ const Store: React.FunctionComponent<StoreInterface> = ({
         >
           only show opened
         </Paper.Button>
+      </>
+    );
+  };
+
+  return (
+    <MainTemplate>
+      <View
+        style={styles.container}
+      >
+        <Paper.Text>
+          {name}
+        </Paper.Text>
+        <Paper.Title>
+          Opening hours
+        </Paper.Title>
+        <Paper.Button
+          onPress={toggleFiltersShown}
+        >
+          {filtersShown ? (
+            'Hide filters'
+          ) : (
+            'Show filters'
+          )}
+        </Paper.Button>
         <FlatList
           data={currentlyFilteredItems}
           renderItem={renderItem}
+          ListHeaderComponent={<FilterContent />}
         />
       </View>
     </MainTemplate>

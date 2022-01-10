@@ -74,7 +74,7 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = (): Rea
         <FlatList
           data={suggestions.relevantProducts.suggestions}
           renderItem={renderStoreItem}
-          ListEmptyComponent={NoResults}
+          ListEmptyComponent={<NoResults />}
         />
         )}
 
