@@ -11,6 +11,7 @@
     "lint": "eslint src __tests__ index.js App.tsx babel.config.js metro.config.js react-native.config.js .eslintrc.js --ext .js,.jsx,.ts,.tsx --fix",
     "tsc": "tsc --skipLibCheck",
     "clean": "react-native clean-project-auto",
+    "cleanBuild": "./node_modules/.bin/react-native-clean-project --keep-node-modules --remove-iOS-build --remove-android-build --clean-android-project --keep-brew --keep-pods",
     "clearCache": "cd android && ./gradlew clean && cd .. && del -rf node_modules && yarn cache clean && yarn install",
     "generateDebugAPK": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res && cd android && ./gradlew assembleDebug && cd ..",
     "generateReleaseAPK": "cd android && ./gradlew assembleRelease && cd ..",
