@@ -1,7 +1,4 @@
 import React from 'react';
-import {
-  StyleSheet,
-} from 'react-native';
 import * as Paper from 'react-native-paper';
 import { FoodItemTemplate, FoodItemBaseInterface } from 'src/components';
 
@@ -16,6 +13,7 @@ interface FoodWasteItemInterface extends FoodItemBaseInterface {
   stockUnit: 'kg' | 'each';
 }
 const FoodWasteItem: React.FunctionComponent<FoodWasteItemInterface> = ({
+  actionContent,
   title,
   image,
   originalPrice,
@@ -30,6 +28,7 @@ const FoodWasteItem: React.FunctionComponent<FoodWasteItemInterface> = ({
     <FoodItemTemplate
       title={title}
       image={image}
+      actionContent={actionContent}
     >
       <Paper.Text>
         children
@@ -55,9 +54,5 @@ const FoodWasteItem: React.FunctionComponent<FoodWasteItemInterface> = ({
     </FoodItemTemplate>
   );
 };
-
-const styles = StyleSheet.create({
-
-});
 
 export default FoodWasteItem;

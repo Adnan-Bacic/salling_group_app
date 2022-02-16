@@ -1,10 +1,6 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  View,
-  StyleSheet,
-  Linking,
-  Alert,
-  ScrollView, FlatList, LayoutAnimation,
+  View, StyleSheet, FlatList, LayoutAnimation, Platform,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -12,6 +8,7 @@ import { uiSelector, storesSelector } from 'src/redux/selectors';
 import * as functions from 'src/redux/functions';
 import { MainTemplate } from 'src/templates';
 import { Spinner, NoResults } from 'src/components';
+import { validators, links } from 'src/utility';
 import { enums } from './helpers';
 import { StoreItem, FilterRadioButtonItem, FilterCheckBoxItem } from './components';
 
@@ -22,11 +19,7 @@ interface StoresInterface {
 const Stores: React.FunctionComponent<StoresInterface> = ({
   navigation,
 }): React.ReactElement => {
-  enum ViewModes {
-    filterView = 'filterView',
-    storesView = 'storesView',
-  }
-  const [viewMode, setViewMode] = useState<ViewModes>(ViewModes.storesView);
+  const [filtersShown, setFiltersShown] = useState(false);
 
   // OPTIONS FOR SEARCH
   // filters
@@ -67,7 +60,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   const [petFood, setPetFood] = useState<boolean>(false);
   const [pharmacy, setPharmacy] = useState<boolean>(false);
   const [scanAndGo, setScanAndGo] = useState<boolean>(false);
-  // const [smileyscheme, setSmileyscheme] = useState<boolean>(false);
+  const [smileyscheme, setSmileyscheme] = useState<string>('');
   const [starbucks, setStarbucks] = useState<boolean>(false);
   const [swipBox, setSwipBox] = useState<boolean>(false);
   const [wc, setWc] = useState<boolean>(false);
@@ -103,6 +96,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         petFood: petFood,
         pharmacy: pharmacy,
         scanAndGo: scanAndGo,
+        smileyscheme: smileyscheme,
         starbucks: starbucks,
         swipBox: swipBox,
         wc: wc,
@@ -115,11 +109,53 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   }, [
     babyChanging, bakery, brand, carlsJunior, city, country, dispatch,
     enablingFacilities, flowers, garden, holidayOpen, parkingRestrictions,
-    nonFood, open247, parking, petFood, pharmacy, scanAndGo, starbucks,
+    nonFood, open247, parking, petFood, pharmacy, scanAndGo, smileyscheme, starbucks,
     street, swipBox, wc, wifi, zip,
   ]);
 
-  const renderStoreItem = ({ item }: FlatListItemProps) => {
+  const renderStoreItem = ({ item }: any) => {
+    const ActionContent: React.FunctionComponent<any> = ({
+      item1,
+    }): React.ReactElement => {
+      const stylesButtons = StyleSheet.create({
+        container: {
+          width: '100%',
+        },
+      });
+
+      return (
+        <View
+          style={stylesButtons.container}
+        >
+          <Paper.Button
+            onPress={() => {
+              navigation.navigate('Store', {
+                name: item.name,
+                hours: item.hours,
+              });
+            }}
+          >
+            show opening hours
+          </Paper.Button>
+          <Paper.Button
+            onPress={() => {
+              const url = `https://www.findsmiley.dk/${item1.attributes.smileyscheme}`;
+
+              links.linkOpener(url);
+            }}
+          >
+            open findsmiley.dk
+          </Paper.Button>
+          <Paper.Button
+            onPress={() => {
+              dispatch(functions.foodWaste.getFoodWasteById(item1.id));
+            }}
+          >
+            anti food waste
+          </Paper.Button>
+        </View>
+      );
+    };
     // TODO: handle br - not a food chain
     return (
       <StoreItem
@@ -129,29 +165,14 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         zip={item.address.zip}
         country={item.address.country}
         attributes={item.attributes}
-        actionButton1Text="see more"
-        actionButton1OnPress={() => {
-          navigation.navigate('Store', {
-            name: item.name,
-            id: item.id,
-          });
-        }}
-        onPressSmileyScheme={async () => {
-          const url = `https://www.findsmiley.dk/${item.attributes.smileyscheme}`;
-
-          try {
-            const res = await Linking.canOpenURL(url);
-
-            if (!res) {
-              throw new Error(`Cannot open link. If you wish to manually look up the smiley scheme: ${url}`);
-            }
-
-            await Linking.openURL(url);
-          } catch (err: any) {
-            Alert.alert(err.name, err.message);
-          }
-        }}
-      />
+        actionContent={(
+          <ActionContent
+            item1={item}
+          />
+)}
+      >
+        children
+      </StoreItem>
     );
   };
 
@@ -176,32 +197,26 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     setWifi(false);
   };
 
-  const scrollRef = useRef<any>();
-
-  const scrollToTop = () => {
-    /*
-    scrollRef.current?.scrollTo({
-      y: 0,
-      animated: true,
-    });
-    */
-
-    scrollRef.current.scrollToOffset({ animated: true, offset: 0 });
-  };
-
-  const switchViewMode = () => {
+  const toggleFiltersShown = () => {
     LayoutAnimation.easeInEaseOut();
 
-    if (viewMode === ViewModes.storesView) {
-      setViewMode(ViewModes.filterView);
-    } else {
-      setViewMode(ViewModes.storesView);
-    }
+    setFiltersShown((prevState) => { return !prevState; });
   };
 
-  const FilterViewContent = () => {
+  const resetLocationFilters = () => {
+    setZip('');
+    setCity('');
+    setStreet('');
+  };
+
+  /*
+  functions instead of component to avoid re-render after changing a filter
+  as we lose focus of the textinputs after every keystroke
+  https://stackoverflow.com/a/59537621/12197001
+  */
+  const filterViewContent = () => {
     // return nothing if user isent toggling to show filters
-    if (viewMode !== ViewModes.filterView) {
+    if (filtersShown === false) {
       return null;
     }
 
@@ -215,13 +230,17 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         </Paper.Subheading>
         {/* filters */}
         <Paper.TextInput
-          keyboardType="numeric"
+          keyboardType={Platform.OS === 'android' ? 'numeric' : 'numbers-and-punctuation'}
           label="Zip code"
           value={zip}
           mode="outlined"
           onChangeText={(text) => {
+            if (!validators.numbersAndDashZip(text)) {
+              return;
+            }
             setZip(text);
           }}
+          maxLength={6}
         />
         <Paper.TextInput
           label="City"
@@ -239,7 +258,27 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
             setStreet(text);
           }}
         />
-
+        <Paper.Button
+          onPress={resetLocationFilters}
+        >
+          reset location
+        </Paper.Button>
+        <Paper.TextInput
+          keyboardType="numeric"
+          label="Smiley scheme (findsmiley.dk)"
+          value={smileyscheme}
+          mode="outlined"
+          onChangeText={(text) => {
+            setSmileyscheme(text);
+          }}
+        />
+        <Paper.Button
+          onPress={() => {
+            setSmileyscheme('');
+          }}
+        >
+          reset smiley scheme
+        </Paper.Button>
         <Paper.Subheading>
           Country
         </Paper.Subheading>
@@ -511,40 +550,27 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
     <MainTemplate>
       <>
         <Paper.Button
-          onPress={switchViewMode}
+          onPress={toggleFiltersShown}
+          mode="contained"
         >
-          {viewMode === ViewModes.storesView ? (
-            'Show filters'
-          ) : (
+          {filtersShown ? (
             'Hide filters'
+          ) : (
+            'Show filters'
           )}
         </Paper.Button>
 
-        <View
-          style={styles.spacer}
-        />
-
         {/*
-          its important to only render certain props depending on ui.isLoading
+          its important to only render certain props depending on loading state
           to have the correct ui elements show
           */}
         <FlatList
-          ref={scrollRef}
-          data={!ui.isLoading ? stores.storesData : []}
-          renderItem={!ui.isLoading ? renderStoreItem : null}
-          ListEmptyComponent={ui.isLoading === false ? NoResults : null}
-          ListHeaderComponent={FilterViewContent}
-          ListFooterComponent={ui.isLoading && Spinner}
-          keyExtractor={(item) => {
-            return item.id;
-          }}
+          data={!ui.isLoading && stores.storesData}
+          renderItem={renderStoreItem}
+          ListEmptyComponent={ui.isLoading === false ? <NoResults /> : null}
+          ListHeaderComponent={filterViewContent()}
+          ListFooterComponent={ui.isLoading && <Spinner />}
         />
-
-        <Paper.Button
-          onPress={scrollToTop}
-        >
-          scroll to top
-        </Paper.Button>
       </>
     </MainTemplate>
   );
@@ -555,9 +581,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     justifyContent: 'space-between',
-  },
-  spacer: {
-    marginTop: 20,
   },
 });
 

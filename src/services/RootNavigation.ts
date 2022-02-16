@@ -1,10 +1,18 @@
 import { createNavigationContainerRef, StackActions, CommonActions } from '@react-navigation/native';
 
-export const navigationRef = createNavigationContainerRef();
+export const navigationRef = createNavigationContainerRef<any>();
 
 export const navigate = (name: string, params?: Record<string, unknown>): void => {
   if (navigationRef.isReady()) {
     navigationRef.navigate(name, params);
+  }
+};
+
+export const push = (screenName: string, params?: any): void => {
+  if (navigationRef.isReady()) {
+    navigationRef.dispatch(
+      StackActions.push(screenName, params),
+    );
   }
 };
 

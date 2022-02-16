@@ -8,11 +8,10 @@ import { enums } from '../helpers';
 
 interface StoreItemInterface extends StoreItemBaseInterface {
   attributes: Record<string, unknown>;
-  onPressSmileyScheme: () => void;
 }
 const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
-  name, street, city, zip, country, attributes, onPressSmileyScheme,
-  actionButton1OnPress, actionButton1Text,
+  name, street, city, zip, country, attributes,
+  actionContent,
 }): React.ReactElement => {
   return (
     <StoreItemTemplate
@@ -21,8 +20,7 @@ const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
       city={city}
       zip={zip}
       country={country}
-      actionButton1OnPress={actionButton1OnPress}
-      actionButton1Text={actionButton1Text}
+      actionContent={actionContent}
     >
       <View
         style={styles.chipContainer}
@@ -54,15 +52,6 @@ const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
         })}
 
       </View>
-      {attributes.smileyscheme && (
-      <View>
-        <Paper.Text
-          onPress={onPressSmileyScheme}
-        >
-          Open smiley scheme
-        </Paper.Text>
-      </View>
-      )}
     </StoreItemTemplate>
   );
 };
@@ -73,7 +62,6 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   chipContainer: {
-    // backgroundColor: 'red',
     flexDirection: 'row',
     flexWrap: 'wrap',
   },

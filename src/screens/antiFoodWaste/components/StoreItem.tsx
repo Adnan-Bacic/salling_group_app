@@ -1,7 +1,4 @@
 import React from 'react';
-import {
-  StyleSheet,
-} from 'react-native';
 import * as Paper from 'react-native-paper';
 import { StoreItemTemplate, StoreItemBaseInterface } from 'src/components';
 
@@ -10,7 +7,7 @@ interface StoreItemInterface extends StoreItemBaseInterface {
 }
 const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
   name, street, city, zip, country, amount,
-  actionButton1OnPress, actionButton1Text,
+  actionContent,
 }): React.ReactElement => {
   return (
     <StoreItemTemplate
@@ -19,8 +16,7 @@ const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
       city={city}
       zip={zip}
       country={country}
-      actionButton1Text={actionButton1Text}
-      actionButton1OnPress={actionButton1OnPress}
+      actionContent={actionContent}
     >
       <Paper.Text>
         children
@@ -31,9 +27,5 @@ const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
     </StoreItemTemplate>
   );
 };
-
-const styles = StyleSheet.create({
-
-});
 
 export default StoreItem;

@@ -16,27 +16,25 @@ const FilterRadioButtonItem: React.FunctionComponent<FilterRadioButtonItemInterf
   title, status, value, onPress,
 }): React.ReactElement => {
   return (
-    <>
+    <View
+      style={styles.container}
+    >
       <View
-        style={styles.container}
+        style={styles.titleContainer}
       >
-        <View
-          style={styles.titleContainer}
-        >
-          <Paper.Text>
-            {title}
-          </Paper.Text>
+        <Paper.Text>
+          {title}
+        </Paper.Text>
 
-        </View>
-        <View>
-          <Paper.RadioButton.Android
-            status={status}
-            value={value}
-            onPress={onPress}
-          />
-        </View>
       </View>
-    </>
+      <View>
+        <Paper.RadioButton.Android
+          status={status}
+          value={value}
+          onPress={onPress}
+        />
+      </View>
+    </View>
   );
 };
 

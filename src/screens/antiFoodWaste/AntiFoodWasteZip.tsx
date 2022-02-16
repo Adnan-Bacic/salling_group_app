@@ -3,6 +3,8 @@ import {
   View,
   FlatList,
   StyleSheet,
+  Alert,
+  Platform,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -10,6 +12,7 @@ import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
 import { foodWasteSelector, uiSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
+import { validators } from 'src/utility';
 import { StoreItem } from './components';
 
 interface FoodWasteInterface {
@@ -34,12 +37,30 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
       return;
     }
 
-    await dispatch(functions.foodWaste.getFoodWasteByZip(zip));
+    if (zip.length < 4) {
+      Alert.alert('Zip must be at least 4 characters long');
+      return;
+    }
+
+    dispatch(functions.foodWaste.getFoodWasteByZip(zip));
   };
 
   const renderStoreItem = ({ item }: any) => {
-    // console.log(item.store.id);
-
+    const ActionContent: React.FunctionComponent<any> = ({
+      items,
+    }): React.ReactElement => {
+      return (
+        <Paper.Button
+          onPress={() => {
+            navigation.navigate('AntiFoodWasteStore', {
+              items: items,
+            });
+          }}
+        >
+          see items
+        </Paper.Button>
+      );
+    };
     return (
       <StoreItem
         key={item.store.id}
@@ -49,12 +70,11 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         zip={item.store.address.zip}
         country={item.store.address.country}
         amount={item.clearances.length}
-        actionButton1Text="food waste"
-        actionButton1OnPress={() => {
-          navigation.navigate('AntiFoodWasteStore', {
-            items: item.clearances,
-          });
-        }}
+        actionContent={(
+          <ActionContent
+            items={item}
+          />
+        )}
       >
         children
       </StoreItem>
@@ -71,9 +91,14 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         <Paper.TextInput
           label="zip"
           value={zip}
-          onChangeText={(text) => { return setZip(text); }}
+          onChangeText={(text) => {
+            if (!validators.numbersAndDashZip(text)) {
+              return;
+            }
+            setZip(text);
+          }}
           mode="outlined"
-          keyboardType="number-pad"
+          keyboardType={Platform.OS === 'android' ? 'numeric' : 'numbers-and-punctuation'}
           onSubmitEditing={getData}
           maxLength={6}
         />
@@ -87,43 +112,12 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         <FlatList
           data={foodWaste.foodItems}
           renderItem={renderStoreItem}
-          ListEmptyComponent={NoResults}
+          ListEmptyComponent={<NoResults />}
         />
         )}
 
-        {/*
-        {(foodWaste.foodItems && !ui.isLoading) && (
-          foodWaste.foodItems.map((item) => {
-            console.log('item', item)
-            return(
-              <Paper.Card>
-              <Paper.Card.Title title="Card Title" subtitle="Card Subtitle" />
-              <Paper.Card.Content>
-                <Paper.Title>Card title</Paper.Title>
-                <Paper.Paragraph>Card content</Paper.Paragraph>
-              </Paper.Card.Content>
-              <Paper.Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-              <Paper.Card.Actions>
-                <Paper.Button>Cancel</Paper.Button>
-                <Paper.Button>Ok</Paper.Button>
-              </Paper.Card.Actions>
-            </Paper.Card>
-            )
-          })
-        )}
-      </View>
-
-      {(foodWaste.foodItems && !ui.isLoading) && (
-            <>
-              {(foodWaste.foodItems.length === 0) && (
-              <NoResults></NoResults>
-              )}
-            </>
-          )}
-
-           */}
         {ui.isLoading && (
-        <Spinner />
+          <Spinner />
         )}
       </View>
     </MainTemplate>

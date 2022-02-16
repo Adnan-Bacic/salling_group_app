@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import {
   FlatList,
-  Linking,
-  Alert,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
@@ -10,15 +8,13 @@ import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
 import { suggestionsSelector, uiSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
-import { ProductSuggestionItem } from './components';
+import { ProductSuggestionItem, SuggestionsActionContent } from './components';
 
 interface RelevantProductsProps {
   navigation: any;
 }
 
-const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
-  navigation,
-}): React.ReactElement => {
+const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = (): React.ReactElement => {
   const [query, setQuery] = useState('');
   const [prevQuery, setPrevQuery] = useState('');
 
@@ -34,33 +30,21 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
       return;
     }
 
-    await dispatch(functions.suggestions.getRelevantProducts(query));
+    dispatch(functions.suggestions.getRelevantProducts(query));
   };
 
   const renderStoreItem = ({ item }: any) => {
-    // console.log(item);
     return (
       <ProductSuggestionItem
         key={item.id}
         title={item.description}
         image={item.img}
         price={item.price}
-        link={item.link}
-        onPressLink={async () => {
-          const url = item.link;
-
-          try {
-            const res = await Linking.canOpenURL(url);
-
-            if (!res) {
-              throw new Error(`Cannot open link. If you wish to manually look up the item: ${url}`);
-            }
-
-            await Linking.openURL(url);
-          } catch (err: any) {
-            Alert.alert(err.name, err.message);
-          }
-        }}
+        actionContent={(
+          <SuggestionsActionContent
+            item1={item}
+          />
+)}
       >
         children
       </ProductSuggestionItem>
@@ -90,12 +74,12 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
         <FlatList
           data={suggestions.relevantProducts.suggestions}
           renderItem={renderStoreItem}
-          ListEmptyComponent={NoResults}
+          ListEmptyComponent={<NoResults />}
         />
         )}
 
         {ui.isLoading && (
-        <Spinner />
+          <Spinner />
         )}
       </>
     </MainTemplate>

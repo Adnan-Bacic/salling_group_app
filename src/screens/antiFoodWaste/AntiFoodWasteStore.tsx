@@ -1,14 +1,13 @@
 import React from 'react';
 import {
-  View,
   FlatList,
-  StyleSheet,
 } from 'react-native';
+import * as Paper from 'react-native-paper';
 import { MainTemplate } from 'src/templates';
+import { NoResults } from 'src/components';
 import { FoodWasteItem } from './components';
 
 interface FoodWasteInterface {
-  navigation: any;
   route: {
     params: {
       items: any;
@@ -16,13 +15,22 @@ interface FoodWasteInterface {
   }
 }
 const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
-  navigation, route,
+  route,
 }): React.ReactElement => {
   const { items } = route.params;
-  // console.log(items)
 
   const renderFoodItem = ({ item }: any) => {
-    // console.log('item stock', item.offer.stock);
+    const ActionContent: React.FunctionComponent = (): React.ReactElement => {
+      return (
+        <Paper.Button
+          onPress={() => {
+            console.log('todo');
+          }}
+        >
+          todo
+        </Paper.Button>
+      );
+    };
     return (
       <FoodWasteItem
         title={item.product.description}
@@ -34,30 +42,22 @@ const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
         discount={item.offer.discount}
         currency={item.offer.currency}
         stockUnit={item.offer.stockUnit}
+        actionContent={<ActionContent />}
       >
         children
       </FoodWasteItem>
     );
   };
+
   return (
     <MainTemplate>
-      <>
-        <View
-          style={styles.spacer}
-        />
-        <FlatList
-          data={items}
-          renderItem={renderFoodItem}
-        />
-      </>
+      <FlatList
+        data={items.clearances}
+        renderItem={renderFoodItem}
+        ListEmptyComponent={<NoResults />}
+      />
     </MainTemplate>
   );
 };
-
-const styles = StyleSheet.create({
-  spacer: {
-    marginTop: 20,
-  },
-});
 
 export default AntiFoodWasteStore;

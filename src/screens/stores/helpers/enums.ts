@@ -1,3 +1,5 @@
+// STORE FILTERS
+
 export enum StoreAttributesNormal {
   babyChanging = 'Baby changing',
   bakery = 'Bakery',
@@ -123,6 +125,92 @@ export const StoreAttributesToNormal = (attribute: StoreAttributes): string => {
 
     case StoreAttributes.wifi:
       res = StoreAttributesNormal.wifi;
+      break;
+
+    default:
+      res = '';
+      break;
+  }
+
+  return res;
+};
+
+// OPENING HOURS
+
+export enum HourTypes {
+  store = 'store',
+  gardencenter = 'gardencenter',
+  foodClickCollect = 'foodClickCollect',
+  bakery = 'bakery',
+  flowers = 'flowers',
+  vareudlevering = 'vareudlevering',
+  servicecenter = 'servicecenter',
+  bistro = 'bistro',
+  quickfood = 'quickfood',
+  sushi = 'sushi',
+  pakketarn = 'pakketarn',
+}
+
+export enum HourTypesNormal {
+  store = 'Store',
+  gardencenter = 'Garden center',
+  foodClickCollect = 'Food click & collect',
+  bakery = 'Bakery',
+  flowers = 'Flowers',
+  vareudlevering = 'Goods delivery',
+  servicecenter = 'Service center',
+  bistro = 'Bistro',
+  quickfood = 'Quickfood',
+  sushi = 'Sushi',
+  pakketarn = 'Pakketarn',
+}
+
+export const hourTypesToNormal = (type: HourTypes): string => {
+  let res;
+
+  switch (type) {
+    case HourTypes.store:
+      res = HourTypesNormal.store;
+      break;
+
+    case HourTypes.gardencenter:
+      res = HourTypesNormal.gardencenter;
+      break;
+
+    case HourTypes.foodClickCollect:
+      res = HourTypesNormal.foodClickCollect;
+      break;
+
+    case HourTypes.bakery:
+      res = HourTypesNormal.bakery;
+      break;
+
+    case HourTypes.flowers:
+      res = HourTypesNormal.flowers;
+      break;
+
+    case HourTypes.vareudlevering:
+      res = HourTypesNormal.vareudlevering;
+      break;
+
+    case HourTypes.servicecenter:
+      res = HourTypesNormal.servicecenter;
+      break;
+
+    case HourTypes.bistro:
+      res = HourTypesNormal.bistro;
+      break;
+
+    case HourTypes.quickfood:
+      res = HourTypesNormal.quickfood;
+      break;
+
+    case HourTypes.sushi:
+      res = HourTypesNormal.sushi;
+      break;
+
+    case HourTypes.pakketarn:
+      res = HourTypesNormal.pakketarn;
       break;
 
     default:

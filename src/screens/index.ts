@@ -8,9 +8,11 @@ import AntiFoodWasteStore from './antiFoodWaste/AntiFoodWasteStore';
 
 // suggestions
 import RelevantProducts from './suggestions/RelevantProducts';
+import SimilarProducts from './suggestions/SimilarProducts';
+import FrequentlyBoughtTogehter from './suggestions/FrequentlyBoughtTogehter';
 
 export {
   Stores, Store,
   AntiFoodWasteZip, AntiFoodWasteStore,
-  RelevantProducts,
+  RelevantProducts, SimilarProducts, FrequentlyBoughtTogehter,
 };
