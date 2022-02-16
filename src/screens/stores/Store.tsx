@@ -63,18 +63,7 @@ const Store: React.FunctionComponent<StoreInterface> = ({
   };
 
   const renderItem = ({ item }: any) => {
-    //console.log('item', item?.customerFlow)
     const hourTypeNormal = enums.hourTypesToNormal(item.type);
-
-
-  const t = hours.forEach(el => {
-    
-    //can be empty
-    if(el.customerFlow){
-      //console.log(el.customerFlow)
-    }
-  });
-  //console.log(t)
 
     return (
       <View
@@ -107,30 +96,6 @@ const Store: React.FunctionComponent<StoreInterface> = ({
           <Paper.Text>
             {`Closes at: ${item.close}`}
           </Paper.Text>
-        )}
-
-        {item.customerFlow && (
-          <>
-          <Paper.Text>Expected customer flow</Paper.Text>
-          {item.customerFlow.map((item1) => {
-            console.log('item1', item1)
-            return(
-              <>
-
-              <View style={{
-                //flex: 1,
-                width: 1,
-    height: 1,
-                backgroundColor: 'red',
-                flexDirection: "row",
-    flexWrap: "wrap",
-              }}>
-
-              </View>
-              </>
-            )
-          })}
-          </>
         )}
       </View>
     );
