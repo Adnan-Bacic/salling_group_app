@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-color-literals */
 import React, { useState, useEffect } from 'react';
 import {
   View, StyleSheet, FlatList, LayoutAnimation,
@@ -76,9 +77,7 @@ const Store: React.FunctionComponent<StoreInterface> = ({
           {`Section - ${hourTypeNormal}`}
         </Paper.Text>
         <Paper.Text
-          style={{
-            color: item.closed ? 'red' : 'green',
-          }}
+          style={item.closed ? styles.red : styles.green}
         >
           {item.closed ? (
             'Closed'
@@ -189,8 +188,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  green: {
+    color: 'green',
+  },
   hourItemContainer: {
     marginBottom: 50,
+  },
+  red: {
+    color: 'red',
   },
 });
 
