@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import {
   View, StyleSheet,
 } from 'react-native';
@@ -37,7 +37,9 @@ const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
           const attributeIsTrue = item[1] === true;
 
           return (
-            <>
+            <Fragment
+              key={item[0]}
+            >
               {/* smiley scheme is a string, so only show boolean */}
               {typeof item[1] === 'boolean' && (
               <Paper.Chip
@@ -47,7 +49,7 @@ const StoreItem: React.FunctionComponent<StoreItemInterface> = ({
                 {attribute}
               </Paper.Chip>
               )}
-            </>
+            </Fragment>
           );
         })}
 
