@@ -4,6 +4,8 @@ import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
 import com.facebook.react.ReactRootView;
 
+import android.os.Bundle;
+
 public class MainActivity extends ReactActivity {
 
   /**
@@ -15,6 +17,7 @@ public class MainActivity extends ReactActivity {
     return "salling_group_app";
   }
 
+<<<<<<< HEAD
   /**
    * Returns the instance of the {@link ReactActivityDelegate}. There the RootView is created and
    * you can specify the rendered you wish to use (Fabric or the older renderer).
@@ -34,5 +37,10 @@ public class MainActivity extends ReactActivity {
       reactRootView.setIsFabric(BuildConfig.IS_NEW_ARCHITECTURE_ENABLED);
       return reactRootView;
     }
+=======
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(null);
+>>>>>>> dev
   }
 }
