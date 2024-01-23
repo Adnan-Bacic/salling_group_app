@@ -103,7 +103,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         wc: wc,
         wifi: wifi,
       };
-      setIsLoading(true)
+      setIsLoading(true);
       await dispatch(functions.stores.getStores(options));
       setIsLoading(false);
     };

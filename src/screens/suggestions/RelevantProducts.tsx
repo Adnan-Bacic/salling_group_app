@@ -31,7 +31,7 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = (): Rea
       return;
     }
 
-    setIsLoading(true)
+    setIsLoading(true);
     await dispatch(functions.suggestions.getRelevantProducts(query));
     setIsLoading(false);
   };
