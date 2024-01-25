@@ -11,8 +11,6 @@ export const getRelevantProducts = (query: any) => {
       so dispatch empty array to show we have no results
       */
     try {
-      dispatch(actions.ui.setLoading(true));
-
       const url = `${API_URL}/v1-beta/product-suggestions/relevant-products?query=${query}`;
 
       const res: any = await fetch(url, {
@@ -44,8 +42,6 @@ export const getRelevantProducts = (query: any) => {
       dispatch(actions.suggestions.getRelevantProducts(data));
     } catch (err: any) {
       Alert.alert(err.name, err.message);
-    } finally {
-      dispatch(actions.ui.setLoading(false));
     }
   };
 };
@@ -53,8 +49,6 @@ export const getRelevantProducts = (query: any) => {
 export const getSimilarProducts = (id: string) => {
   return async (dispatch: any) => {
     try {
-      dispatch(actions.ui.setLoading(true));
-
       const url = `${API_URL}/v1-beta/product-suggestions/similar-products?productId=${id}`;
 
       const res: any = await fetch(url, {
@@ -79,8 +73,6 @@ export const getSimilarProducts = (id: string) => {
       dispatch(actions.suggestions.getSimilarProducts(data));
     } catch (err: any) {
       Alert.alert(err.name, err.message);
-    } finally {
-      dispatch(actions.ui.setLoading(false));
     }
   };
 };
@@ -88,8 +80,6 @@ export const getSimilarProducts = (id: string) => {
 export const getFrequentlyBoughtTogehter = (id: string) => {
   return async (dispatch: any) => {
     try {
-      dispatch(actions.ui.setLoading(true));
-
       const url = `${API_URL}/v1-beta/product-suggestions/frequently-bought-together?productId=${id}`;
 
       const res: any = await fetch(url, {
@@ -114,8 +104,6 @@ export const getFrequentlyBoughtTogehter = (id: string) => {
       dispatch(actions.suggestions.getFrequentlyBoughtTogehter(data));
     } catch (err: any) {
       Alert.alert(err.name, err.message);
-    } finally {
-      dispatch(actions.ui.setLoading(false));
     }
   };
 };

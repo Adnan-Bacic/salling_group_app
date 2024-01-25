@@ -10,7 +10,7 @@ import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
-import { foodWasteSelector, uiSelector } from 'src/redux/selectors';
+import { foodWasteSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
 import { validators } from 'src/utility';
 import { StoreItem } from './components';
@@ -25,9 +25,10 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
   const [zip, setZip] = useState('');
   const [prevZip, setPrevZip] = useState('');
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
   const foodWaste = useAppSelector(foodWasteSelector);
-  const ui = useAppSelector(uiSelector);
 
   const getData = async () => {
     setPrevZip(zip);
@@ -42,7 +43,9 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
       return;
     }
 
-    dispatch(functions.foodWaste.getFoodWasteByZip(zip));
+    setIsLoading(true);
+    await dispatch(functions.foodWaste.getFoodWasteByZip(zip));
+    setIsLoading(false);
   };
 
   const renderStoreItem = ({ item }: any) => {
@@ -105,7 +108,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
           search
         </Paper.Button>
 
-        {(foodWaste.foodItems && !ui.isLoading) && (
+        {(foodWaste.foodItems && !isLoading) && (
         <FlatList
           data={foodWaste.foodItems}
           renderItem={renderStoreItem}
@@ -113,7 +116,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         />
         )}
 
-        {ui.isLoading && (
+        {isLoading && (
           <Spinner />
         )}
       </View>

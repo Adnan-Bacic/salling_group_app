@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import { NoResults, Spinner } from 'src/components';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { MainTemplate } from 'src/templates';
-import { suggestionsSelector, uiSelector } from 'src/redux/selectors';
+import { suggestionsSelector } from 'src/redux/selectors';
 import * as functions from 'src/redux/functions';
 import { ProductSuggestionItem, SuggestionsActionContent } from './components';
 
@@ -21,7 +21,6 @@ const SimilarProducts: React.FunctionComponent<SimilarProductsInterface> = ({
 
   const [isLoading, setIsloading] = useState(false);
 
-  const ui = useAppSelector(uiSelector);
   const suggestions = useAppSelector(suggestionsSelector);
 
   const dispatch = useAppDispatch();

@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import { MainTemplate } from 'src/templates';
 import { NoResults, Spinner } from 'src/components';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
-import { suggestionsSelector, uiSelector } from 'src/redux/selectors';
+import { suggestionsSelector } from 'src/redux/selectors';
 import * as functions from 'src/redux/functions';
 import { ProductSuggestionItem, SuggestionsActionContent } from './components';
 
@@ -36,8 +36,6 @@ const FrequentlyBoughtTogehter: React.FunctionComponent<FrequentlyBoughtTogehter
 
     getItems();
   }, [dispatch, id]);
-
-  const ui = useAppSelector(uiSelector);
 
   const renderItem = ({ item }: any) => {
     return (

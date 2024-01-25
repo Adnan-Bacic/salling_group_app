@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
-import { uiSelector, storesSelector } from 'src/redux/selectors';
+import { storesSelector } from 'src/redux/selectors';
 import * as functions from 'src/redux/functions';
 import { MainTemplate } from 'src/templates';
 import { Spinner, NoResults } from 'src/components';
@@ -66,13 +66,14 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   const [wc, setWc] = useState<boolean>(false);
   const [wifi, setWifi] = useState<boolean>(false);
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
 
   const stores = useAppSelector(storesSelector);
-  const ui = useAppSelector(uiSelector);
 
   useEffect(() => {
-    const getStores = () => {
+    const getStores = async () => {
       const options = {
         // filters
         zip: zip,
@@ -102,7 +103,9 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         wc: wc,
         wifi: wifi,
       };
-      dispatch(functions.stores.getStores(options));
+      setIsLoading(true);
+      await dispatch(functions.stores.getStores(options));
+      setIsLoading(false);
     };
 
     getStores();
@@ -564,11 +567,11 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           to have the correct ui elements show
           */}
         <FlatList
-          data={!ui.isLoading && stores.storesData}
+          data={!isLoading && stores.storesData}
           renderItem={renderStoreItem}
-          ListEmptyComponent={ui.isLoading === false ? <NoResults /> : null}
+          ListEmptyComponent={isLoading === false ? <NoResults /> : null}
           ListHeaderComponent={filterViewContent()}
-          ListFooterComponent={ui.isLoading && <Spinner />}
+          ListFooterComponent={isLoading === true ? <Spinner /> : null}
         />
       </>
     </MainTemplate>

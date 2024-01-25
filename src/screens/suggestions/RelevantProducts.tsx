@@ -6,7 +6,7 @@ import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
-import { suggestionsSelector, uiSelector } from 'src/redux/selectors';
+import { suggestionsSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
 import { ProductSuggestionItem, SuggestionsActionContent } from './components';
 
@@ -20,9 +20,10 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
   const [query, setQuery] = useState('');
   const [prevQuery, setPrevQuery] = useState('');
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
   const suggestions = useAppSelector(suggestionsSelector);
-  const ui = useAppSelector(uiSelector);
 
   const getData = async () => {
     setPrevQuery(query);
@@ -32,7 +33,9 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
       return;
     }
 
-    dispatch(functions.suggestions.getRelevantProducts(query));
+    setIsLoading(true);
+    await dispatch(functions.suggestions.getRelevantProducts(query));
+    setIsLoading(false);
   };
 
   const renderStoreItem = ({ item }: any) => {
@@ -73,14 +76,14 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
           search
         </Paper.Button>
 
-        {(suggestions.relevantProducts && !ui.isLoading) && (
+        {(suggestions.relevantProducts && !isLoading) && (
         <FlatList
           data={suggestions.relevantProducts.suggestions}
           renderItem={renderStoreItem}
           ListEmptyComponent={<NoResults />}
         />
         )}
-        {ui.isLoading && (
+        {isLoading && (
           <Spinner />
         )}
       </>
