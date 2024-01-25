@@ -1,7 +1,6 @@
 import { API_URL, API_TOKEN } from '@env';
 import { Alert } from 'react-native';
 import { requests } from 'src/helpers';
-import { RootNavigation } from 'src/services';
 import * as actions from '../actions';
 
 export const getRelevantProducts = (query: any) => {
@@ -71,17 +70,7 @@ export const getSimilarProducts = (id: string) => {
 
       const data = await res.json();
 
-      const data2 = {
-        similarProductsLastItemId: id,
-        similarProducts: data,
-      };
-
-      dispatch(actions.suggestions.getSimilarProducts(data2));
-
-      RootNavigation.push('SimilarProducts', {
-        // initial: false,
-        items: data,
-      });
+      dispatch(actions.suggestions.getSimilarProducts(data));
     } catch (err: any) {
       Alert.alert(err.name, err.message);
     }
@@ -113,11 +102,6 @@ export const getFrequentlyBoughtTogehter = (id: string) => {
       const data = await res.json();
 
       dispatch(actions.suggestions.getFrequentlyBoughtTogehter(data));
-
-      RootNavigation.push('FrequentlyBoughtTogehter', {
-        // initial: false,
-        items: data,
-      });
     } catch (err: any) {
       Alert.alert(err.name, err.message);
     }

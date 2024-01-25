@@ -1,7 +1,6 @@
 import { API_URL, API_TOKEN } from '@env';
 import { Alert } from 'react-native';
 import { requests } from 'src/helpers';
-import { RootNavigation } from 'src/services';
 import * as actions from '../actions';
 
 export const getFoodWasteByZip = (zip: string) => {
@@ -40,13 +39,6 @@ export const getFoodWasteById = (id: string) => {
     try {
       // if user clicks on the same item, no need to make request, show already saved items
       if (id === getState()?.foodWaste?.foodItemsId?.store?.id) {
-        RootNavigation.navigate('AntiFoodWasteNavigator', {
-          screen: 'AntiFoodWasteStore',
-          initial: false,
-          params: {
-            items: getState().foodWaste.foodItemsId,
-          },
-        });
         return;
       }
 
@@ -72,14 +64,6 @@ export const getFoodWasteById = (id: string) => {
       const data = await res.json();
 
       dispatch(actions.foodWaste.getFoodWasteById(data));
-
-      RootNavigation.navigate('AntiFoodWasteNavigator', {
-        screen: 'AntiFoodWasteStore',
-        initial: false,
-        params: {
-          items: data,
-        },
-      });
     } catch (err: any) {
       Alert.alert(err.name, err.message);
     }

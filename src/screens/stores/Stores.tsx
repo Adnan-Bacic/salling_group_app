@@ -133,8 +133,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           <Paper.Button
             onPress={() => {
               navigation.navigate('Store', {
-                name: item.name,
-                hours: item.hours,
+                id: item.id,
               });
             }}
           >

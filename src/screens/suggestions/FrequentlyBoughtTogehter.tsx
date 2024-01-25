@@ -1,20 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { MainTemplate } from 'src/templates';
-import { NoResults } from 'src/components';
+import { NoResults, Spinner } from 'src/components';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import { suggestionsSelector } from 'src/redux/selectors';
+import * as functions from 'src/redux/functions';
 import { ProductSuggestionItem, SuggestionsActionContent } from './components';
 
 interface FrequentlyBoughtTogehterProps {
   route:{
     params:{
-      items: any
+      id: string
     }
   }
 }
 const FrequentlyBoughtTogehter: React.FunctionComponent<FrequentlyBoughtTogehterProps> = ({
-  route,
+  navigation, route,
 }): React.ReactElement => {
-  const { items } = route.params;
+  const { id } = route.params;
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const dispatch = useAppDispatch();
+
+  const suggestions = useAppSelector(suggestionsSelector);
+
+  useEffect(() => {
+    const getItems = async () => {
+      setIsLoading(true);
+
+      await dispatch(functions.suggestions.getFrequentlyBoughtTogehter(id));
+
+      setIsLoading(false);
+    };
+
+    getItems();
+  }, [dispatch, id]);
 
   const renderItem = ({ item }: any) => {
     return (
@@ -26,6 +47,7 @@ const FrequentlyBoughtTogehter: React.FunctionComponent<FrequentlyBoughtTogehter
         actionContent={(
           <SuggestionsActionContent
             item1={item}
+            navigation={navigation}
           />
 )}
       >
@@ -34,10 +56,16 @@ const FrequentlyBoughtTogehter: React.FunctionComponent<FrequentlyBoughtTogehter
     );
   };
 
+  if (isLoading) {
+    return (
+      <Spinner />
+    );
+  }
+
   return (
     <MainTemplate>
       <FlatList
-        data={items}
+        data={suggestions.frequentlyBoughtTogehter}
         renderItem={renderItem}
         ListEmptyComponent={<NoResults />}
       />

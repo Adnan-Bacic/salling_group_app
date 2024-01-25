@@ -14,7 +14,9 @@ interface RelevantProductsProps {
   navigation: any;
 }
 
-const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = (): React.ReactElement => {
+const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
+  navigation,
+}): React.ReactElement => {
   const [query, setQuery] = useState('');
   const [prevQuery, setPrevQuery] = useState('');
 
@@ -46,8 +48,9 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = (): Rea
         actionContent={(
           <SuggestionsActionContent
             item1={item}
+            navigation={navigation}
           />
-)}
+      )}
       >
         children
       </ProductSuggestionItem>
@@ -80,7 +83,6 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = (): Rea
           ListEmptyComponent={<NoResults />}
         />
         )}
-
         {isLoading && (
           <Spinner />
         )}
