@@ -40,8 +40,6 @@ const Store: React.FunctionComponent<StoreInterface> = ({
   }, [currentStore.hours]);
 
   useEffect(() => {
-    console.log(1);
-
     const handleChangeHourType = () => {
       // if not null / not empty string so it doesnt run on first render
       if (currentlyFilteredItems !== null && hoursType !== '') {
