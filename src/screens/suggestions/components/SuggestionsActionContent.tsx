@@ -3,15 +3,11 @@ import {
   View, StyleSheet,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
-import * as functions from 'src/redux/functions';
-import { useAppDispatch } from 'src/redux/hooks';
 import { links } from 'src/utility';
 
 const SuggestionsActionContent: React.FunctionComponent<any> = ({
-  item1,
+  navigation, item1,
 }): React.ReactElement => {
-  const dispatch = useAppDispatch();
-
   return (
     <View
       style={styles.container}
@@ -27,14 +23,18 @@ const SuggestionsActionContent: React.FunctionComponent<any> = ({
       </Paper.Button>
       <Paper.Button
         onPress={() => {
-          dispatch(functions.suggestions.getSimilarProducts(item1.prod_id));
+          navigation.navigate('SimilarProducts', {
+            id: item1.prod_id,
+          });
         }}
       >
         similar products
       </Paper.Button>
       <Paper.Button
         onPress={() => {
-          dispatch(functions.suggestions.getFrequentlyBoughtTogehter(item1.prod_id));
+          navigation.navigate('FrequentlyBoughtTogehter', {
+            id: item1.prod_id,
+          });
         }}
       >
         frequently bought togehter

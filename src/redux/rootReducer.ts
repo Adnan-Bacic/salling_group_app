@@ -3,7 +3,6 @@ import * as reducers from './reducers';
 import * as actionTypes from './actionTypes';
 
 const appReducer = combineReducers({
-  ui: reducers.uiReducer,
   stores: reducers.storesReducer,
   foodWaste: reducers.foodWasteReducer,
   suggestions: reducers.suggestionsReducer,

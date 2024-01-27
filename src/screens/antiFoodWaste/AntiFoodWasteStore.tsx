@@ -1,23 +1,44 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { MainTemplate } from 'src/templates';
-import { NoResults } from 'src/components';
+import { NoResults, Spinner } from 'src/components';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
+import * as functions from 'src/redux/functions';
+import { foodWasteSelector } from 'src/redux/selectors';
 import { FoodWasteItem } from './components';
 
 interface FoodWasteInterface {
   route: {
     params: {
-      items: any;
+      id: string;
     }
   }
 }
 const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
   route,
 }): React.ReactElement => {
-  const { items } = route.params;
+  const { id } = route.params;
+
+  const dispatch = useAppDispatch();
+
+  const foodWaste = useAppSelector(foodWasteSelector);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    const getItems = async () => {
+      setIsLoading(true);
+
+      await dispatch(functions.foodWaste.getFoodWasteById(id));
+
+      setIsLoading(false);
+    };
+
+    getItems();
+  }, [dispatch, id]);
 
   const renderFoodItem = ({ item }: any) => {
     const ActionContent: React.FunctionComponent = (): React.ReactElement => {
@@ -49,10 +70,16 @@ const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
     );
   };
 
+  if (isLoading) {
+    return (
+      <Spinner />
+    );
+  }
+
   return (
     <MainTemplate>
       <FlatList
-        data={items.clearances}
+        data={foodWaste?.foodItemsId?.clearances}
         renderItem={renderFoodItem}
         ListEmptyComponent={<NoResults />}
       />
