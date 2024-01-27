@@ -1,9 +1,11 @@
+import { FoodWasteInterface } from 'src/types2/states';
 import * as actionTypes from '../actionTypes';
 
 interface DefaultState {
-  foodItems: null | any;
+  foodItems: null | FoodWasteInterface;
   foodItemsId: null | any;
 }
+
 const defaultState: DefaultState = {
   foodItems: null,
   foodItemsId: null,

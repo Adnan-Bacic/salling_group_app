@@ -1,10 +1,12 @@
+import { SuggestionsInterface } from 'src/types2/states';
 import * as actionTypes from '../actionTypes';
 
 interface DefaultState {
-  relevantProducts: null | any;
-  similarProducts: null | any;
-  frequentlyBoughtTogehter: null | any;
+  relevantProducts: null | Pick<SuggestionsInterface, 'relevantProducts'>;
+  similarProducts: null | Pick<SuggestionsInterface, 'similarProducts'>;
+  frequentlyBoughtTogehter: null | Pick<SuggestionsInterface, 'frequentlyBoughtTogehter'>;
 }
+
 const defaultState: DefaultState = {
   relevantProducts: null,
   similarProducts: null,
