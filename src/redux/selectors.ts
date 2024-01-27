@@ -1,3 +1,10 @@
-export const storesSelector = (state: any): any => { return state.stores; };
-export const foodWasteSelector = (state: any): any => { return state.foodWaste; };
-export const suggestionsSelector = (state: any): any => { return state.suggestions; };
+import { FoodWasteInterface, StoresInterface, SuggestionsInterface } from 'src/types2/states';
+import { AppState } from './types';
+
+export const storesSelector = (state: AppState): StoresInterface => { return state.stores; };
+export const foodWasteSelector = (state: AppState): FoodWasteInterface => {
+  return state.foodWaste;
+};
+export const suggestionsSelector = (state: AppState): SuggestionsInterface => {
+  return state.suggestions;
+};
