@@ -554,6 +554,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         <Paper.Button
           onPress={toggleFiltersShown}
           mode="contained"
+          style={styles.filterButton}
         >
           {filtersShown ? (
             'Hide filters'
@@ -567,11 +568,11 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           to have the correct ui elements show
           */}
         <FlatList
-          data={!isLoading && stores.storesData}
+          data={!isLoading ? stores.storesData : null}
           renderItem={renderStoreItem}
-          ListEmptyComponent={isLoading === false ? <NoResults /> : null}
+          ListEmptyComponent={!isLoading ? <NoResults /> : null}
           ListHeaderComponent={filterViewContent()}
-          ListFooterComponent={isLoading === true ? <Spinner /> : null}
+          ListFooterComponent={isLoading ? <Spinner /> : null}
         />
       </>
     </MainTemplate>
@@ -579,6 +580,9 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
 };
 
 const styles = StyleSheet.create({
+  filterButton: {
+    marginBottom: 20,
+  },
   filterRowContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',

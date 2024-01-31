@@ -43,11 +43,7 @@ const AntiFoodWasteStore: React.FunctionComponent<FoodWasteInterface> = ({
   const renderFoodItem = ({ item }: any) => {
     const ActionContent: React.FunctionComponent = (): React.ReactElement => {
       return (
-        <Paper.Button
-          onPress={() => {
-            console.log('todo');
-          }}
-        >
+        <Paper.Button>
           todo
         </Paper.Button>
       );

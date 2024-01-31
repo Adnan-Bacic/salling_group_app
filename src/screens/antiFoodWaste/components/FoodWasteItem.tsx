@@ -3,7 +3,7 @@ import * as Paper from 'react-native-paper';
 import { FoodItemTemplate, FoodItemBaseInterface } from 'src/components';
 
 interface FoodWasteItemInterface extends FoodItemBaseInterface {
-  children: any;
+  children: React.ReactNode;
   originalPrice: number;
   newPrice: number;
   percentDiscount: number

@@ -5,7 +5,7 @@ import {
 import * as Paper from 'react-native-paper';
 
 export interface StoreItemBaseInterface {
-  children: React.ReactElement;
+  children: React.ReactNode;
   name: string;
   street: string;
   city: string;

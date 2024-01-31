@@ -7,6 +7,7 @@ import * as Paper from 'react-native-paper';
 import { MainTemplate } from 'src/templates';
 import { useAppSelector } from 'src/redux/hooks';
 import { storesSelector } from 'src/redux/selectors';
+import { Spinner } from 'src/components';
 import { enums } from './helpers';
 
 interface StoreInterface {
@@ -138,6 +139,12 @@ const Store: React.FunctionComponent<StoreInterface> = ({
       </>
     );
   };
+
+  if (currentStore === undefined) {
+    return (
+      <Spinner />
+    );
+  }
 
   return (
     <MainTemplate>
