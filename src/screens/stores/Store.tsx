@@ -118,6 +118,7 @@ const Store: React.FunctionComponent<StoreInterface> = ({
                   });
 
                   setCurrentlyFilteredItems(filteredItemsByType);
+                  setHoursType(type[0]);
                 }}
                 key={type[0]}
               >
