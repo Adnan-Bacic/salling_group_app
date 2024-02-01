@@ -150,7 +150,12 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           </Paper.Button>
           <Paper.Button
             onPress={() => {
-              dispatch(functions.foodWaste.getFoodWasteById(item1.id));
+              navigation.navigate('AntiFoodWasteNavigator', {
+                screen: 'AntiFoodWasteStore',
+                params: {
+                  id: item1.id,
+                },
+              });
             }}
           >
             anti food waste
