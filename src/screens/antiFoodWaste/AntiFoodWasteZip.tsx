@@ -48,15 +48,23 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
     setIsLoading(false);
   };
 
+  const onChangeTextHandler = (text: string) => {
+    if (!validators.numbersAndDashZip(text)) {
+      return;
+    }
+    setZip(text);
+  };
+
   const renderStoreItem = ({ item }: any) => {
     const ActionContent: React.FunctionComponent<any> = (): React.ReactElement => {
+      const onPressItemButton = () => {
+        navigation.navigate('AntiFoodWasteStore', {
+          id: item.store.id,
+        });
+      };
       return (
         <Paper.Button
-          onPress={() => {
-            navigation.navigate('AntiFoodWasteStore', {
-              id: item.store.id,
-            });
-          }}
+          onPress={onPressItemButton}
         >
           see items
         </Paper.Button>
@@ -91,12 +99,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         <Paper.TextInput
           label="zip"
           value={zip}
-          onChangeText={(text) => {
-            if (!validators.numbersAndDashZip(text)) {
-              return;
-            }
-            setZip(text);
-          }}
+          onChangeText={onChangeTextHandler}
           mode="outlined"
           keyboardType={Platform.OS === 'android' ? 'numeric' : 'numbers-and-punctuation'}
           onSubmitEditing={getData}

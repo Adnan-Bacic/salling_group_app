@@ -38,6 +38,10 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
     setIsLoading(false);
   };
 
+  const onChangeTextHandler = (text: string) => {
+    setQuery(text);
+  };
+
   const renderStoreItem = ({ item }: any) => {
     return (
       <ProductSuggestionItem
@@ -66,7 +70,7 @@ const RelevantProducts: React.FunctionComponent<RelevantProductsProps> = ({
         <Paper.TextInput
           label="product"
           value={query}
-          onChangeText={(text) => { return setQuery(text); }}
+          onChangeText={onChangeTextHandler}
           mode="outlined"
           onSubmitEditing={getData}
         />

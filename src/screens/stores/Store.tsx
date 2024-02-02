@@ -107,19 +107,21 @@ const Store: React.FunctionComponent<StoreInterface> = ({
           style={styles.chipContainer}
         >
           {Object.entries(enums.HourTypesNormal).map((type) => {
+            const onPressChip = () => {
+              const filteredItemsByType = currentStore.hours.filter((item: any) => {
+                return item.type === type[0];
+              });
+
+              setCurrentlyFilteredItems(filteredItemsByType);
+              setHoursType(type[0]);
+            };
+
             return (
               <Paper.Chip
                 selected={hoursType === type[0]}
                 style={styles.chip}
                 icon={hoursType === type[0] ? 'check' : 'information'}
-                onPress={() => {
-                  const filteredItemsByType = currentStore.hours.filter((item: any) => {
-                    return item.type === type[0];
-                  });
-
-                  setCurrentlyFilteredItems(filteredItemsByType);
-                  setHoursType(type[0]);
-                }}
+                onPress={onPressChip}
                 key={type[0]}
               >
                 {type[1]}

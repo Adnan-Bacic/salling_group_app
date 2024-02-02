@@ -126,37 +126,43 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         },
       });
 
+      const onPressShowOpeningHours = () => {
+        navigation.navigate('Store', {
+          id: item.id,
+        });
+      };
+
+      const onPressSmileyScheme = () => {
+        const url = `https://www.findsmiley.dk/${item1.attributes.smileyscheme}`;
+
+        links.linkOpener(url);
+      };
+
+      const onPressFoodWaste = () => {
+        navigation.navigate('AntiFoodWasteNavigator', {
+          screen: 'AntiFoodWasteStore',
+          params: {
+            id: item1.id,
+          },
+        });
+      };
+
       return (
         <View
           style={stylesButtons.container}
         >
           <Paper.Button
-            onPress={() => {
-              navigation.navigate('Store', {
-                id: item.id,
-              });
-            }}
+            onPress={onPressShowOpeningHours}
           >
             show opening hours
           </Paper.Button>
           <Paper.Button
-            onPress={() => {
-              const url = `https://www.findsmiley.dk/${item1.attributes.smileyscheme}`;
-
-              links.linkOpener(url);
-            }}
+            onPress={onPressSmileyScheme}
           >
             open findsmiley.dk
           </Paper.Button>
           <Paper.Button
-            onPress={() => {
-              navigation.navigate('AntiFoodWasteNavigator', {
-                screen: 'AntiFoodWasteStore',
-                params: {
-                  id: item1.id,
-                },
-              });
-            }}
+            onPress={onPressFoodWaste}
           >
             anti food waste
           </Paper.Button>

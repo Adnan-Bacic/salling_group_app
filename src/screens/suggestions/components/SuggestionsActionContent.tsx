@@ -8,34 +8,39 @@ import { links } from 'src/utility';
 const SuggestionsActionContent: React.FunctionComponent<any> = ({
   navigation, item1,
 }): React.ReactElement => {
+  const onPressLink = () => {
+    const url = item1.link;
+
+    links.linkOpener(url);
+  };
+
+  const onPressSimilarProducts = () => {
+    navigation.navigate('SimilarProducts', {
+      id: item1.prod_id,
+    });
+  };
+
+  const onPressFrequentlyBoughtTogehter = () => {
+    navigation.navigate('FrequentlyBoughtTogehter', {
+      id: item1.prod_id,
+    });
+  };
   return (
     <View
       style={styles.container}
     >
       <Paper.Button
-        onPress={() => {
-          const url = item1.link;
-
-          links.linkOpener(url);
-        }}
+        onPress={onPressLink}
       >
         open bilkatogo.dk
       </Paper.Button>
       <Paper.Button
-        onPress={() => {
-          navigation.navigate('SimilarProducts', {
-            id: item1.prod_id,
-          });
-        }}
+        onPress={onPressSimilarProducts}
       >
         similar products
       </Paper.Button>
       <Paper.Button
-        onPress={() => {
-          navigation.navigate('FrequentlyBoughtTogehter', {
-            id: item1.prod_id,
-          });
-        }}
+        onPress={onPressFrequentlyBoughtTogehter}
       >
         frequently bought togehter
       </Paper.Button>
