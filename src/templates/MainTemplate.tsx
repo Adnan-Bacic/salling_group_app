@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 
 interface MainTemplateInterface {
-  children: React.ReactElement;
+  children: React.ReactNode;
 }
 const MainTemplate: React.FunctionComponent<MainTemplateInterface> = ({
   children,

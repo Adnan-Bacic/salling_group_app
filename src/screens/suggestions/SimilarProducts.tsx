@@ -1,24 +1,41 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FlatList } from 'react-native';
 import { NoResults, Spinner } from 'src/components';
-import { useAppSelector } from 'src/redux/hooks';
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { MainTemplate } from 'src/templates';
-import { uiSelector } from 'src/redux/selectors';
+import { suggestionsSelector } from 'src/redux/selectors';
+import * as functions from 'src/redux/functions';
 import { ProductSuggestionItem, SuggestionsActionContent } from './components';
 
 interface SimilarProductsInterface {
   route:{
     params:{
-      items: any
+      id: string
     }
   }
 }
 const SimilarProducts: React.FunctionComponent<SimilarProductsInterface> = ({
-  route,
+  navigation, route,
 }): React.ReactElement => {
-  const { items } = route.params;
+  const { id } = route.params;
 
-  const ui = useAppSelector(uiSelector);
+  const [isLoading, setIsloading] = useState(false);
+
+  const suggestions = useAppSelector(suggestionsSelector);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const getItems = async () => {
+      setIsloading(true);
+
+      await dispatch(functions.suggestions.getSimilarProducts(id));
+
+      setIsloading(false);
+    };
+
+    getItems();
+  }, [dispatch, id]);
 
   const renderItem = ({ item }: any) => {
     return (
@@ -26,6 +43,7 @@ const SimilarProducts: React.FunctionComponent<SimilarProductsInterface> = ({
         actionContent={(
           <SuggestionsActionContent
             item1={item}
+            navigation={navigation}
           />
         )}
         title={item.title}
@@ -37,7 +55,7 @@ const SimilarProducts: React.FunctionComponent<SimilarProductsInterface> = ({
     );
   };
 
-  if (ui.isLoading) {
+  if (isLoading) {
     return (
       <Spinner />
     );
@@ -46,7 +64,7 @@ const SimilarProducts: React.FunctionComponent<SimilarProductsInterface> = ({
   return (
     <MainTemplate>
       <FlatList
-        data={items}
+        data={suggestions.similarProducts}
         renderItem={renderItem}
         ListEmptyComponent={<NoResults />}
       />

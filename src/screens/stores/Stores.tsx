@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
-import { uiSelector, storesSelector } from 'src/redux/selectors';
+import { storesSelector } from 'src/redux/selectors';
 import * as functions from 'src/redux/functions';
 import { MainTemplate } from 'src/templates';
 import { Spinner, NoResults } from 'src/components';
@@ -66,13 +66,14 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
   const [wc, setWc] = useState<boolean>(false);
   const [wifi, setWifi] = useState<boolean>(false);
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
 
   const stores = useAppSelector(storesSelector);
-  const ui = useAppSelector(uiSelector);
 
   useEffect(() => {
-    const getStores = () => {
+    const getStores = async () => {
       const options = {
         // filters
         zip: zip,
@@ -102,7 +103,9 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         wc: wc,
         wifi: wifi,
       };
-      dispatch(functions.stores.getStores(options));
+      setIsLoading(true);
+      await dispatch(functions.stores.getStores(options));
+      setIsLoading(false);
     };
 
     getStores();
@@ -123,33 +126,43 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         },
       });
 
+      const onPressShowOpeningHours = () => {
+        navigation.navigate('Store', {
+          id: item.id,
+        });
+      };
+
+      const onPressSmileyScheme = () => {
+        const url = `https://www.findsmiley.dk/${item1.attributes.smileyscheme}`;
+
+        links.linkOpener(url);
+      };
+
+      const onPressFoodWaste = () => {
+        navigation.navigate('AntiFoodWasteNavigator', {
+          screen: 'AntiFoodWasteStore',
+          params: {
+            id: item1.id,
+          },
+        });
+      };
+
       return (
         <View
           style={stylesButtons.container}
         >
           <Paper.Button
-            onPress={() => {
-              navigation.navigate('Store', {
-                name: item.name,
-                hours: item.hours,
-              });
-            }}
+            onPress={onPressShowOpeningHours}
           >
             show opening hours
           </Paper.Button>
           <Paper.Button
-            onPress={() => {
-              const url = `https://www.findsmiley.dk/${item1.attributes.smileyscheme}`;
-
-              links.linkOpener(url);
-            }}
+            onPress={onPressSmileyScheme}
           >
             open findsmiley.dk
           </Paper.Button>
           <Paper.Button
-            onPress={() => {
-              dispatch(functions.foodWaste.getFoodWasteById(item1.id));
-            }}
+            onPress={onPressFoodWaste}
           >
             anti food waste
           </Paper.Button>
@@ -552,6 +565,7 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
         <Paper.Button
           onPress={toggleFiltersShown}
           mode="contained"
+          style={styles.filterButton}
         >
           {filtersShown ? (
             'Hide filters'
@@ -565,11 +579,11 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
           to have the correct ui elements show
           */}
         <FlatList
-          data={!ui.isLoading && stores.storesData}
+          data={!isLoading ? stores.storesData : null}
           renderItem={renderStoreItem}
-          ListEmptyComponent={ui.isLoading === false ? <NoResults /> : null}
+          ListEmptyComponent={!isLoading ? <NoResults /> : null}
           ListHeaderComponent={filterViewContent()}
-          ListFooterComponent={ui.isLoading && <Spinner />}
+          ListFooterComponent={isLoading ? <Spinner /> : null}
         />
       </>
     </MainTemplate>
@@ -577,6 +591,9 @@ const Stores: React.FunctionComponent<StoresInterface> = ({
 };
 
 const styles = StyleSheet.create({
+  filterButton: {
+    marginBottom: 20,
+  },
   filterRowContainer: {
     flexDirection: 'row',
     flexWrap: 'wrap',

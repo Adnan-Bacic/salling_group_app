@@ -5,20 +5,28 @@ import {
 } from 'react-native';
 import * as Paper from 'react-native-paper';
 import { MainTemplate } from 'src/templates';
+import { useAppSelector } from 'src/redux/hooks';
+import { storesSelector } from 'src/redux/selectors';
+import { Spinner } from 'src/components';
 import { enums } from './helpers';
 
 interface StoreInterface {
-  route:{
-    params:{
-      name: string;
-      hours: any;
+  route: {
+    params: {
+      id: string;
     }
   }
 }
 const Store: React.FunctionComponent<StoreInterface> = ({
   route,
 }): React.ReactElement => {
-  const { name, hours } = route.params;
+  const stores = useAppSelector(storesSelector);
+
+  const { id } = route.params;
+
+  const currentStore = stores.storesData.find((store) => {
+    return store.id === id;
+  });
 
   const [filtersShown, setFiltersShown] = useState(false);
   const [hoursType, setHoursType] = useState('');
@@ -26,40 +34,22 @@ const Store: React.FunctionComponent<StoreInterface> = ({
 
   useEffect(() => {
     const setInitialData = () => {
-      setCurrentlyFilteredItems(hours);
+      setCurrentlyFilteredItems(currentStore.hours);
     };
 
     setInitialData();
-    // empty array or params makes no difference
-  }, [hours]);
-
-  useEffect(() => {
-    const handleChangeHourType = () => {
-      console.log(1);
-      // if not null / not empty string so it doesnt run on first render
-      if (currentlyFilteredItems !== null && hoursType !== '') {
-        const filteredItemsByType = hours.filter((item: any) => {
-          return item.type === hoursType;
-        });
-
-        setCurrentlyFilteredItems(filteredItemsByType);
-      }
-    };
-
-    handleChangeHourType();
-    // dont need currentlyFilteredItems to avoid infinite re-render
-  }, [hoursType]);
+  }, [currentStore.hours]);
 
   const reset = () => {
     setHoursType('');
-    setCurrentlyFilteredItems(hours);
+    setCurrentlyFilteredItems(currentStore.hours);
   };
 
   const showOpenOnly = () => {
-    const openOnly = hours.filter((item: any) => {
+    const openOnly = currentStore.hours.filter((item) => {
       return item.closed === false;
     });
-    // console.log(openOnly)
+
     setCurrentlyFilteredItems(openOnly);
   };
 
@@ -117,14 +107,21 @@ const Store: React.FunctionComponent<StoreInterface> = ({
           style={styles.chipContainer}
         >
           {Object.entries(enums.HourTypesNormal).map((type) => {
+            const onPressChip = () => {
+              const filteredItemsByType = currentStore.hours.filter((item: any) => {
+                return item.type === type[0];
+              });
+
+              setCurrentlyFilteredItems(filteredItemsByType);
+              setHoursType(type[0]);
+            };
+
             return (
               <Paper.Chip
                 selected={hoursType === type[0]}
                 style={styles.chip}
                 icon={hoursType === type[0] ? 'check' : 'information'}
-                onPress={() => {
-                  setHoursType(type[0]);
-                }}
+                onPress={onPressChip}
                 key={type[0]}
               >
                 {type[1]}
@@ -146,13 +143,19 @@ const Store: React.FunctionComponent<StoreInterface> = ({
     );
   };
 
+  if (currentStore === undefined) {
+    return (
+      <Spinner />
+    );
+  }
+
   return (
     <MainTemplate>
       <View
         style={styles.container}
       >
         <Paper.Text>
-          {name}
+          {currentStore.name}
         </Paper.Text>
         <Paper.Title>
           Opening hours

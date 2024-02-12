@@ -3,7 +3,7 @@ import * as Paper from 'react-native-paper';
 import { FoodItemTemplate, FoodItemBaseInterface } from 'src/components';
 
 interface ProductSuggestionItemInterface extends FoodItemBaseInterface {
-  children: any;
+  children: React.ReactNode;
   price: number;
 }
 const ProductSuggestionItem: React.FunctionComponent<ProductSuggestionItemInterface> = ({

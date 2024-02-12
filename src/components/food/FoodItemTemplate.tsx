@@ -5,7 +5,7 @@ import {
 import * as Paper from 'react-native-paper';
 
 export interface FoodItemBaseInterface {
-  children: any;
+  children: React.ReactNode;
   actionContent: React.ReactElement;
   title: string;
   image: string;
@@ -39,6 +39,7 @@ const FoodItemTemplate: React.FunctionComponent<FoodItemBaseInterface> = ({
             <Image
               source={{ uri: image }}
               style={styles.image}
+              resizeMode="contain"
             />
           </View>
           )}

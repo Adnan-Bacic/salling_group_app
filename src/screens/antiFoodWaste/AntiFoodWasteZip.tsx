@@ -10,7 +10,7 @@ import * as Paper from 'react-native-paper';
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks';
 import { MainTemplate } from 'src/templates';
 import * as functions from 'src/redux/functions';
-import { foodWasteSelector, uiSelector } from 'src/redux/selectors';
+import { foodWasteSelector } from 'src/redux/selectors';
 import { NoResults, Spinner } from 'src/components';
 import { validators } from 'src/utility';
 import { StoreItem } from './components';
@@ -25,9 +25,10 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
   const [zip, setZip] = useState('');
   const [prevZip, setPrevZip] = useState('');
 
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const dispatch = useAppDispatch();
   const foodWaste = useAppSelector(foodWasteSelector);
-  const ui = useAppSelector(uiSelector);
 
   const getData = async () => {
     setPrevZip(zip);
@@ -42,20 +43,28 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
       return;
     }
 
-    dispatch(functions.foodWaste.getFoodWasteByZip(zip));
+    setIsLoading(true);
+    await dispatch(functions.foodWaste.getFoodWasteByZip(zip));
+    setIsLoading(false);
+  };
+
+  const onChangeTextHandler = (text: string) => {
+    if (!validators.numbersAndDashZip(text)) {
+      return;
+    }
+    setZip(text);
   };
 
   const renderStoreItem = ({ item }: any) => {
-    const ActionContent: React.FunctionComponent<any> = ({
-      items,
-    }): React.ReactElement => {
+    const ActionContent: React.FunctionComponent<any> = (): React.ReactElement => {
+      const onPressItemButton = () => {
+        navigation.navigate('AntiFoodWasteStore', {
+          id: item.store.id,
+        });
+      };
       return (
         <Paper.Button
-          onPress={() => {
-            navigation.navigate('AntiFoodWasteStore', {
-              items: items,
-            });
-          }}
+          onPress={onPressItemButton}
         >
           see items
         </Paper.Button>
@@ -71,15 +80,14 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         country={item.store.address.country}
         amount={item.clearances.length}
         actionContent={(
-          <ActionContent
-            items={item}
-          />
+          <ActionContent />
         )}
       >
         children
       </StoreItem>
     );
   };
+
   return (
     <MainTemplate>
       <View
@@ -91,12 +99,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         <Paper.TextInput
           label="zip"
           value={zip}
-          onChangeText={(text) => {
-            if (!validators.numbersAndDashZip(text)) {
-              return;
-            }
-            setZip(text);
-          }}
+          onChangeText={onChangeTextHandler}
           mode="outlined"
           keyboardType={Platform.OS === 'android' ? 'numeric' : 'numbers-and-punctuation'}
           onSubmitEditing={getData}
@@ -108,7 +111,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
           search
         </Paper.Button>
 
-        {(foodWaste.foodItems && !ui.isLoading) && (
+        {(foodWaste.foodItems && !isLoading) && (
         <FlatList
           data={foodWaste.foodItems}
           renderItem={renderStoreItem}
@@ -116,7 +119,7 @@ const AntiFoodWasteZip: React.FunctionComponent<FoodWasteInterface> = ({
         />
         )}
 
-        {ui.isLoading && (
+        {isLoading && (
           <Spinner />
         )}
       </View>

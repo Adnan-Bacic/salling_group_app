@@ -1,8 +1,10 @@
+import { StoresInterface } from 'src/types2/states';
 import * as actionTypes from '../actionTypes';
 
 interface DefaultState {
-  storesData: null | any
+  storesData: null | StoresInterface
 }
+
 const defaultState: DefaultState = {
   storesData: null,
 };

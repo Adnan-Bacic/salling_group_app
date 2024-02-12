@@ -34,8 +34,6 @@ interface Options {
 export const getStores = (options: Options) => {
   return async (dispatch: any): Promise<void> => {
     try {
-      dispatch(actions.ui.setLoading(true));
-
       let query = '';
 
       // filters
@@ -136,8 +134,6 @@ export const getStores = (options: Options) => {
       dispatch(actions.stores.getStores(data));
     } catch (err: any) {
       Alert.alert(err.name, err.message);
-    } finally {
-      dispatch(actions.ui.setLoading(false));
     }
   };
 };
