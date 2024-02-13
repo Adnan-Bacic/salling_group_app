@@ -1,4 +1,4 @@
 {
     "extends": "./tsconfig.json",
-    "include": ["src/**/*.ts", "src/**/*.tsx", "__tests__", "index.js", "App.tsx", "babel.config.js", "metro.config.js", "react-native.config.js", ".eslintrc.js"]
+    "include": ["src/**/*.ts", "src/**/*.tsx", "__tests__", "index.js", "App.tsx", "babel.config.js", "metro.config.js", "react-native.config.js", ".eslintrc.js", "jest.config.js"]
   }

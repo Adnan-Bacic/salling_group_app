@@ -7,6 +7,9 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import App from '../App';
 
+// Note: import explicitly to use the types shiped with jest.
+import { it } from '@jest/globals';
+
 let wrapper: any;
 
 // fix for:
@@ -19,7 +22,7 @@ beforeEach(() => {
   );
 });
 
-test('renders correctly', () => {
+it('renders correctly', () => {
   const tree = wrapper.toJSON();
   expect(tree).toMatchSnapshot();
 });
