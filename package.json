@@ -79,5 +79,5 @@
       "/node_modules/(?!react-native|@react-native|react-navigation|@react-navigation)"
     ]
   },
-  "packageManager": "yarn@3.0.1"
+  "packageManager": "yarn@3.2.0"
 }
